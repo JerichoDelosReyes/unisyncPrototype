@@ -201,7 +201,7 @@ body {
     flex: 1;
     display: flex;
     align-items: center;
-    padding: 120px 0 100px;
+    padding: 50px 0 100px;
     background: var(--gradient-hero);
     position: relative;
     overflow: hidden;
