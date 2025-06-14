@@ -42,21 +42,20 @@
                         Revolutionize your campus experience with our cutting-edge platform featuring 
                         AI-powered assistance, real-time scheduling, and seamless communication tools. 
                         Join thousands of students and faculty already transforming their academic journey!
-                    </p>
-                      <!-- Enhanced Login Cards -->
+                    </p>                      <!-- Enhanced Login Cards -->
                     <div class="login-cards">
-                        <div class="login-card" onclick="redirectTo('student/dashboard.html', 'student')">
+                        <div class="login-card" onclick="redirectTo('student/login.html', 'student')">
                             <div class="card-icon">
                                 <i class="fas fa-user-graduate"></i>
                             </div>
                             <h3>Student Portal</h3>
-                            <p>Discover your personalized dashboard with AI tutoring, instant announcements, smart scheduling, and academic progress tracking!</p>                            <button class="btn-primary">
+                            <p>Discover your personalized dashboard with AI tutoring, instant announcements, smart scheduling, and progress tracking!</p>                            <button class="btn-primary">
                                 <span>Start Your Journey</span>
                                 <i class="fas fa-arrow-right"></i>
                             </button>
                         </div>
 
-                        <div class="login-card" onclick="redirectTo('faculty/dashboard.html', 'faculty')">
+                        <div class="login-card" onclick="redirectTo('faculty/login.html', 'faculty')">
                             <div class="card-icon">
                                 <i class="fas fa-chalkboard-teacher"></i>
                             </div>
@@ -67,7 +66,7 @@
                             </button>
                         </div>
 
-                        <div class="login-card" onclick="redirectTo('admin/dashboard.html', 'admin')">
+                        <div class="login-card" onclick="redirectTo('admin/login.html', 'admin')">
                             <div class="card-icon">
                                 <i class="fas fa-user-cog"></i>
                             </div>
@@ -140,54 +139,15 @@
         <!-- Modern Footer -->
         <footer class="footer">
             <div class="container">
-                <p>🌟 &copy; 2025 UNISYNC - Transforming Education at Cavite State University Imus Campus | Made with ❤️ for Students, Faculty & Staff</p>
+                <p>&copy; 2025 UNISYNC</p>
             </div>
         </footer>
     </div>
 
-    <script>
-        // Enhanced redirect function with smooth transitions
+    <script>        // Enhanced redirect function with smooth transitions
         function redirectTo(url, userType) {
-            // Add loading animation
-            document.body.style.opacity = '0.8';
-            document.body.style.transform = 'scale(0.98)';
-            
-            // Show enthusiastic message based on user type
-            const messages = {
-                student: "🎓 Launching your student portal... Get ready for an amazing experience!",
-                faculty: "📚 Opening faculty dashboard... Prepare to revolutionize your teaching!",
-                admin: "⚡ Accessing admin control center... Time to command your campus!"
-            };
-            
-            // Create temporary message overlay
-            const overlay = document.createElement('div');
-            overlay.style.cssText = `
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: linear-gradient(135deg, #006400, #228B22);
-                color: white;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 1.5rem;
-                font-weight: 600;
-                z-index: 10000;
-                opacity: 0;
-                transition: opacity 0.3s ease;
-            `;
-            overlay.textContent = messages[userType] || "🚀 Loading your dashboard...";
-            document.body.appendChild(overlay);
-            
-            // Animate overlay
-            setTimeout(() => overlay.style.opacity = '1', 100);
-            
-            // Redirect after animation
-            setTimeout(() => {
-                window.location.href = url;
-            }, 2000);
+            // Immediate redirect without overlay
+            window.location.href = url;
         }
 
         // Add smooth scroll for navigation links
