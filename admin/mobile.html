@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>UNISYNC Admin Mobile - CvSU Imus</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">    <link rel="stylesheet" href="css/admin-mobile.css">
+</head>
+<body>    <!-- Mobile Header -->
+    <header class="mobile-header">
+        <div class="header-content">
+            <div class="user-info">
+                <h2>Admin Rodriguez</h2>
+                <div class="role">System Administrator</div>
+            </div>
+            <div class="header-actions">
+                <button class="notification-btn">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge">5</span>
+                </button>
+                <button class="menu-btn">
+                    <i class="fas fa-ellipsis-v"></i>
+                </button>
+            </div>
+        </div>
+    </header>    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <div class="nav-tabs">
+            <a href="#dashboard" class="nav-tab active" data-tab="dashboard">
+                <i class="fas fa-tachometer-alt"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="#users" class="nav-tab" data-tab="users">
+                <i class="fas fa-users"></i>
+                <span>Users</span>
+            </a>
+            <a href="#reports" class="nav-tab" data-tab="reports">
+                <i class="fas fa-chart-bar"></i>
+                <span>Reports</span>
+            </a>
+            <a href="#settings" class="nav-tab" data-tab="settings">
+                <i class="fas fa-cog"></i>
+                <span>Settings</span>
+            </a>
+            <a href="#system" class="nav-tab" data-tab="system">
+                <i class="fas fa-server"></i>
+                <span>System</span>
+            </a>
+        </div>
+    </nav>    <!-- Main Content -->
+    <main class="mobile-content">
+        <div id="dashboard-content" class="content-section">
+            <!-- Quick Stats Cards -->
+            <div class="stats-grid">
+                <div class="stat-card" id="total-users">
+                    <span class="stat-icon">👥</span>
+                    <div class="stat-number">1,247</div>
+                    <div class="stat-label">Total Users</div>
+                </div>
+                
+                <div class="stat-card" id="active-users">
+                    <span class="stat-icon">✅</span>
+                    <div class="stat-number">1,156</div>
+                    <div class="stat-label">Active Users</div>
+                </div>
+                
+                <div class="stat-card" id="system-uptime">
+                    <span class="stat-icon">⚡</span>
+                    <div class="stat-number">99.9%</div>
+                    <div class="stat-label">System Uptime</div>
+                </div>
+                
+                <div class="stat-card" id="storage-used">
+                    <span class="stat-icon">💾</span>
+                    <div class="stat-number">85%</div>
+                    <div class="stat-label">Storage Used</div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="quick-actions">
+                <h3>Quick Actions</h3>
+                <div class="actions-grid">
+                    <a href="#" class="action-btn" data-action="add-user">
+                        <i class="fas fa-user-plus"></i>
+                        <span>Add User</span>
+                    </a>
+                    <a href="#" class="action-btn" data-action="system-health">
+                        <i class="fas fa-heartbeat"></i>
+                        <span>System Health</span>
+                    </a>
+                    <a href="#" class="action-btn" data-action="backup">
+                        <i class="fas fa-download"></i>
+                        <span>Backup</span>
+                    </a>
+                    <a href="#" class="action-btn" data-action="reports">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Reports</span>
+                    </a>
+                    <a href="#" class="action-btn" data-action="logs">
+                        <i class="fas fa-file-alt"></i>
+                        <span>Logs</span>
+                    </a>
+                    <a href="#" class="action-btn" data-action="settings">
+                        <i class="fas fa-cogs"></i>
+                        <span>Settings</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="activity-section">
+                <h3>Recent Activity</h3>
+                <div class="activity-list">
+                    <!-- Activity items will be loaded by JavaScript -->
+                </div>
+            </div>
+
+            <!-- System Status -->
+            <div class="system-status">
+                <h3>System Status</h3>
+                <div class="status-list">
+                    <!-- Status items will be loaded by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </main>
+                        <span class="card-value">89%</span>
+                        <span class="card-label">Room Usage</span>
+                        <span class="card-change neutral">Optimal</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="quick-actions">
+                <div class="section-header">
+                    <h3>Quick Actions</h3>
+                </div>
+                <div class="actions-grid">
+                    <button class="action-btn" onclick="addUser()">
+                        <i class="fas fa-user-plus"></i>
+                        <span>Add User</span>
+                    </button>
+                    <button class="action-btn" onclick="createAnnouncement()">
+                        <i class="fas fa-plus"></i>
+                        <span>New Announcement</span>
+                    </button>
+                    <button class="action-btn" onclick="viewReports()">
+                        <i class="fas fa-chart-line"></i>
+                        <span>View Reports</span>
+                    </button>
+                    <button class="action-btn" onclick="manageRooms()">
+                        <i class="fas fa-building"></i>
+                        <span>Manage Rooms</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- System Alerts -->
+            <div class="system-alerts">
+                <div class="section-header">
+                    <h3>System Alerts</h3>
+                    <button class="view-all-btn">View All</button>
+                </div>
+                
+                <div class="alerts-list">
+                    <div class="alert-item critical">
+                        <div class="alert-icon">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="alert-content">
+                            <h4>Server Load High</h4>
+                            <p>Database server experiencing high load (85%)</p>
+                            <span class="alert-time">5 minutes ago</span>
+                        </div>
+                        <button class="alert-action" onclick="resolveAlert('server-load')">
+                            <i class="fas fa-check"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="alert-item warning">
+                        <div class="alert-icon">
+                            <i class="fas fa-wifi"></i>
+                        </div>
+                        <div class="alert-content">
+                            <h4>Network Maintenance</h4>
+                            <p>Scheduled maintenance tonight at 2:00 AM</p>
+                            <span class="alert-time">2 hours ago</span>
+                        </div>
+                    </div>
+                    
+                    <div class="alert-item info">
+                        <div class="alert-icon">
+                            <i class="fas fa-upload"></i>
+                        </div>
+                        <div class="alert-content">
+                            <h4>Backup Completed</h4>
+                            <p>Daily system backup completed successfully</p>
+                            <span class="alert-time">4 hours ago</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="recent-activity">
+                <div class="section-header">
+                    <h3>Recent Activity</h3>
+                    <button class="view-all-btn">View All</button>
+                </div>
+                
+                <div class="activity-timeline">
+                    <div class="activity-item">
+                        <div class="activity-dot user"></div>
+                        <div class="activity-content">
+                            <h4>New User Registration</h4>
+                            <p>Maria Santos registered as Faculty</p>
+                            <span class="activity-time">10 minutes ago</span>
+                        </div>
+                    </div>
+                    
+                    <div class="activity-item">
+                        <div class="activity-dot announcement"></div>
+                        <div class="activity-content">
+                            <h4>Announcement Published</h4>
+                            <p>"Final Exam Schedule" by Academic Affairs</p>
+                            <span class="activity-time">1 hour ago</span>
+                        </div>
+                    </div>
+                    
+                    <div class="activity-item">
+                        <div class="activity-dot system"></div>
+                        <div class="activity-content">
+                            <h4>System Update</h4>
+                            <p>UNISYNC v2.1.3 deployed successfully</p>
+                            <span class="activity-time">3 hours ago</span>
+                        </div>
+                    </div>
+                    
+                    <div class="activity-item">
+                        <div class="activity-dot room"></div>
+                        <div class="activity-content">
+                            <h4>Room Reservation</h4>
+                            <p>Room 401 booked for CS Department meeting</p>
+                            <span class="activity-time">5 hours ago</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Users Tab -->
+        <div id="users" class="tab-content">
+            <div class="users-header">
+                <h2>User Management</h2>
+                <button class="add-user-btn" onclick="addUser()">
+                    <i class="fas fa-plus"></i>
+                    Add User
+                </button>
+            </div>
+            
+            <div class="user-stats">
+                <div class="stat-card">
+                    <div class="stat-icon students">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <div class="stat-info">
+                        <span class="stat-number">2,456</span>
+                        <span class="stat-label">Students</span>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon faculty">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <div class="stat-info">
+                        <span class="stat-number">185</span>
+                        <span class="stat-label">Faculty</span>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon admin">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <div class="stat-info">
+                        <span class="stat-number">12</span>
+                        <span class="stat-label">Admins</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="user-filters">
+                <div class="filter-group">
+                    <select id="user-role-filter" onchange="filterUsers()">
+                        <option value="all">All Roles</option>
+                        <option value="student">Students</option>
+                        <option value="faculty">Faculty</option>
+                        <option value="admin">Admins</option>
+                    </select>
+                </div>
+                
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search users..." id="user-search" oninput="searchUsers()">
+                </div>
+            </div>
+            
+            <div class="users-list">
+                <div class="user-item" data-role="faculty">
+                    <div class="user-avatar">
+                        <img src="../img/avatars/faculty-avatar.jpg" alt="Maria Santos">
+                    </div>
+                    <div class="user-info">
+                        <h4>Prof. Maria Santos</h4>
+                        <p>Computer Science Department</p>
+                        <span class="user-role faculty">Faculty</span>
+                    </div>
+                    <div class="user-actions">
+                        <button class="action-btn small" onclick="editUser('maria-santos')">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="action-btn small danger" onclick="suspendUser('maria-santos')">
+                            <i class="fas fa-ban"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="user-item" data-role="student">
+                    <div class="user-avatar">
+                        <img src="../img/avatars/student-avatar.jpg" alt="Juan Dela Cruz">
+                    </div>
+                    <div class="user-info">
+                        <h4>Juan Dela Cruz</h4>
+                        <p>BS Computer Science - 3rd Year</p>
+                        <span class="user-role student">Student</span>
+                    </div>
+                    <div class="user-actions">
+                        <button class="action-btn small" onclick="editUser('juan-dela-cruz')">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="action-btn small danger" onclick="suspendUser('juan-dela-cruz')">
+                            <i class="fas fa-ban"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="user-item" data-role="admin">
+                    <div class="user-avatar">
+                        <img src="../img/avatars/admin-avatar2.jpg" alt="Ana Garcia">
+                    </div>
+                    <div class="user-info">
+                        <h4>Ana Garcia</h4>
+                        <p>System Administrator</p>
+                        <span class="user-role admin">Admin</span>
+                    </div>
+                    <div class="user-actions">
+                        <button class="action-btn small" onclick="editUser('ana-garcia')">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="action-btn small danger" onclick="suspendUser('ana-garcia')">
+                            <i class="fas fa-ban"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="user-item" data-role="faculty">
+                    <div class="user-avatar">
+                        <div class="avatar-placeholder">
+                            <i class="fas fa-user"></i>
+                        </div>
+                    </div>
+                    <div class="user-info">
+                        <h4>Dr. Jose Rizal</h4>
+                        <p>Mathematics Department</p>
+                        <span class="user-role faculty">Faculty</span>
+                    </div>
+                    <div class="user-actions">
+                        <button class="action-btn small" onclick="editUser('jose-rizal')">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="action-btn small danger" onclick="suspendUser('jose-rizal')">
+                            <i class="fas fa-ban"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Announcements Tab -->
+        <div id="announcements" class="tab-content">
+            <div class="announcements-header">
+                <h2>System Announcements</h2>
+                <button class="create-btn" onclick="createAnnouncement()">
+                    <i class="fas fa-plus"></i>
+                    Create
+                </button>
+            </div>
+            
+            <div class="announcement-stats">
+                <div class="stat-item">
+                    <span class="stat-number">47</span>
+                    <span class="stat-label">Total</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">12</span>
+                    <span class="stat-label">This Week</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">8.2k</span>
+                    <span class="stat-label">Total Views</span>
+                </div>
+            </div>
+            
+            <div class="filter-tabs">
+                <button class="filter-tab active" onclick="filterAnnouncements('all')">All</button>
+                <button class="filter-tab" onclick="filterAnnouncements('published')">Published</button>
+                <button class="filter-tab" onclick="filterAnnouncements('draft')">Drafts</button>
+                <button class="filter-tab" onclick="filterAnnouncements('scheduled')">Scheduled</button>
+            </div>
+            
+            <div class="announcements-list">
+                <div class="announcement-item published priority">
+                    <div class="announcement-header">
+                        <div class="status-indicator published">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Published</span>
+                        </div>
+                        <div class="priority-badge high">
+                            <i class="fas fa-exclamation"></i>
+                            <span>High Priority</span>
+                        </div>
+                    </div>
+                    
+                    <div class="announcement-content">
+                        <h3>Final Examination Period Guidelines</h3>
+                        <p>Updated guidelines for the final examination period, including safety protocols and schedule changes.</p>
+                        <div class="announcement-meta">
+                            <span class="author">Academic Affairs Office</span>
+                            <span class="views">2,341 views</span>
+                            <span class="timestamp">2 hours ago</span>
+                        </div>
+                    </div>
+                    
+                    <div class="announcement-actions">
+                        <button class="action-btn secondary" onclick="editAnnouncement(1)">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="action-btn secondary" onclick="viewAnalytics(1)">
+                            <i class="fas fa-chart-bar"></i>
+                        </button>
+                        <button class="action-btn danger" onclick="deleteAnnouncement(1)">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="announcement-item published">
+                    <div class="announcement-header">
+                        <div class="status-indicator published">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Published</span>
+                        </div>
+                    </div>
+                    
+                    <div class="announcement-content">
+                        <h3>Library Extended Hours</h3>
+                        <p>The university library will be open 24/7 during the final examination period to support student learning.</p>
+                        <div class="announcement-meta">
+                            <span class="author">Library Services</span>
+                            <span class="views">1,892 views</span>
+                            <span class="timestamp">1 day ago</span>
+                        </div>
+                    </div>
+                    
+                    <div class="announcement-actions">
+                        <button class="action-btn secondary" onclick="editAnnouncement(2)">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="action-btn secondary" onclick="viewAnalytics(2)">
+                            <i class="fas fa-chart-bar"></i>
+                        </button>
+                        <button class="action-btn danger" onclick="deleteAnnouncement(2)">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="announcement-item draft">
+                    <div class="announcement-header">
+                        <div class="status-indicator draft">
+                            <i class="fas fa-file-alt"></i>
+                            <span>Draft</span>
+                        </div>
+                    </div>
+                    
+                    <div class="announcement-content">
+                        <h3>Campus Wi-Fi Network Upgrade</h3>
+                        <p>Information about the upcoming campus-wide Wi-Fi infrastructure improvements...</p>
+                        <div class="announcement-meta">
+                            <span class="author">IT Services</span>
+                            <span class="timestamp">3 days ago</span>
+                        </div>
+                    </div>
+                    
+                    <div class="announcement-actions">
+                        <button class="action-btn primary" onclick="publishAnnouncement(3)">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                        <button class="action-btn secondary" onclick="editAnnouncement(3)">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="action-btn danger" onclick="deleteAnnouncement(3)">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reports Tab -->
+        <div id="reports" class="tab-content">
+            <div class="reports-header">
+                <h2>System Reports</h2>
+                <button class="generate-btn" onclick="generateReport()">
+                    <i class="fas fa-plus"></i>
+                    Generate
+                </button>
+            </div>
+            
+            <div class="report-cards">
+                <div class="report-card" onclick="viewReport('user-analytics')">
+                    <div class="report-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="report-info">
+                        <h3>User Analytics</h3>
+                        <p>Registration trends, active users, and engagement metrics</p>
+                        <span class="last-updated">Updated 1 hour ago</span>
+                    </div>
+                    <div class="report-action">
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </div>
+                
+                <div class="report-card" onclick="viewReport('system-performance')">
+                    <div class="report-icon">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <div class="report-info">
+                        <h3>System Performance</h3>
+                        <p>Server uptime, response times, and resource usage</p>
+                        <span class="last-updated">Updated 30 minutes ago</span>
+                    </div>
+                    <div class="report-action">
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </div>
+                
+                <div class="report-card" onclick="viewReport('room-utilization')">
+                    <div class="report-icon">
+                        <i class="fas fa-door-open"></i>
+                    </div>
+                    <div class="report-info">
+                        <h3>Room Utilization</h3>
+                        <p>Room booking rates, peak hours, and availability trends</p>
+                        <span class="last-updated">Updated 2 hours ago</span>
+                    </div>
+                    <div class="report-action">
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </div>
+                
+                <div class="report-card" onclick="viewReport('announcements')">
+                    <div class="report-icon">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                    <div class="report-info">
+                        <h3>Announcement Metrics</h3>
+                        <p>View counts, engagement rates, and reach statistics</p>
+                        <span class="last-updated">Updated 3 hours ago</span>
+                    </div>
+                    <div class="report-action">
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="quick-stats">
+                <div class="section-header">
+                    <h3>Quick Statistics</h3>
+                </div>
+                
+                <div class="stats-grid">
+                    <div class="quick-stat">
+                        <div class="stat-value">
+                            <span class="number">98.7%</span>
+                            <span class="trend positive">
+                                <i class="fas fa-arrow-up"></i>
+                                +0.3%
+                            </span>
+                        </div>
+                        <span class="stat-label">System Uptime</span>
+                    </div>
+                    
+                    <div class="quick-stat">
+                        <div class="stat-value">
+                            <span class="number">2.3s</span>
+                            <span class="trend positive">
+                                <i class="fas fa-arrow-down"></i>
+                                -0.1s
+                            </span>
+                        </div>
+                        <span class="stat-label">Avg Response Time</span>
+                    </div>
+                    
+                    <div class="quick-stat">
+                        <div class="stat-value">
+                            <span class="number">89%</span>
+                            <span class="trend positive">
+                                <i class="fas fa-arrow-up"></i>
+                                +5%
+                            </span>
+                        </div>
+                        <span class="stat-label">Room Utilization</span>
+                    </div>
+                    
+                    <div class="quick-stat">
+                        <div class="stat-value">
+                            <span class="number">1,247</span>
+                            <span class="trend positive">
+                                <i class="fas fa-arrow-up"></i>
+                                +84
+                            </span>
+                        </div>
+                        <span class="stat-label">Daily Active Users</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- More/Settings Tab -->
+        <div id="more" class="tab-content">
+            <div class="settings-header">
+                <h2>System Settings</h2>
+            </div>
+            
+            <div class="settings-sections">
+                <div class="settings-section">
+                    <h3>System Management</h3>
+                    <div class="settings-items">
+                        <a href="#" class="settings-item">
+                            <div class="item-icon">
+                                <i class="fas fa-server"></i>
+                            </div>
+                            <div class="item-info">
+                                <span class="item-title">Server Status</span>
+                                <span class="item-subtitle">Monitor system health</span>
+                            </div>
+                            <div class="status-indicator online">
+                                <i class="fas fa-circle"></i>
+                            </div>
+                        </a>
+                        
+                        <a href="#" class="settings-item">
+                            <div class="item-icon">
+                                <i class="fas fa-database"></i>
+                            </div>
+                            <div class="item-info">
+                                <span class="item-title">Database Management</span>
+                                <span class="item-subtitle">Backup and maintenance</span>
+                            </div>
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                        
+                        <a href="#" class="settings-item">
+                            <div class="item-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <div class="item-info">
+                                <span class="item-title">Security Settings</span>
+                                <span class="item-subtitle">Authentication and permissions</span>
+                            </div>
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                        
+                        <a href="#" class="settings-item">
+                            <div class="item-icon">
+                                <i class="fas fa-cogs"></i>
+                            </div>
+                            <div class="item-info">
+                                <span class="item-title">System Configuration</span>
+                                <span class="item-subtitle">Global settings and parameters</span>
+                            </div>
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="settings-section">
+                    <h3>User Management</h3>
+                    <div class="settings-items">
+                        <a href="#" class="settings-item">
+                            <div class="item-icon">
+                                <i class="fas fa-user-cog"></i>
+                            </div>
+                            <div class="item-info">
+                                <span class="item-title">Role Management</span>
+                                <span class="item-subtitle">Configure user roles and permissions</span>
+                            </div>
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                        
+                        <a href="#" class="settings-item">
+                            <div class="item-icon">
+                                <i class="fas fa-user-shield"></i>
+                            </div>
+                            <div class="item-info">
+                                <span class="item-title">Admin Accounts</span>
+                                <span class="item-subtitle">Manage administrator access</span>
+                            </div>
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                        
+                        <a href="#" class="settings-item">
+                            <div class="item-icon">
+                                <i class="fas fa-key"></i>
+                            </div>
+                            <div class="item-info">
+                                <span class="item-title">Password Policies</span>
+                                <span class="item-subtitle">Set password requirements</span>
+                            </div>
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="settings-section">
+                    <h3>Content Management</h3>
+                    <div class="settings-items">
+                        <a href="#" class="settings-item">
+                            <div class="item-icon">
+                                <i class="fas fa-building"></i>
+                            </div>
+                            <div class="item-info">
+                                <span class="item-title">Room Management</span>
+                                <span class="item-subtitle">Add, edit, and organize rooms</span>
+                            </div>
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                        
+                        <a href="#" class="settings-item">
+                            <div class="item-icon">
+                                <i class="fas fa-calendar-alt"></i>
+                            </div>
+                            <div class="item-info">
+                                <span class="item-title">Academic Calendar</span>
+                                <span class="item-subtitle">Manage semester and events</span>
+                            </div>
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                        
+                        <a href="#" class="settings-item">
+                            <div class="item-icon">
+                                <i class="fas fa-tags"></i>
+                            </div>
+                            <div class="item-info">
+                                <span class="item-title">Categories & Tags</span>
+                                <span class="item-subtitle">Organize content classifications</span>
+                            </div>
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="settings-section">
+                    <h3>Account</h3>
+                    <div class="settings-items">
+                        <a href="#" class="settings-item">
+                            <div class="item-icon">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="item-info">
+                                <span class="item-title">Profile Settings</span>
+                                <span class="item-subtitle">Personal information</span>
+                            </div>
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                        
+                        <a href="#" class="settings-item">
+                            <div class="item-icon">
+                                <i class="fas fa-bell"></i>
+                            </div>
+                            <div class="item-info">
+                                <span class="item-title">Notifications</span>
+                                <span class="item-subtitle">Alert preferences</span>
+                            </div>
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                        
+                        <a href="#" class="settings-item">
+                            <div class="item-icon">
+                                <i class="fas fa-moon"></i>
+                            </div>
+                            <div class="item-info">
+                                <span class="item-title">Dark Mode</span>
+                                <span class="item-subtitle">Toggle theme</span>
+                            </div>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="dark-mode-toggle">
+                                <label for="dark-mode-toggle"></label>
+                            </div>
+                        </a>
+                        
+                        <a href="#" class="settings-item logout">
+                            <div class="item-icon">
+                                <i class="fas fa-sign-out-alt"></i>
+                            </div>
+                            <div class="item-info">
+                                <span class="item-title">Logout</span>
+                                <span class="item-subtitle">Sign out of admin panel</span>
+                            </div>
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Floating Action Button for AI Assistant -->
+    <button class="fab-chatbot" onclick="toggleChatbot()">
+        <i class="fas fa-robot"></i>
+    </button>
+
+    <!-- Mobile Chatbot -->
+    <div class="mobile-chatbot" id="mobile-chatbot">
+        <div class="chatbot-header">
+            <div class="chatbot-info">
+                <div class="chatbot-avatar">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div class="chatbot-details">
+                    <span class="chatbot-name">Admin Assistant</span>
+                    <span class="chatbot-status">Online</span>
+                </div>
+            </div>
+            <button class="close-chatbot" onclick="toggleChatbot()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <div class="chatbot-messages" id="chatbot-messages">
+            <div class="message bot-message">
+                <div class="message-content">
+                    <p>Hello Admin! I can help you manage the UNISYNC system. What would you like to do?</p>
+                </div>
+                <span class="message-time">Now</span>
+            </div>
+        </div>
+        
+        <div class="quick-suggestions">
+            <button class="suggestion-btn" onclick="sendQuickMessage('Show system status')">Show system status</button>
+            <button class="suggestion-btn" onclick="sendQuickMessage('User statistics')">User statistics</button>
+            <button class="suggestion-btn" onclick="sendQuickMessage('Generate report')">Generate report</button>
+        </div>
+        
+        <div class="chatbot-input">
+            <input type="text" placeholder="Type your message..." id="chat-input">
+            <button class="send-btn" onclick="sendMessage()">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Notification Panel -->
+    <div class="notification-panel" id="notification-panel">
+        <div class="panel-header">
+            <h3>System Notifications</h3>
+            <button class="close-panel" onclick="toggleNotifications()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="notifications-list">
+            <div class="notification-item critical unread">
+                <div class="notification-icon">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <div class="notification-content">
+                    <h4>High Server Load Detected</h4>
+                    <p>Database server load at 85%. Consider scaling resources.</p>
+                    <span class="notification-time">5 minutes ago</span>
+                </div>
+                <button class="dismiss-btn" onclick="dismissNotification(this)">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="notification-item warning">
+                <div class="notification-icon">
+                    <i class="fas fa-wifi"></i>
+                </div>
+                <div class="notification-content">
+                    <h4>Scheduled Maintenance</h4>
+                    <p>Network maintenance tonight at 2:00 AM (4 hours)</p>
+                    <span class="notification-time">2 hours ago</span>
+                </div>
+                <button class="dismiss-btn" onclick="dismissNotification(this)">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="notification-item info">
+                <div class="notification-icon">
+                    <i class="fas fa-user-plus"></i>
+                </div>
+                <div class="notification-content">
+                    <h4>New User Registration</h4>
+                    <p>Maria Santos registered as Faculty member</p>
+                    <span class="notification-time">1 hour ago</span>
+                </div>
+                <button class="dismiss-btn" onclick="dismissNotification(this)">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="notification-item success">
+                <div class="notification-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <div class="notification-content">
+                    <h4>Backup Completed</h4>
+                    <p>Daily system backup completed successfully</p>
+                    <span class="notification-time">4 hours ago</span>
+                </div>
+                <button class="dismiss-btn" onclick="dismissNotification(this)">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="notification-item info">
+                <div class="notification-icon">
+                    <i class="fas fa-bullhorn"></i>
+                </div>
+                <div class="notification-content">
+                    <h4>Announcement Published</h4>
+                    <p>"Final Exam Schedule" published by Academic Affairs</p>
+                    <span class="notification-time">6 hours ago</span>
+                </div>
+                <button class="dismiss-btn" onclick="dismissNotification(this)">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="javascript/admin-mobile.js"></script>
+</body>
+</html>

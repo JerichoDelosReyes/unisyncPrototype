@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - UNISYNC</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-university"></i>
+                    <span>UNISYNC Admin</span>
+                </div>
+            </div>
+            
+            <ul class="sidebar-menu">
+                <li class="active">
+                    <a href="#dashboard" onclick="showSection('dashboard')">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>Dashboard Overview</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#users" onclick="showSection('users')">
+                        <i class="fas fa-users"></i>
+                        <span>Manage Users</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#announcements" onclick="showSection('announcements')">
+                        <i class="fas fa-bullhorn"></i>
+                        <span>Announcements</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#schedule" onclick="showSection('schedule')">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Room Schedule</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#reports" onclick="showSection('reports')">
+                        <i class="fas fa-chart-bar"></i>
+                        <span>Reports</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#settings" onclick="showSection('settings')">
+                        <i class="fas fa-cog"></i>
+                        <span>Settings</span>
+                    </a>
+                </li>
+            </ul>
+
+            <div class="sidebar-footer">
+                <a href="../index.html" class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="main-header">
+                <div class="header-left">
+                    <button class="menu-toggle" onclick="toggleSidebar()">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h1 id="page-title">Dashboard Overview</h1>
+                </div>
+                <div class="header-right">
+                    <div class="notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-count">3</span>
+                    </div>
+                    <div class="user-profile">
+                        <img src="img/admin-avatar.jpg" alt="Admin" class="avatar">
+                        <span>Admin User</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Overview Section -->
+            <section id="dashboard" class="content-section active">
+                <div class="dashboard-widgets">
+                    <div class="widget-card">
+                        <div class="widget-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="widget-content">
+                            <h3>Total Users</h3>
+                            <p class="widget-number">2,847</p>
+                            <span class="widget-change positive">+12% from last month</span>
+                        </div>
+                    </div>
+
+                    <div class="widget-card">
+                        <div class="widget-icon">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <div class="widget-content">
+                            <h3>Active Students</h3>
+                            <p class="widget-number">2,456</p>
+                            <span class="widget-change positive">+8% from last month</span>
+                        </div>
+                    </div>
+
+                    <div class="widget-card">
+                        <div class="widget-icon">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                        </div>
+                        <div class="widget-content">
+                            <h3>Faculty Members</h3>
+                            <p class="widget-number">312</p>
+                            <span class="widget-change neutral">No change</span>
+                        </div>
+                    </div>
+
+                    <div class="widget-card">
+                        <div class="widget-icon">
+                            <i class="fas fa-bullhorn"></i>
+                        </div>
+                        <div class="widget-content">
+                            <h3>Announcements</h3>
+                            <p class="widget-number">45</p>
+                            <span class="widget-change positive">+5 this week</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-charts">
+                    <div class="chart-card">
+                        <h3>System Usage Over Time</h3>
+                        <canvas id="usageChart"></canvas>
+                    </div>
+                    
+                    <div class="recent-activity">
+                        <h3>Recent Activity</h3>
+                        <div class="activity-list">
+                            <div class="activity-item">
+                                <i class="fas fa-user-plus"></i>
+                                <div class="activity-content">
+                                    <p><strong>New student registered:</strong> John Doe (BSCS-3A)</p>
+                                    <span class="activity-time">2 minutes ago</span>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <i class="fas fa-bullhorn"></i>
+                                <div class="activity-content">
+                                    <p><strong>Announcement posted:</strong> Semester Break Schedule</p>
+                                    <span class="activity-time">15 minutes ago</span>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <i class="fas fa-calendar"></i>
+                                <div class="activity-content">
+                                    <p><strong>Room reserved:</strong> Room 401 - Database Systems</p>
+                                    <span class="activity-time">1 hour ago</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- User Management Section -->
+            <section id="users" class="content-section">
+                <div class="section-header">
+                    <h2>User Management</h2>
+                    <button class="btn-primary" onclick="openUserModal()">
+                        <i class="fas fa-plus"></i> Add New User
+                    </button>
+                </div>
+                
+                <div class="user-filters">
+                    <div class="filter-group">
+                        <label>Role:</label>
+                        <select id="roleFilter">
+                            <option value="">All Roles</option>
+                            <option value="student">Student</option>
+                            <option value="faculty">Faculty</option>
+                            <option value="admin">Admin</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Status:</label>
+                        <select id="statusFilter">
+                            <option value="">All Status</option>
+                            <option value="active">Active</option>
+                            <option value="inactive">Inactive</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <input type="text" placeholder="Search users..." id="userSearch">
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <table class="users-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                                <th>Status</th>
+                                <th>Last Login</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>2024-001</td>
+                                <td>John Doe</td>
+                                <td>john.doe@cvsu.edu.ph</td>
+                                <td><span class="role-badge student">Student</span></td>
+                                <td><span class="status-badge active">Active</span></td>
+                                <td>Dec 15, 2024 10:30 AM</td>
+                                <td>
+                                    <button class="btn-icon edit" onclick="editUser('2024-001')">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn-icon delete" onclick="deleteUser('2024-001')">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2024-002</td>
+                                <td>Prof. Maria Santos</td>
+                                <td>maria.santos@cvsu.edu.ph</td>
+                                <td><span class="role-badge faculty">Faculty</span></td>
+                                <td><span class="status-badge active">Active</span></td>
+                                <td>Dec 15, 2024 9:15 AM</td>
+                                <td>
+                                    <button class="btn-icon edit" onclick="editUser('2024-002')">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn-icon delete" onclick="deleteUser('2024-002')">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Announcements Section -->
+            <section id="announcements" class="content-section">
+                <div class="section-header">
+                    <h2>Announcements Management</h2>
+                    <button class="btn-primary" onclick="openAnnouncementModal()">
+                        <i class="fas fa-plus"></i> Create Announcement
+                    </button>
+                </div>
+
+                <div class="announcements-grid">
+                    <div class="announcement-card">
+                        <div class="announcement-header">
+                            <h3>Semester Break Schedule</h3>
+                            <div class="announcement-actions">
+                                <button class="btn-icon edit">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn-icon delete">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="announcement-content">
+                            Please be informed that the semester break will start on December 20, 2024, and classes will resume on January 8, 2025.
+                        </p>
+                        <div class="announcement-footer">
+                            <span class="announcement-tag academic">Academic</span>
+                            <span class="announcement-date">Posted: Dec 15, 2024</span>
+                        </div>
+                    </div>
+
+                    <div class="announcement-card">
+                        <div class="announcement-header">
+                            <h3>Library Hours Extension</h3>
+                            <div class="announcement-actions">
+                                <button class="btn-icon edit">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn-icon delete">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="announcement-content">
+                            The library will extend its operating hours from 7:00 AM to 10:00 PM starting next week to accommodate final examinations.
+                        </p>
+                        <div class="announcement-footer">
+                            <span class="announcement-tag general">General</span>
+                            <span class="announcement-date">Posted: Dec 14, 2024</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Room Schedule Section -->
+            <section id="schedule" class="content-section">
+                <div class="section-header">
+                    <h2>Room Schedule Management</h2>
+                    <button class="btn-primary" onclick="openScheduleModal()">
+                        <i class="fas fa-plus"></i> Add Schedule
+                    </button>
+                </div>
+
+                <div class="schedule-filters">
+                    <div class="filter-group">
+                        <label>Building:</label>
+                        <select id="buildingFilter">
+                            <option value="">All Buildings</option>
+                            <option value="main">Main Building</option>
+                            <option value="engineering">Engineering Building</option>
+                            <option value="science">Science Building</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Date:</label>
+                        <input type="date" id="dateFilter" value="2024-12-15">
+                    </div>
+                </div>
+
+                <div class="schedule-grid">
+                    <div class="room-schedule-card">
+                        <h3>Room 401 - Main Building</h3>
+                        <div class="schedule-timeline">
+                            <div class="time-slot occupied">
+                                <span class="time">8:00 - 9:30 AM</span>
+                                <span class="subject">Database Systems - BSCS 3A</span>
+                                <span class="instructor">Prof. Juan Cruz</span>
+                            </div>
+                            <div class="time-slot available">
+                                <span class="time">9:30 - 11:00 AM</span>
+                                <span class="subject">Available</span>
+                            </div>
+                            <div class="time-slot occupied">
+                                <span class="time">11:00 - 12:30 PM</span>
+                                <span class="subject">Software Engineering - BSCS 4A</span>
+                                <span class="instructor">Prof. Maria Santos</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="room-schedule-card">
+                        <h3>Room 402 - Main Building</h3>
+                        <div class="schedule-timeline">
+                            <div class="time-slot available">
+                                <span class="time">8:00 - 9:30 AM</span>
+                                <span class="subject">Available</span>
+                            </div>
+                            <div class="time-slot occupied">
+                                <span class="time">9:30 - 11:00 AM</span>
+                                <span class="subject">Web Development - BSIT 3B</span>
+                                <span class="instructor">Prof. Ana Reyes</span>
+                            </div>
+                            <div class="time-slot occupied">
+                                <span class="time">11:00 - 12:30 PM</span>
+                                <span class="subject">Mobile App Development - BSIT 4A</span>
+                                <span class="instructor">Prof. Carlos Mendoza</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Reports Section -->
+            <section id="reports" class="content-section">
+                <div class="section-header">
+                    <h2>Reports & Analytics</h2>
+                    <div class="report-actions">
+                        <button class="btn-secondary" onclick="exportReport('pdf')">
+                            <i class="fas fa-file-pdf"></i> Export PDF
+                        </button>
+                        <button class="btn-secondary" onclick="exportReport('excel')">
+                            <i class="fas fa-file-excel"></i> Export Excel
+                        </button>
+                    </div>
+                </div>
+
+                <div class="reports-grid">
+                    <div class="report-card">
+                        <h3>User Statistics</h3>
+                        <canvas id="userStatsChart"></canvas>
+                    </div>
+                    
+                    <div class="report-card">
+                        <h3>Room Utilization</h3>
+                        <canvas id="roomUtilizationChart"></canvas>
+                    </div>
+                    
+                    <div class="report-card">
+                        <h3>Announcement Engagement</h3>
+                        <div class="engagement-stats">
+                            <div class="stat-item">
+                                <span class="stat-label">Total Views:</span>
+                                <span class="stat-value">12,456</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Average Views per Announcement:</span>
+                                <span class="stat-value">276</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Most Viewed Category:</span>
+                                <span class="stat-value">Academic</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Settings Section -->
+            <section id="settings" class="content-section">
+                <div class="section-header">
+                    <h2>System Settings</h2>
+                </div>
+
+                <div class="settings-grid">
+                    <div class="settings-card">
+                        <h3>General Settings</h3>
+                        <div class="setting-item">
+                            <label>System Name:</label>
+                            <input type="text" value="UNISYNC" readonly>
+                        </div>
+                        <div class="setting-item">
+                            <label>University:</label>
+                            <input type="text" value="Cavite State University - Imus Campus" readonly>
+                        </div>
+                        <div class="setting-item">
+                            <label>Time Zone:</label>
+                            <select>
+                                <option value="Asia/Manila">Asia/Manila (UTC+8)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="settings-card">
+                        <h3>Notification Settings</h3>
+                        <div class="setting-item">
+                            <label class="checkbox-label">
+                                <input type="checkbox" checked>
+                                Email notifications for new users
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <label class="checkbox-label">
+                                <input type="checkbox" checked>
+                                SMS notifications for critical announcements
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <label class="checkbox-label">
+                                <input type="checkbox">
+                                Weekly system reports
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="settings-card">
+                        <h3>Security Settings</h3>
+                        <div class="setting-item">
+                            <label>Session Timeout (minutes):</label>
+                            <input type="number" value="30" min="15" max="120">
+                        </div>
+                        <div class="setting-item">
+                            <label class="checkbox-label">
+                                <input type="checkbox" checked>
+                                Require password change every 90 days
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <label class="checkbox-label">
+                                <input type="checkbox" checked>
+                                Enable two-factor authentication
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="settings-actions">
+                    <button class="btn-primary">Save Settings</button>
+                    <button class="btn-secondary">Reset to Default</button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- AI Chatbot -->
+    <div class="chatbot-container" id="chatbot">
+        <div class="chatbot-header" onclick="toggleChat()">
+            <i class="fas fa-robot"></i>
+            <span>AI Assistant</span>
+            <i class="fas fa-chevron-up" id="chatToggle"></i>
+        </div>
+        <div class="chatbot-body">
+            <div class="chat-messages" id="chatMessages">
+                <div class="message bot-message">
+                    <div class="message-content">
+                        Hello! I'm your AI assistant. How can I help you today?
+                    </div>
+                </div>
+            </div>
+            <div class="chat-input">
+                <input type="text" placeholder="Type your message..." id="chatInput">
+                <button onclick="sendMessage()">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="javascript/admin.js"></script>
+</body>
+</html>

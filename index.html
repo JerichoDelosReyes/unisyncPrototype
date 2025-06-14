@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UNISYNC - Cavite State University Imus Campus</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="landing-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="container">
+                <div class="logo">
+                    <img src="img/cvsu-logo.png" alt="CvSU Logo">
+                    <div class="logo-text">
+                        <h1>UNISYNC</h1>
+                        <p>Cavite State University - Imus Campus</p>
+                    </div>
+                </div>
+                <nav class="nav">
+                    <a href="#about">About</a>
+                    <a href="#features">Features</a>
+                    <a href="#contact">Contact</a>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Welcome to UNISYNC</h1>
+                    <p>Your centralized university management system for announcements, room scheduling, and AI assistance</p>
+                    
+                    <!-- Login Cards -->
+                    <div class="login-cards">
+                        <div class="login-card" onclick="redirectTo('student/dashboard.html')">
+                            <div class="card-icon">
+                                <i class="fas fa-user-graduate"></i>
+                            </div>
+                            <h3>Student Portal</h3>
+                            <p>Access announcements, check room schedules, and get AI assistance</p>
+                            <button class="btn-primary">Student Login</button>
+                        </div>
+
+                        <div class="login-card" onclick="redirectTo('faculty/dashboard.html')">
+                            <div class="card-icon">
+                                <i class="fas fa-chalkboard-teacher"></i>
+                            </div>
+                            <h3>Faculty Portal</h3>
+                            <p>Manage announcements, view schedules, and access teaching tools</p>
+                            <button class="btn-primary">Faculty Login</button>
+                        </div>
+
+                        <div class="login-card" onclick="redirectTo('admin/dashboard.html')">
+                            <div class="card-icon">
+                                <i class="fas fa-user-cog"></i>
+                            </div>
+                            <h3>Admin Portal</h3>
+                            <p>System management, user control, and comprehensive reporting</p>
+                            <button class="btn-primary">Admin Login</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features" id="features">
+            <div class="container">
+                <h2>Key Features</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <i class="fas fa-bullhorn"></i>
+                        <h3>Announcement Board</h3>
+                        <p>Centralized platform for all university and faculty announcements</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-calendar-alt"></i>
+                        <h3>Room Scheduling</h3>
+                        <p>Real-time room availability and scheduling management</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-robot"></i>
+                        <h3>AI Virtual Assistant</h3>
+                        <p>Smart chatbot for instant answers to your university queries</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <p>&copy; 2025 UNISYNC - Cavite State University Imus Campus. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        function redirectTo(url) {
+            window.location.href = url;
+        }
+    </script>
+</body>
+</html>

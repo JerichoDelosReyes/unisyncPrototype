@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard - UNISYNC</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="css/student.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="student-container">
+        <!-- Header -->
+        <header class="main-header">
+            <div class="header-left">
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="logo">
+                    <i class="fas fa-university"></i>
+                    <span>UNISYNC</span>
+                </div>
+            </div>
+            
+            <div class="header-center">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search announcements, rooms, or ask AI..." id="globalSearch">
+                </div>
+            </div>
+            
+            <div class="header-right">
+                <div class="notifications" onclick="toggleNotifications()">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-count">7</span>
+                </div>
+                <div class="user-profile" onclick="toggleUserMenu()">
+                    <img src="img/student-avatar.jpg" alt="Student" class="avatar">
+                    <div class="user-info">
+                        <span class="user-name">John Doe</span>
+                        <span class="user-id">2024-00123</span>
+                    </div>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+        </header>
+
+        <!-- Mobile Navigation -->
+        <nav class="mobile-nav" id="mobileNav">
+            <a href="#dashboard" class="nav-item active" onclick="showSection('dashboard')">
+                <i class="fas fa-home"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="#announcements" class="nav-item" onclick="showSection('announcements')">
+                <i class="fas fa-bullhorn"></i>
+                <span>Announcements</span>
+            </a>
+            <a href="#schedule" class="nav-item" onclick="showSection('schedule')">
+                <i class="fas fa-calendar-alt"></i>
+                <span>Schedule</span>
+            </a>
+            <a href="#rooms" class="nav-item" onclick="showSection('rooms')">
+                <i class="fas fa-door-open"></i>
+                <span>Room Finder</span>
+            </a>
+        </nav>
+
+        <!-- Desktop Navigation -->
+        <nav class="desktop-nav">
+            <div class="nav-container">
+                <a href="#dashboard" class="nav-tab active" onclick="showSection('dashboard')">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#announcements" class="nav-tab" onclick="showSection('announcements')">
+                    <i class="fas fa-bullhorn"></i>
+                    <span>Announcements</span>
+                </a>
+                <a href="#schedule" class="nav-tab" onclick="showSection('schedule')">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>My Schedule</span>
+                </a>
+                <a href="#rooms" class="nav-tab" onclick="showSection('rooms')">
+                    <i class="fas fa-door-open"></i>
+                    <span>Room Finder</span>
+                </a>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="content-section active">
+                <div class="welcome-section">
+                    <div class="welcome-text">
+                        <h1>Good morning, John! 👋</h1>
+                        <p>Here's what's happening today in your academic journey</p>
+                    </div>
+                    <div class="quick-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">5</span>
+                            <span class="stat-label">Classes Today</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">3</span>
+                            <span class="stat-label">New Announcements</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">2</span>
+                            <span class="stat-label">Assignments Due</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-grid">
+                    <!-- Today's Schedule Card -->
+                    <div class="dashboard-card schedule-card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-calendar-day"></i> Today's Schedule</h3>
+                            <button class="view-all-btn" onclick="showSection('schedule')">View All</button>
+                        </div>
+                        <div class="schedule-preview">
+                            <div class="schedule-item current">
+                                <div class="schedule-time">
+                                    <span class="time">8:00 AM</span>
+                                    <span class="duration">1.5hrs</span>
+                                </div>
+                                <div class="schedule-details">
+                                    <h4>Database Systems</h4>
+                                    <p><i class="fas fa-map-marker-alt"></i> Room 401, Main Building</p>
+                                    <p><i class="fas fa-user"></i> Prof. Maria Santos</p>
+                                </div>
+                                <div class="schedule-status">
+                                    <span class="status-badge current">In Progress</span>
+                                </div>
+                            </div>
+
+                            <div class="schedule-item upcoming">
+                                <div class="schedule-time">
+                                    <span class="time">10:00 AM</span>
+                                    <span class="duration">1.5hrs</span>
+                                </div>
+                                <div class="schedule-details">
+                                    <h4>Data Structures</h4>
+                                    <p><i class="fas fa-map-marker-alt"></i> Room 403, Main Building</p>
+                                    <p><i class="fas fa-user"></i> Prof. Ana Reyes</p>
+                                </div>
+                                <div class="schedule-status">
+                                    <span class="status-badge upcoming">Next</span>
+                                </div>
+                            </div>
+
+                            <div class="schedule-item">
+                                <div class="schedule-time">
+                                    <span class="time">2:00 PM</span>
+                                    <span class="duration">2hrs</span>
+                                </div>
+                                <div class="schedule-details">
+                                    <h4>Programming Lab</h4>
+                                    <p><i class="fas fa-map-marker-alt"></i> Room IT301, IT Building</p>
+                                    <p><i class="fas fa-user"></i> Prof. Carlos Mendoza</p>
+                                </div>
+                                <div class="schedule-status">
+                                    <span class="status-badge scheduled">Later</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Announcements Card -->
+                    <div class="dashboard-card announcements-card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-bullhorn"></i> Recent Announcements</h3>
+                            <button class="view-all-btn" onclick="showSection('announcements')">View All</button>
+                        </div>
+                        <div class="announcements-preview">
+                            <div class="announcement-item priority">
+                                <div class="announcement-icon">
+                                    <i class="fas fa-exclamation-circle"></i>
+                                </div>
+                                <div class="announcement-content">
+                                    <h4>Final Exam Schedule Released</h4>
+                                    <p>Final examinations for all subjects will begin on December 18...</p>
+                                    <span class="announcement-meta">
+                                        <span class="announcement-time">2 hours ago</span>
+                                        <span class="announcement-tag important">Important</span>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="announcement-item">
+                                <div class="announcement-icon">
+                                    <i class="fas fa-info-circle"></i>
+                                </div>
+                                <div class="announcement-content">
+                                    <h4>Library Hours Extended</h4>
+                                    <p>Library will be open until 10:00 PM during exam week...</p>
+                                    <span class="announcement-meta">
+                                        <span class="announcement-time">5 hours ago</span>
+                                        <span class="announcement-tag general">General</span>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="announcement-item">
+                                <div class="announcement-icon">
+                                    <i class="fas fa-calendar"></i>
+                                </div>
+                                <div class="announcement-content">
+                                    <h4>Database Systems Project Due</h4>
+                                    <p>Submit your final project through the online platform...</p>
+                                    <span class="announcement-meta">
+                                        <span class="announcement-time">1 day ago</span>
+                                        <span class="announcement-tag academic">Academic</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions Card -->
+                    <div class="dashboard-card quick-actions-card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-bolt"></i> Quick Actions</h3>
+                        </div>
+                        <div class="quick-actions-grid">
+                            <button class="quick-action-btn" onclick="findRoom()">
+                                <i class="fas fa-search"></i>
+                                <span>Find Room</span>
+                            </button>
+                            <button class="quick-action-btn" onclick="checkSchedule()">
+                                <i class="fas fa-calendar-check"></i>
+                                <span>Check Schedule</span>
+                            </button>
+                            <button class="quick-action-btn" onclick="viewGrades()">
+                                <i class="fas fa-chart-line"></i>
+                                <span>View Grades</span>
+                            </button>
+                            <button class="quick-action-btn" onclick="contactSupport()">
+                                <i class="fas fa-headset"></i>
+                                <span>Get Help</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Academic Progress Card -->
+                    <div class="dashboard-card progress-card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-graduation-cap"></i> Academic Progress</h3>
+                        </div>
+                        <div class="progress-content">
+                            <div class="semester-info">
+                                <div class="semester-details">
+                                    <h4>1st Semester 2024-2025</h4>
+                                    <p>Computer Science • 3rd Year</p>
+                                </div>
+                                <div class="semester-stats">
+                                    <span class="gpa">GPA: 3.85</span>
+                                </div>
+                            </div>
+                            
+                            <div class="subjects-progress">
+                                <div class="subject-item">
+                                    <div class="subject-info">
+                                        <span class="subject-name">Database Systems</span>
+                                        <span class="subject-grade">92%</span>
+                                    </div>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 92%"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="subject-item">
+                                    <div class="subject-info">
+                                        <span class="subject-name">Data Structures</span>
+                                        <span class="subject-grade">88%</span>
+                                    </div>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 88%"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="subject-item">
+                                    <div class="subject-info">
+                                        <span class="subject-name">Programming Lab</span>
+                                        <span class="subject-grade">95%</span>
+                                    </div>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 95%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Announcements Section -->
+            <section id="announcements" class="content-section">
+                <div class="section-header">
+                    <h2>Announcements</h2>
+                    <div class="section-controls">
+                        <div class="filter-tabs">
+                            <button class="filter-tab active" onclick="filterAnnouncements('all')">All</button>
+                            <button class="filter-tab" onclick="filterAnnouncements('important')">Important</button>
+                            <button class="filter-tab" onclick="filterAnnouncements('academic')">Academic</button>
+                            <button class="filter-tab" onclick="filterAnnouncements('general')">General</button>
+                        </div>
+                        <div class="view-toggle">
+                            <button class="view-btn active" onclick="toggleView('list')">
+                                <i class="fas fa-list"></i>
+                            </button>
+                            <button class="view-btn" onclick="toggleView('grid')">
+                                <i class="fas fa-th"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="announcements-container list-view" id="announcementsContainer">
+                    <div class="announcement-card important">
+                        <div class="announcement-header">
+                            <div class="announcement-meta">
+                                <span class="announcement-tag important">Important</span>
+                                <span class="announcement-date">December 15, 2024</span>
+                            </div>
+                            <button class="bookmark-btn" onclick="toggleBookmark(this)">
+                                <i class="fas fa-bookmark"></i>
+                            </button>
+                        </div>
+                        <div class="announcement-body">
+                            <h3>Final Examination Schedule - 1st Semester AY 2024-2025</h3>
+                            <p>The final examination for the 1st Semester of Academic Year 2024-2025 will commence on December 18, 2024. All students are required to check their individual examination schedules through the student portal...</p>
+                            <div class="announcement-details">
+                                <span class="author"><i class="fas fa-user"></i> Academic Affairs Office</span>
+                                <span class="category"><i class="fas fa-folder"></i> Academic</span>
+                            </div>
+                        </div>
+                        <div class="announcement-actions">
+                            <button class="action-btn" onclick="readMore(this)">
+                                <i class="fas fa-eye"></i> Read More
+                            </button>
+                            <button class="action-btn" onclick="shareAnnouncement(this)">
+                                <i class="fas fa-share"></i> Share
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="announcement-card academic">
+                        <div class="announcement-header">
+                            <div class="announcement-meta">
+                                <span class="announcement-tag academic">Academic</span>
+                                <span class="announcement-date">December 14, 2024</span>
+                            </div>
+                            <button class="bookmark-btn" onclick="toggleBookmark(this)">
+                                <i class="far fa-bookmark"></i>
+                            </button>
+                        </div>
+                        <div class="announcement-body">
+                            <h3>Database Systems Final Project Submission Guidelines</h3>
+                            <p>Students enrolled in Database Systems (CS 321) are reminded to submit their final projects by December 20, 2024. The project should include a complete database design, implementation, and documentation...</p>
+                            <div class="announcement-details">
+                                <span class="author"><i class="fas fa-user"></i> Prof. Maria Santos</span>
+                                <span class="category"><i class="fas fa-folder"></i> BSCS 3A</span>
+                            </div>
+                        </div>
+                        <div class="announcement-actions">
+                            <button class="action-btn" onclick="readMore(this)">
+                                <i class="fas fa-eye"></i> Read More
+                            </button>
+                            <button class="action-btn" onclick="shareAnnouncement(this)">
+                                <i class="fas fa-share"></i> Share
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="announcement-card general">
+                        <div class="announcement-header">
+                            <div class="announcement-meta">
+                                <span class="announcement-tag general">General</span>
+                                <span class="announcement-date">December 13, 2024</span>
+                            </div>
+                            <button class="bookmark-btn" onclick="toggleBookmark(this)">
+                                <i class="far fa-bookmark"></i>
+                            </button>
+                        </div>
+                        <div class="announcement-body">
+                            <h3>Library Operating Hours Extended During Exam Period</h3>
+                            <p>To better serve our students during the examination period, the University Library will extend its operating hours from 7:00 AM to 10:00 PM starting December 16, 2024...</p>
+                            <div class="announcement-details">
+                                <span class="author"><i class="fas fa-user"></i> Library Services</span>
+                                <span class="category"><i class="fas fa-folder"></i> General</span>
+                            </div>
+                        </div>
+                        <div class="announcement-actions">
+                            <button class="action-btn" onclick="readMore(this)">
+                                <i class="fas fa-eye"></i> Read More
+                            </button>
+                            <button class="action-btn" onclick="shareAnnouncement(this)">
+                                <i class="fas fa-share"></i> Share
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="announcement-card academic">
+                        <div class="announcement-header">
+                            <div class="announcement-meta">
+                                <span class="announcement-tag academic">Academic</span>
+                                <span class="announcement-date">December 12, 2024</span>
+                            </div>
+                            <button class="bookmark-btn bookmarked" onclick="toggleBookmark(this)">
+                                <i class="fas fa-bookmark"></i>
+                            </button>
+                        </div>
+                        <div class="announcement-body">
+                            <h3>Programming Laboratory Equipment Maintenance</h3>
+                            <p>The IT Building computer laboratories will undergo scheduled maintenance on December 16, 2024. Alternative venues have been arranged for affected classes...</p>
+                            <div class="announcement-details">
+                                <span class="author"><i class="fas fa-user"></i> IT Services</span>
+                                <span class="category"><i class="fas fa-folder"></i> Technical</span>
+                            </div>
+                        </div>
+                        <div class="announcement-actions">
+                            <button class="action-btn" onclick="readMore(this)">
+                                <i class="fas fa-eye"></i> Read More
+                            </button>
+                            <button class="action-btn" onclick="shareAnnouncement(this)">
+                                <i class="fas fa-share"></i> Share
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Schedule Section -->
+            <section id="schedule" class="content-section">
+                <div class="section-header">
+                    <h2>My Class Schedule</h2>
+                    <div class="schedule-controls">
+                        <div class="date-selector">
+                            <button class="date-nav" onclick="changeWeek(-1)">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <span class="current-week">December 15-21, 2024</span>
+                            <button class="date-nav" onclick="changeWeek(1)">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                        <button class="btn-primary" onclick="exportSchedule()">
+                            <i class="fas fa-download"></i> Export
+                        </button>
+                    </div>
+                </div>
+
+                <div class="schedule-container">
+                    <div class="schedule-grid">
+                        <div class="time-column">
+                            <div class="time-header">Time</div>
+                            <div class="time-slot">7:00 AM</div>
+                            <div class="time-slot">8:00 AM</div>
+                            <div class="time-slot">9:00 AM</div>
+                            <div class="time-slot">10:00 AM</div>
+                            <div class="time-slot">11:00 AM</div>
+                            <div class="time-slot">12:00 PM</div>
+                            <div class="time-slot">1:00 PM</div>
+                            <div class="time-slot">2:00 PM</div>
+                            <div class="time-slot">3:00 PM</div>
+                            <div class="time-slot">4:00 PM</div>
+                            <div class="time-slot">5:00 PM</div>
+                        </div>
+
+                        <div class="day-column">
+                            <div class="day-header">Monday</div>
+                            <div class="schedule-slot empty"></div>
+                            <div class="schedule-slot class-slot" data-subject="Database Systems">
+                                <div class="class-info">
+                                    <h4>Database Systems</h4>
+                                    <p>CS 321</p>
+                                    <p>Room 401</p>
+                                </div>
+                            </div>
+                            <div class="schedule-slot class-slot" data-subject="Database Systems">
+                                <div class="class-info continued">
+                                    <span>continues...</span>
+                                </div>
+                            </div>
+                            <div class="schedule-slot class-slot" data-subject="Data Structures">
+                                <div class="class-info">
+                                    <h4>Data Structures</h4>
+                                    <p>CS 221</p>
+                                    <p>Room 403</p>
+                                </div>
+                            </div>
+                            <div class="schedule-slot class-slot" data-subject="Data Structures">
+                                <div class="class-info continued">
+                                    <span>continues...</span>
+                                </div>
+                            </div>
+                            <div class="schedule-slot break-slot">
+                                <div class="break-info">Lunch Break</div>
+                            </div>
+                            <div class="schedule-slot empty"></div>
+                            <div class="schedule-slot class-slot" data-subject="Programming Lab">
+                                <div class="class-info">
+                                    <h4>Programming Lab</h4>
+                                    <p>CS 111L</p>
+                                    <p>Room IT301</p>
+                                </div>
+                            </div>
+                            <div class="schedule-slot class-slot" data-subject="Programming Lab">
+                                <div class="class-info continued">
+                                    <span>continues...</span>
+                                </div>
+                            </div>
+                            <div class="schedule-slot empty"></div>
+                            <div class="schedule-slot empty"></div>
+                        </div>
+
+                        <div class="day-column">
+                            <div class="day-header">Tuesday</div>
+                            <div class="schedule-slot empty"></div>
+                            <div class="schedule-slot empty"></div>
+                            <div class="schedule-slot class-slot" data-subject="Mathematics">
+                                <div class="class-info">
+                                    <h4>Mathematics</h4>
+                                    <p>MATH 321</p>
+                                    <p>Room 205</p>
+                                </div>
+                            </div>
+                            <div class="schedule-slot class-slot" data-subject="Mathematics">
+                                <div class="class-info continued">
+                                    <span>continues...</span>
+                                </div>
+                            </div>
+                            <div class="schedule-slot empty"></div>
+                            <div class="schedule-slot break-slot">
+                                <div class="break-info">Lunch Break</div>
+                            </div>
+                            <div class="schedule-slot empty"></div>
+                            <div class="schedule-slot class-slot" data-subject="Software Engineering">
+                                <div class="class-info">
+                                    <h4>Software Engineering</h4>
+                                    <p>CS 422</p>
+                                    <p>Room 402</p>
+                                </div>
+                            </div>
+                            <div class="schedule-slot class-slot" data-subject="Software Engineering">
+                                <div class="class-info continued">
+                                    <span>continues...</span>
+                                </div>
+                            </div>
+                            <div class="schedule-slot empty"></div>
+                            <div class="schedule-slot empty"></div>
+                        </div>
+
+                        <div class="day-column">
+                            <div class="day-header today">Wednesday</div>
+                            <div class="schedule-slot empty"></div>
+                            <div class="schedule-slot class-slot current" data-subject="Database Systems">
+                                <div class="class-info">
+                                    <h4>Database Systems</h4>
+                                    <p>CS 321</p>
+                                    <p>Room 401</p>
+                                    <span class="current-indicator">Now</span>
+                                </div>
+                            </div>
+                            <div class="schedule-slot class-slot current" data-subject="Database Systems">
+                                <div class="class-info continued">
+                                    <span>continues...</span>
+                                </div>
+                            </div>
+                            <div class="schedule-slot class-slot next" data-subject="Data Structures">
+                                <div class="class-info">
+                                    <h4>Data Structures</h4>
+                                    <p>CS 221</p>
+                                    <p>Room 403</p>
+                                    <span class="next-indicator">Next</span>
+                                </div>
+                            </div>
+                            <div class="schedule-slot class-slot next" data-subject="Data Structures">
+                                <div class="class-info continued">
+                                    <span>continues...</span>
+                                </div>
+                            </div>
+                            <div class="schedule-slot break-slot">
+                                <div class="break-info">Lunch Break</div>
+                            </div>
+                            <div class="schedule-slot empty"></div>
+                            <div class="schedule-slot class-slot" data-subject="Programming Lab">
+                                <div class="class-info">
+                                    <h4>Programming Lab</h4>
+                                    <p>CS 111L</p>
+                                    <p>Room IT301</p>
+                                </div>
+                            </div>
+                            <div class="schedule-slot class-slot" data-subject="Programming Lab">
+                                <div class="class-info continued">
+                                    <span>continues...</span>
+                                </div>
+                            </div>
+                            <div class="schedule-slot empty"></div>
+                            <div class="schedule-slot empty"></div>
+                        </div>
+
+                        <div class="day-column">
+                            <div class="day-header">Thursday</div>
+                            <div class="schedule-slot empty"></div>
+                            <div class="schedule-slot empty"></div>
+                            <div class="schedule-slot class-slot" data-subject="Mathematics">
+                                <div class="class-info">
+                                    <h4>Mathematics</h4>
+                                    <p>MATH 321</p>
+                                    <p>Room 205</p>
+                                </div>
+                            </div>
+                            <div class="schedule-slot class-slot" data-subject="Mathematics">
+                                <div class="class-info continued">
+                                    <span>continues...</span>
+                                </div>
+                            </div>
+                            <div class="schedule-slot empty"></div>
+                            <div class="schedule-slot break-slot">
+                                <div class="break-info">Lunch Break</div>
+                            </div>
+                            <div class="schedule-slot empty"></div>
+                            <div class="schedule-slot class-slot" data-subject="Software Engineering">
+                                <div class="class-info">
+                                    <h4>Software Engineering</h4>
+                                    <p>CS 422</p>
+                                    <p>Room 402</p>
+                                </div>
+                            </div>
+                            <div class="schedule-slot class-slot" data-subject="Software Engineering">
+                                <div class="class-info continued">
+                                    <span>continues...</span>
+                                </div>
+                            </div>
+                            <div class="schedule-slot empty"></div>
+                            <div class="schedule-slot empty"></div>
+                        </div>
+
+                        <div class="day-column">
+                            <div class="day-header">Friday</div>
+                            <div class="schedule-slot empty"></div>
+                            <div class="schedule-slot class-slot" data-subject="Database Systems">
+                                <div class="class-info">
+                                    <h4>Database Systems</h4>
+                                    <p>CS 321</p>
+                                    <p>Room 401</p>
+                                </div>
+                            </div>
+                            <div class="schedule-slot class-slot" data-subject="Database Systems">
+                                <div class="class-info continued">
+                                    <span>continues...</span>
+                                </div>
+                            </div>
+                            <div class="schedule-slot class-slot" data-subject="Data Structures">
+                                <div class="class-info">
+                                    <h4>Data Structures</h4>
+                                    <p>CS 221</p>
+                                    <p>Room 403</p>
+                                </div>
+                            </div>
+                            <div class="schedule-slot class-slot" data-subject="Data Structures">
+                                <div class="class-info continued">
+                                    <span>continues...</span>
+                                </div>
+                            </div>
+                            <div class="schedule-slot break-slot">
+                                <div class="break-info">Lunch Break</div>
+                            </div>
+                            <div class="schedule-slot empty"></div>
+                            <div class="schedule-slot class-slot" data-subject="Programming Lab">
+                                <div class="class-info">
+                                    <h4>Programming Lab</h4>
+                                    <p>CS 111L</p>
+                                    <p>Room IT301</p>
+                                </div>
+                            </div>
+                            <div class="schedule-slot class-slot" data-subject="Programming Lab">
+                                <div class="class-info continued">
+                                    <span>continues...</span>
+                                </div>
+                            </div>
+                            <div class="schedule-slot empty"></div>
+                            <div class="schedule-slot empty"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Room Finder Section -->
+            <section id="rooms" class="content-section">
+                <div class="section-header">
+                    <h2>Room Finder</h2>
+                    <div class="room-search-bar">
+                        <input type="text" placeholder="Search by room number or building..." id="roomSearch">
+                        <button class="search-btn">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="room-filters">
+                    <div class="filter-group">
+                        <label>Building:</label>
+                        <select id="buildingFilter">
+                            <option value="">All Buildings</option>
+                            <option value="main">Main Building</option>
+                            <option value="engineering">Engineering Building</option>
+                            <option value="science">Science Building</option>
+                            <option value="it">IT Building</option>
+                            <option value="library">Library</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Floor:</label>
+                        <select id="floorFilter">
+                            <option value="">All Floors</option>
+                            <option value="1">1st Floor</option>
+                            <option value="2">2nd Floor</option>
+                            <option value="3">3rd Floor</option>
+                            <option value="4">4th Floor</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Availability:</label>
+                        <select id="availabilityFilter">
+                            <option value="">All Rooms</option>
+                            <option value="available">Available Now</option>
+                            <option value="occupied">Currently Occupied</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="rooms-grid">
+                    <div class="room-card available">
+                        <div class="room-header">
+                            <div class="room-info">
+                                <h3>Room 401</h3>
+                                <p>Main Building • 4th Floor</p>
+                            </div>
+                            <div class="room-status available">
+                                <i class="fas fa-circle"></i>
+                                <span>Available</span>
+                            </div>
+                        </div>
+                        <div class="room-details">
+                            <div class="room-features">
+                                <span class="feature"><i class="fas fa-users"></i> 40 seats</span>
+                                <span class="feature"><i class="fas fa-tv"></i> Projector</span>
+                                <span class="feature"><i class="fas fa-wifi"></i> WiFi</span>
+                                <span class="feature"><i class="fas fa-snowflake"></i> A/C</span>
+                            </div>
+                            <div class="next-class">
+                                <strong>Next class:</strong> Software Engineering at 10:00 AM
+                            </div>
+                        </div>
+                        <div class="room-actions">
+                            <button class="btn-primary" onclick="getDirections('401')">
+                                <i class="fas fa-route"></i> Get Directions
+                            </button>
+                            <button class="btn-secondary" onclick="viewRoomSchedule('401')">
+                                <i class="fas fa-calendar"></i> View Schedule
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="room-card occupied">
+                        <div class="room-header">
+                            <div class="room-info">
+                                <h3>Room 402</h3>
+                                <p>Main Building • 4th Floor</p>
+                            </div>
+                            <div class="room-status occupied">
+                                <i class="fas fa-circle"></i>
+                                <span>Occupied</span>
+                            </div>
+                        </div>
+                        <div class="room-details">
+                            <div class="room-features">
+                                <span class="feature"><i class="fas fa-users"></i> 35 seats</span>
+                                <span class="feature"><i class="fas fa-tv"></i> Projector</span>
+                                <span class="feature"><i class="fas fa-wifi"></i> WiFi</span>
+                                <span class="feature"><i class="fas fa-snowflake"></i> A/C</span>
+                            </div>
+                            <div class="current-class">
+                                <strong>Current class:</strong> Database Systems (ends at 9:30 AM)
+                            </div>
+                        </div>
+                        <div class="room-actions">
+                            <button class="btn-primary" onclick="getDirections('402')">
+                                <i class="fas fa-route"></i> Get Directions
+                            </button>
+                            <button class="btn-secondary" onclick="viewRoomSchedule('402')">
+                                <i class="fas fa-calendar"></i> View Schedule
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="room-card available">
+                        <div class="room-header">
+                            <div class="room-info">
+                                <h3>Room IT301</h3>
+                                <p>IT Building • 3rd Floor</p>
+                            </div>
+                            <div class="room-status available">
+                                <i class="fas fa-circle"></i>
+                                <span>Available</span>
+                            </div>
+                        </div>
+                        <div class="room-details">
+                            <div class="room-features">
+                                <span class="feature"><i class="fas fa-desktop"></i> 30 computers</span>
+                                <span class="feature"><i class="fas fa-tv"></i> Projector</span>
+                                <span class="feature"><i class="fas fa-wifi"></i> WiFi</span>
+                                <span class="feature"><i class="fas fa-snowflake"></i> A/C</span>
+                            </div>
+                            <div class="next-class">
+                                <strong>Next class:</strong> Programming Lab at 2:00 PM
+                            </div>
+                        </div>
+                        <div class="room-actions">
+                            <button class="btn-primary" onclick="getDirections('IT301')">
+                                <i class="fas fa-route"></i> Get Directions
+                            </button>
+                            <button class="btn-secondary" onclick="viewRoomSchedule('IT301')">
+                                <i class="fas fa-calendar"></i> View Schedule
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="room-card maintenance">
+                        <div class="room-header">
+                            <div class="room-info">
+                                <h3>Room IT302</h3>
+                                <p>IT Building • 3rd Floor</p>
+                            </div>
+                            <div class="room-status maintenance">
+                                <i class="fas fa-tools"></i>
+                                <span>Maintenance</span>
+                            </div>
+                        </div>
+                        <div class="room-details">
+                            <div class="room-features">
+                                <span class="feature"><i class="fas fa-desktop"></i> 30 computers</span>
+                                <span class="feature"><i class="fas fa-tv"></i> Projector</span>
+                                <span class="feature"><i class="fas fa-wifi"></i> WiFi</span>
+                                <span class="feature"><i class="fas fa-snowflake"></i> A/C</span>
+                            </div>
+                            <div class="maintenance-info">
+                                <strong>Maintenance scheduled:</strong> December 16, 2024
+                            </div>
+                        </div>
+                        <div class="room-actions">
+                            <button class="btn-primary" onclick="getDirections('IT302')">
+                                <i class="fas fa-route"></i> Get Directions
+                            </button>
+                            <button class="btn-secondary" onclick="viewRoomSchedule('IT302')">
+                                <i class="fas fa-calendar"></i> View Schedule
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- AI Chatbot -->
+        <div class="chatbot-fab" onclick="toggleChatbot()">
+            <i class="fas fa-robot"></i>
+        </div>
+
+        <div class="chatbot-container" id="chatbot">
+            <div class="chatbot-header">
+                <div class="chatbot-info">
+                    <i class="fas fa-robot"></i>
+                    <div>
+                        <h4>AI Assistant</h4>
+                        <p>Ask me anything about campus!</p>
+                    </div>
+                </div>
+                <button class="chatbot-close" onclick="toggleChatbot()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="chatbot-body">
+                <div class="chat-messages" id="chatMessages">
+                    <div class="message bot-message">
+                        <div class="message-avatar">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="message-content">
+                            Hi John! I'm your AI assistant. I can help you find rooms, check schedules, answer questions about announcements, or provide directions around campus. What would you like to know?
+                        </div>
+                    </div>
+                </div>
+                <div class="quick-suggestions">
+                    <button class="suggestion-btn" onclick="sendSuggestion('Where is Room 401?')">
+                        📍 Where is Room 401?
+                    </button>
+                    <button class="suggestion-btn" onclick="sendSuggestion('What\'s my next class?')">
+                        📅 What's my next class?
+                    </button>
+                    <button class="suggestion-btn" onclick="sendSuggestion('Show me available rooms')">
+                        🚪 Show me available rooms
+                    </button>
+                </div>
+                <div class="chat-input">
+                    <input type="text" placeholder="Type your message..." id="chatInput">
+                    <button onclick="sendMessage()">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Notification Panel -->
+        <div class="notification-panel" id="notificationPanel">
+            <div class="notification-header">
+                <h3>Notifications</h3>
+                <button class="clear-all-btn" onclick="clearAllNotifications()">Clear All</button>
+            </div>
+            <div class="notification-list">
+                <div class="notification-item unread">
+                    <div class="notification-icon">
+                        <i class="fas fa-exclamation-circle"></i>
+                    </div>
+                    <div class="notification-content">
+                        <h4>Final Exam Schedule Released</h4>
+                        <p>Check your examination schedule for December 18-22</p>
+                        <span class="notification-time">2 hours ago</span>
+                    </div>
+                    <button class="dismiss-btn" onclick="dismissNotification(this)">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+
+                <div class="notification-item unread">
+                    <div class="notification-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <div class="notification-content">
+                        <h4>Database Systems Project Due</h4>
+                        <p>Submit your final project by December 20, 2024</p>
+                        <span class="notification-time">1 day ago</span>
+                    </div>
+                    <button class="dismiss-btn" onclick="dismissNotification(this)">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+
+                <div class="notification-item">
+                    <div class="notification-icon">
+                        <i class="fas fa-info-circle"></i>
+                    </div>
+                    <div class="notification-content">
+                        <h4>Library Hours Extended</h4>
+                        <p>Library will be open until 10:00 PM during exam week</p>
+                        <span class="notification-time">2 days ago</span>
+                    </div>
+                    <button class="dismiss-btn" onclick="dismissNotification(this)">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- User Menu -->
+        <div class="user-menu" id="userMenu">
+            <div class="user-menu-header">
+                <img src="img/student-avatar.jpg" alt="Student" class="user-avatar">
+                <div class="user-details">
+                    <h4>John Doe</h4>
+                    <p>BSCS 3A • 2024-00123</p>
+                </div>
+            </div>
+            <div class="user-menu-items">
+                <a href="#profile" class="menu-item">
+                    <i class="fas fa-user"></i>
+                    <span>My Profile</span>
+                </a>
+                <a href="#grades" class="menu-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span>View Grades</span>
+                </a>
+                <a href="#settings" class="menu-item">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+                <a href="#help" class="menu-item">
+                    <i class="fas fa-question-circle"></i>
+                    <span>Help & Support</span>
+                </a>
+                <div class="menu-divider"></div>
+                <a href="../index.html" class="menu-item logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script src="javascript/student.js"></script>
+</body>
+</html>

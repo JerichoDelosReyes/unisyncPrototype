@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>UNISYNC Student Mobile - CvSU Imus</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/mobile.css">
+</head>
+<body>
+    <!-- Mobile Header -->
+    <header class="mobile-header">
+        <div class="header-content">
+            <div class="user-section">
+                <img src="../img/avatars/student-avatar.jpg" alt="Profile" class="header-avatar">
+                <div class="user-info">
+                    <span class="greeting">Good morning,</span>
+                    <span class="user-name">Juan Dela Cruz</span>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button class="notification-btn" onclick="toggleNotifications()">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge">3</span>
+                </button>
+                <button class="menu-btn" onclick="toggleUserMenu()">
+                    <i class="fas fa-ellipsis-v"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Tab Navigation -->
+    <nav class="bottom-nav">
+        <a href="#dashboard" class="nav-item active" onclick="showTab('dashboard')">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="#schedule" class="nav-item" onclick="showTab('schedule')">
+            <i class="fas fa-calendar-alt"></i>
+            <span>Schedule</span>
+        </a>
+        <a href="#announcements" class="nav-item" onclick="showTab('announcements')">
+            <i class="fas fa-bullhorn"></i>
+            <span>News</span>
+        </a>
+        <a href="#rooms" class="nav-item" onclick="showTab('rooms')">
+            <i class="fas fa-door-open"></i>
+            <span>Rooms</span>
+        </a>
+        <a href="#more" class="nav-item" onclick="showTab('more')">
+            <i class="fas fa-grip-horizontal"></i>
+            <span>More</span>
+        </a>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Dashboard Tab -->
+        <div id="dashboard" class="tab-content active">
+            <!-- Status Cards -->
+            <div class="status-cards">
+                <div class="status-card current-class">
+                    <div class="card-icon">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <div class="card-info">
+                        <span class="card-label">Current Class</span>
+                        <span class="card-value">CS 123 - Data Structures</span>
+                        <span class="card-detail">Room 401 • Ends in 45 min</span>
+                    </div>
+                </div>
+                
+                <div class="status-card next-class">
+                    <div class="card-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="card-info">
+                        <span class="card-label">Next Class</span>
+                        <span class="card-value">MATH 101 - Calculus</span>
+                        <span class="card-detail">Room 205 • In 1 hour</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="quick-actions">
+                <div class="section-header">
+                    <h3>Quick Actions</h3>
+                </div>
+                <div class="actions-grid">
+                    <button class="action-btn" onclick="showQRCode()">
+                        <i class="fas fa-qrcode"></i>
+                        <span>My QR Code</span>
+                    </button>
+                    <button class="action-btn" onclick="showTab('rooms')">
+                        <i class="fas fa-search"></i>
+                        <span>Find Room</span>
+                    </button>
+                    <button class="action-btn" onclick="toggleChatbot()">
+                        <i class="fas fa-robot"></i>
+                        <span>AI Assistant</span>
+                    </button>
+                    <button class="action-btn" onclick="showGrades()">
+                        <i class="fas fa-chart-line"></i>
+                        <span>My Grades</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Today's Schedule Preview -->
+            <div class="schedule-preview">
+                <div class="section-header">
+                    <h3>Today's Schedule</h3>
+                    <button class="view-more-btn" onclick="showTab('schedule')">View All</button>
+                </div>
+                <div class="schedule-list">
+                    <div class="schedule-item current">
+                        <div class="time-slot">
+                            <span class="time">10:00 AM</span>
+                            <span class="duration">2 hrs</span>
+                        </div>
+                        <div class="class-details">
+                            <h4>CS 123 - Data Structures</h4>
+                            <p><i class="fas fa-map-marker-alt"></i> Room 401 - Engineering Building</p>
+                            <p><i class="fas fa-user"></i> Prof. Maria Santos</p>
+                        </div>
+                        <div class="status-indicator current">Now</div>
+                    </div>
+                    
+                    <div class="schedule-item upcoming">
+                        <div class="time-slot">
+                            <span class="time">1:00 PM</span>
+                            <span class="duration">1.5 hrs</span>
+                        </div>
+                        <div class="class-details">
+                            <h4>MATH 101 - Calculus I</h4>
+                            <p><i class="fas fa-map-marker-alt"></i> Room 205 - Mathematics Building</p>
+                            <p><i class="fas fa-user"></i> Prof. Juan Rodriguez</p>
+                        </div>
+                        <div class="status-indicator upcoming">Next</div>
+                    </div>
+                    
+                    <div class="schedule-item">
+                        <div class="time-slot">
+                            <span class="time">3:30 PM</span>
+                            <span class="duration">2 hrs</span>
+                        </div>
+                        <div class="class-details">
+                            <h4>ENG 101 - Technical Writing</h4>
+                            <p><i class="fas fa-map-marker-alt"></i> Room 102 - Liberal Arts Building</p>
+                            <p><i class="fas fa-user"></i> Prof. Ana Garcia</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Announcements -->
+            <div class="announcements-preview">
+                <div class="section-header">
+                    <h3>Latest News</h3>
+                    <button class="view-more-btn" onclick="showTab('announcements')">View All</button>
+                </div>
+                <div class="announcement-cards">
+                    <div class="announcement-card priority">
+                        <div class="card-header">
+                            <div class="announcement-icon">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                            <span class="priority-badge">Important</span>
+                        </div>
+                        <div class="card-content">
+                            <h4>Final Exam Schedule Released</h4>
+                            <p>The final examination schedule for the current semester has been posted. Please check your individual schedules.</p>
+                            <span class="timestamp">2 hours ago</span>
+                        </div>
+                    </div>
+                    
+                    <div class="announcement-card">
+                        <div class="card-header">
+                            <div class="announcement-icon">
+                                <i class="fas fa-calendar"></i>
+                            </div>
+                            <span class="category-badge">Academic</span>
+                        </div>
+                        <div class="card-content">
+                            <h4>Library Extended Hours</h4>
+                            <p>The library will be open 24/7 during finals week to accommodate student study needs.</p>
+                            <span class="timestamp">1 day ago</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Schedule Tab -->
+        <div id="schedule" class="tab-content">
+            <div class="schedule-header">
+                <h2>Class Schedule</h2>
+                <div class="week-navigator">
+                    <button class="nav-btn" onclick="previousWeek()">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <span class="current-week">March 18 - 24, 2024</span>
+                    <button class="nav-btn" onclick="nextWeek()">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="day-selector">
+                <button class="day-btn" onclick="showDay('monday')">Mon</button>
+                <button class="day-btn active" onclick="showDay('tuesday')">Tue</button>
+                <button class="day-btn" onclick="showDay('wednesday')">Wed</button>
+                <button class="day-btn" onclick="showDay('thursday')">Thu</button>
+                <button class="day-btn" onclick="showDay('friday')">Fri</button>
+                <button class="day-btn" onclick="showDay('saturday')">Sat</button>
+            </div>
+            
+            <div class="day-schedule active" id="tuesday-schedule">
+                <div class="schedule-timeline">
+                    <div class="time-block">
+                        <div class="time-label">8:00 AM</div>
+                        <div class="class-block free">
+                            <span class="free-time">Free Time</span>
+                        </div>
+                    </div>
+                    
+                    <div class="time-block">
+                        <div class="time-label">10:00 AM</div>
+                        <div class="class-block current">
+                            <div class="class-info">
+                                <h4>CS 123 - Data Structures</h4>
+                                <p><i class="fas fa-map-marker-alt"></i> Room 401</p>
+                                <p><i class="fas fa-user"></i> Prof. Maria Santos</p>
+                                <p><i class="fas fa-clock"></i> 2 hours</p>
+                            </div>
+                            <div class="class-status">Current</div>
+                        </div>
+                    </div>
+                    
+                    <div class="time-block">
+                        <div class="time-label">12:00 PM</div>
+                        <div class="class-block break">
+                            <span class="break-time">Lunch Break</span>
+                        </div>
+                    </div>
+                    
+                    <div class="time-block">
+                        <div class="time-label">1:00 PM</div>
+                        <div class="class-block upcoming">
+                            <div class="class-info">
+                                <h4>MATH 101 - Calculus I</h4>
+                                <p><i class="fas fa-map-marker-alt"></i> Room 205</p>
+                                <p><i class="fas fa-user"></i> Prof. Juan Rodriguez</p>
+                                <p><i class="fas fa-clock"></i> 1.5 hours</p>
+                            </div>
+                            <div class="class-status">Next</div>
+                        </div>
+                    </div>
+                    
+                    <div class="time-block">
+                        <div class="time-label">3:30 PM</div>
+                        <div class="class-block">
+                            <div class="class-info">
+                                <h4>ENG 101 - Technical Writing</h4>
+                                <p><i class="fas fa-map-marker-alt"></i> Room 102</p>
+                                <p><i class="fas fa-user"></i> Prof. Ana Garcia</p>
+                                <p><i class="fas fa-clock"></i> 2 hours</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Announcements Tab -->
+        <div id="announcements" class="tab-content">
+            <div class="announcements-header">
+                <h2>Announcements</h2>
+                <div class="filter-pills">
+                    <button class="filter-pill active" onclick="filterAnnouncements('all')">All</button>
+                    <button class="filter-pill" onclick="filterAnnouncements('important')">Important</button>
+                    <button class="filter-pill" onclick="filterAnnouncements('academic')">Academic</button>
+                    <button class="filter-pill" onclick="filterAnnouncements('general')">General</button>
+                </div>
+            </div>
+            
+            <div class="announcements-list">
+                <div class="announcement-item priority">
+                    <div class="announcement-header">
+                        <div class="announcement-meta">
+                            <div class="priority-indicator">
+                                <i class="fas fa-exclamation-circle"></i>
+                            </div>
+                            <div class="announcement-info">
+                                <span class="category">Important</span>
+                                <span class="timestamp">2 hours ago</span>
+                            </div>
+                        </div>
+                        <button class="bookmark-btn" onclick="toggleBookmark(this)">
+                            <i class="far fa-bookmark"></i>
+                        </button>
+                    </div>
+                    <div class="announcement-content">
+                        <h3>Final Exam Schedule Released</h3>
+                        <p>The final examination schedule for the current semester has been posted. Students are advised to check their individual schedules and prepare accordingly.</p>
+                        <div class="announcement-footer">
+                            <span class="source"><i class="fas fa-user-tie"></i> Academic Affairs Office</span>
+                            <button class="read-more-btn" onclick="expandAnnouncement(this)">Read More</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="announcement-item">
+                    <div class="announcement-header">
+                        <div class="announcement-meta">
+                            <div class="category-indicator academic">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <div class="announcement-info">
+                                <span class="category">Academic</span>
+                                <span class="timestamp">1 day ago</span>
+                            </div>
+                        </div>
+                        <button class="bookmark-btn" onclick="toggleBookmark(this)">
+                            <i class="far fa-bookmark"></i>
+                        </button>
+                    </div>
+                    <div class="announcement-content">
+                        <h3>Library Extended Hours During Finals</h3>
+                        <p>The university library will extend its operating hours to 24/7 during the final examination period to accommodate student study needs.</p>
+                        <div class="announcement-footer">
+                            <span class="source"><i class="fas fa-book"></i> Library Services</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="announcement-item">
+                    <div class="announcement-header">
+                        <div class="announcement-meta">
+                            <div class="category-indicator general">
+                                <i class="fas fa-info-circle"></i>
+                            </div>
+                            <div class="announcement-info">
+                                <span class="category">General</span>
+                                <span class="timestamp">2 days ago</span>
+                            </div>
+                        </div>
+                        <button class="bookmark-btn bookmarked" onclick="toggleBookmark(this)">
+                            <i class="fas fa-bookmark"></i>
+                        </button>
+                    </div>
+                    <div class="announcement-content">
+                        <h3>Campus Wi-Fi Maintenance</h3>
+                        <p>Scheduled maintenance of the campus Wi-Fi network will occur this weekend from 2:00 AM to 6:00 AM.</p>
+                        <div class="announcement-footer">
+                            <span class="source"><i class="fas fa-wifi"></i> IT Services</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Rooms Tab -->
+        <div id="rooms" class="tab-content">
+            <div class="rooms-header">
+                <h2>Room Finder</h2>
+                <div class="search-container">
+                    <div class="search-input">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search rooms, buildings..." id="room-search">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="building-filter">
+                <button class="building-btn active" onclick="filterBuilding('all')">All</button>
+                <button class="building-btn" onclick="filterBuilding('engineering')">Engineering</button>
+                <button class="building-btn" onclick="filterBuilding('science')">Science</button>
+                <button class="building-btn" onclick="filterBuilding('liberal-arts')">Liberal Arts</button>
+                <button class="building-btn" onclick="filterBuilding('admin')">Admin</button>
+            </div>
+            
+            <div class="rooms-list">
+                <div class="room-card available">
+                    <div class="room-header">
+                        <div class="room-info">
+                            <h3>Room 401</h3>
+                            <p>Engineering Building</p>
+                        </div>
+                        <div class="room-status available">
+                            <i class="fas fa-circle"></i>
+                            <span>Available</span>
+                        </div>
+                    </div>
+                    <div class="room-details">
+                        <div class="room-features">
+                            <span class="feature"><i class="fas fa-users"></i> 40 seats</span>
+                            <span class="feature"><i class="fas fa-tv"></i> Projector</span>
+                            <span class="feature"><i class="fas fa-wifi"></i> Wi-Fi</span>
+                        </div>
+                        <div class="room-schedule">
+                            <p class="next-class">Next: MATH 201 at 2:00 PM</p>
+                        </div>
+                    </div>
+                    <div class="room-actions">
+                        <button class="action-btn primary" onclick="getDirections('401')">
+                            <i class="fas fa-route"></i> Directions
+                        </button>
+                        <button class="action-btn secondary" onclick="viewRoomSchedule('401')">
+                            <i class="fas fa-calendar"></i> Schedule
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="room-card occupied">
+                    <div class="room-header">
+                        <div class="room-info">
+                            <h3>Room 205</h3>
+                            <p>Mathematics Building</p>
+                        </div>
+                        <div class="room-status occupied">
+                            <i class="fas fa-circle"></i>
+                            <span>Occupied</span>
+                        </div>
+                    </div>
+                    <div class="room-details">
+                        <div class="room-features">
+                            <span class="feature"><i class="fas fa-users"></i> 35 seats</span>
+                            <span class="feature"><i class="fas fa-chalkboard"></i> Whiteboard</span>
+                            <span class="feature"><i class="fas fa-snowflake"></i> AC</span>
+                        </div>
+                        <div class="room-schedule">
+                            <p class="current-class">Current: CS 101 (ends at 2:30 PM)</p>
+                        </div>
+                    </div>
+                    <div class="room-actions">
+                        <button class="action-btn secondary" onclick="getDirections('205')">
+                            <i class="fas fa-route"></i> Directions
+                        </button>
+                        <button class="action-btn secondary" onclick="viewRoomSchedule('205')">
+                            <i class="fas fa-calendar"></i> Schedule
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="room-card maintenance">
+                    <div class="room-header">
+                        <div class="room-info">
+                            <h3>Room 301</h3>
+                            <p>Science Building</p>
+                        </div>
+                        <div class="room-status maintenance">
+                            <i class="fas fa-tools"></i>
+                            <span>Maintenance</span>
+                        </div>
+                    </div>
+                    <div class="room-details">
+                        <div class="room-features">
+                            <span class="feature"><i class="fas fa-users"></i> 30 seats</span>
+                            <span class="feature"><i class="fas fa-flask"></i> Lab Equipment</span>
+                            <span class="feature"><i class="fas fa-shower"></i> Eye Wash</span>
+                        </div>
+                        <div class="room-schedule">
+                            <p class="maintenance-info">Maintenance until 3:00 PM</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- More Tab -->
+        <div id="more" class="tab-content">
+            <div class="more-header">
+                <h2>More Options</h2>
+            </div>
+            
+            <div class="menu-sections">
+                <div class="menu-section">
+                    <h3>Academic</h3>
+                    <div class="menu-items">
+                        <a href="#" class="menu-item">
+                            <div class="item-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="item-info">
+                                <span class="item-title">My Grades</span>
+                                <span class="item-subtitle">View academic performance</span>
+                            </div>
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                        
+                        <a href="#" class="menu-item">
+                            <div class="item-icon">
+                                <i class="fas fa-book"></i>
+                            </div>
+                            <div class="item-info">
+                                <span class="item-title">Subjects</span>
+                                <span class="item-subtitle">Enrolled courses</span>
+                            </div>
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                        
+                        <a href="#" class="menu-item">
+                            <div class="item-icon">
+                                <i class="fas fa-file-alt"></i>
+                            </div>
+                            <div class="item-info">
+                                <span class="item-title">Transcript</span>
+                                <span class="item-subtitle">Academic records</span>
+                            </div>
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="menu-section">
+                    <h3>Services</h3>
+                    <div class="menu-items">
+                        <a href="#" class="menu-item">
+                            <div class="item-icon">
+                                <i class="fas fa-credit-card"></i>
+                            </div>
+                            <div class="item-info">
+                                <span class="item-title">Payment</span>
+                                <span class="item-subtitle">Tuition and fees</span>
+                            </div>
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                        
+                        <a href="#" class="menu-item">
+                            <div class="item-icon">
+                                <i class="fas fa-id-card"></i>
+                            </div>
+                            <div class="item-info">
+                                <span class="item-title">Student ID</span>
+                                <span class="item-subtitle">Digital ID card</span>
+                            </div>
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                        
+                        <a href="#" class="menu-item">
+                            <div class="item-icon">
+                                <i class="fas fa-question-circle"></i>
+                            </div>
+                            <div class="item-info">
+                                <span class="item-title">Help & Support</span>
+                                <span class="item-subtitle">Get assistance</span>
+                            </div>
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="menu-section">
+                    <h3>Settings</h3>
+                    <div class="menu-items">
+                        <a href="#" class="menu-item">
+                            <div class="item-icon">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="item-info">
+                                <span class="item-title">Profile</span>
+                                <span class="item-subtitle">Personal information</span>
+                            </div>
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                        
+                        <a href="#" class="menu-item">
+                            <div class="item-icon">
+                                <i class="fas fa-bell"></i>
+                            </div>
+                            <div class="item-info">
+                                <span class="item-title">Notifications</span>
+                                <span class="item-subtitle">Manage alerts</span>
+                            </div>
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                        
+                        <a href="#" class="menu-item">
+                            <div class="item-icon">
+                                <i class="fas fa-moon"></i>
+                            </div>
+                            <div class="item-info">
+                                <span class="item-title">Dark Mode</span>
+                                <span class="item-subtitle">Toggle theme</span>
+                            </div>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="dark-mode-toggle">
+                                <label for="dark-mode-toggle"></label>
+                            </div>
+                        </a>
+                        
+                        <a href="#" class="menu-item logout">
+                            <div class="item-icon">
+                                <i class="fas fa-sign-out-alt"></i>
+                            </div>
+                            <div class="item-info">
+                                <span class="item-title">Logout</span>
+                                <span class="item-subtitle">Sign out of account</span>
+                            </div>
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Floating Action Button for AI Assistant -->
+    <button class="fab-chatbot" onclick="toggleChatbot()">
+        <i class="fas fa-robot"></i>
+    </button>
+
+    <!-- Mobile Chatbot -->
+    <div class="mobile-chatbot" id="mobile-chatbot">
+        <div class="chatbot-header">
+            <div class="chatbot-info">
+                <div class="chatbot-avatar">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div class="chatbot-details">
+                    <span class="chatbot-name">UNISYNC Assistant</span>
+                    <span class="chatbot-status">Online</span>
+                </div>
+            </div>
+            <button class="close-chatbot" onclick="toggleChatbot()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <div class="chatbot-messages" id="chatbot-messages">
+            <div class="message bot-message">
+                <div class="message-content">
+                    <p>Hello! I'm your UNISYNC assistant. How can I help you today?</p>
+                </div>
+                <span class="message-time">Now</span>
+            </div>
+        </div>
+        
+        <div class="quick-suggestions">
+            <button class="suggestion-btn" onclick="sendQuickMessage('Where is room 401?')">Where is room 401?</button>
+            <button class="suggestion-btn" onclick="sendQuickMessage('What\'s my next class?')">What's my next class?</button>
+            <button class="suggestion-btn" onclick="sendQuickMessage('Show my grades')">Show my grades</button>
+        </div>
+        
+        <div class="chatbot-input">
+            <input type="text" placeholder="Type your message..." id="chat-input">
+            <button class="send-btn" onclick="sendMessage()">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Notification Panel -->
+    <div class="notification-panel" id="notification-panel">
+        <div class="panel-header">
+            <h3>Notifications</h3>
+            <button class="close-panel" onclick="toggleNotifications()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="notifications-list">
+            <div class="notification-item unread">
+                <div class="notification-icon priority">
+                    <i class="fas fa-exclamation-circle"></i>
+                </div>
+                <div class="notification-content">
+                    <h4>Final Exam Schedule</h4>
+                    <p>Your final exam schedule has been updated</p>
+                    <span class="notification-time">2 hours ago</span>
+                </div>
+                <button class="dismiss-btn" onclick="dismissNotification(this)">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="notification-item">
+                <div class="notification-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <div class="notification-content">
+                    <h4>Class Reminder</h4>
+                    <p>MATH 101 starts in 30 minutes</p>
+                    <span class="notification-time">1 hour ago</span>
+                </div>
+                <button class="dismiss-btn" onclick="dismissNotification(this)">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="notification-item">
+                <div class="notification-icon">
+                    <i class="fas fa-info-circle"></i>
+                </div>
+                <div class="notification-content">
+                    <h4>Library Hours Extended</h4>
+                    <p>Library will be open 24/7 during finals week</p>
+                    <span class="notification-time">1 day ago</span>
+                </div>
+                <button class="dismiss-btn" onclick="dismissNotification(this)">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- QR Code Modal -->
+    <div class="modal" id="qr-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>My Student QR Code</h3>
+                <button class="close-modal" onclick="closeModal('qr-modal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="qr-container">
+                    <div class="qr-code">
+                        <!-- This would be a real QR code in production -->
+                        <div class="qr-placeholder">
+                            <i class="fas fa-qrcode"></i>
+                        </div>
+                    </div>
+                    <div class="student-info">
+                        <h4>Juan Dela Cruz</h4>
+                        <p>Student ID: 2021-00001</p>
+                        <p>Computer Science</p>
+                    </div>
+                </div>
+                <p class="qr-description">Use this QR code for attendance, library access, and campus services.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="javascript/mobile.js"></script>
+</body>
+</html>

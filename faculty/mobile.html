@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>UNISYNC Faculty Mobile - CvSU Imus</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/faculty-mobile.css">
+</head>
+<body>
+    <!-- Mobile Header -->
+    <header class="mobile-header">
+        <div class="header-content">
+            <div class="user-section">
+                <img src="../img/avatars/faculty-avatar.jpg" alt="Profile" class="header-avatar">
+                <div class="user-info">
+                    <span class="greeting">Good morning,</span>
+                    <span class="user-name">Prof. Maria Santos</span>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button class="notification-btn" onclick="toggleNotifications()">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge">2</span>
+                </button>
+                <button class="menu-btn" onclick="toggleUserMenu()">
+                    <i class="fas fa-ellipsis-v"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Tab Navigation -->
+    <nav class="bottom-nav">
+        <a href="#dashboard" class="nav-item active" onclick="showTab('dashboard')">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="#classes" class="nav-item" onclick="showTab('classes')">
+            <i class="fas fa-chalkboard-teacher"></i>
+            <span>Classes</span>
+        </a>
+        <a href="#announcements" class="nav-item" onclick="showTab('announcements')">
+            <i class="fas fa-bullhorn"></i>
+            <span>Announce</span>
+        </a>
+        <a href="#schedule" class="nav-item" onclick="showTab('schedule')">
+            <i class="fas fa-calendar-alt"></i>
+            <span>Schedule</span>
+        </a>
+        <a href="#more" class="nav-item" onclick="showTab('more')">
+            <i class="fas fa-grip-horizontal"></i>
+            <span>More</span>
+        </a>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Dashboard Tab -->
+        <div id="dashboard" class="tab-content active">
+            <!-- Today's Classes -->
+            <div class="today-classes">
+                <div class="section-header">
+                    <h3>Today's Classes</h3>
+                    <span class="date-display">March 19, 2024</span>
+                </div>
+                
+                <div class="class-cards">
+                    <div class="class-card current">
+                        <div class="class-time">
+                            <span class="time">10:00 AM</span>
+                            <span class="duration">2 hrs</span>
+                        </div>
+                        <div class="class-info">
+                            <h4>CS 123 - Data Structures</h4>
+                            <p><i class="fas fa-map-marker-alt"></i> Room 401 - Engineering Building</p>
+                            <p><i class="fas fa-users"></i> 35 students enrolled</p>
+                        </div>
+                        <div class="class-status current">
+                            <i class="fas fa-circle"></i>
+                            <span>In Progress</span>
+                        </div>
+                    </div>
+                    
+                    <div class="class-card upcoming">
+                        <div class="class-time">
+                            <span class="time">2:00 PM</span>
+                            <span class="duration">1.5 hrs</span>
+                        </div>
+                        <div class="class-info">
+                            <h4>CS 456 - Software Engineering</h4>
+                            <p><i class="fas fa-map-marker-alt"></i> Room 502 - Engineering Building</p>
+                            <p><i class="fas fa-users"></i> 28 students enrolled</p>
+                        </div>
+                        <div class="class-status upcoming">
+                            <i class="fas fa-clock"></i>
+                            <span>Next Class</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="quick-actions">
+                <div class="section-header">
+                    <h3>Quick Actions</h3>
+                </div>
+                <div class="actions-grid">
+                    <button class="action-btn" onclick="takeAttendance()">
+                        <i class="fas fa-user-check"></i>
+                        <span>Take Attendance</span>
+                    </button>
+                    <button class="action-btn" onclick="createAnnouncement()">
+                        <i class="fas fa-plus"></i>
+                        <span>New Announcement</span>
+                    </button>
+                    <button class="action-btn" onclick="viewGrades()">
+                        <i class="fas fa-chart-bar"></i>
+                        <span>Grade Book</span>
+                    </button>
+                    <button class="action-btn" onclick="findRoom()">
+                        <i class="fas fa-search"></i>
+                        <span>Find Room</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="recent-activity">
+                <div class="section-header">
+                    <h3>Recent Activity</h3>
+                    <button class="view-more-btn">View All</button>
+                </div>
+                
+                <div class="activity-list">
+                    <div class="activity-item">
+                        <div class="activity-icon assignment">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <div class="activity-content">
+                            <h4>New assignment submitted</h4>
+                            <p>Juan Dela Cruz submitted Lab Report #3</p>
+                            <span class="activity-time">5 minutes ago</span>
+                        </div>
+                    </div>
+                    
+                    <div class="activity-item attendance">
+                        <div class="activity-icon">
+                            <i class="fas fa-user-check"></i>
+                        </div>
+                        <div class="activity-content">
+                            <h4>Attendance updated</h4>
+                            <p>CS 123 - 32 out of 35 students present</p>
+                            <span class="activity-time">2 hours ago</span>
+                        </div>
+                    </div>
+                    
+                    <div class="activity-item grade">
+                        <div class="activity-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="activity-content">
+                            <h4>Grades updated</h4>
+                            <p>Midterm exam grades posted for CS 456</p>
+                            <span class="activity-time">1 day ago</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Class Statistics -->
+            <div class="class-stats">
+                <div class="section-header">
+                    <h3>Class Overview</h3>
+                </div>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-number">63</span>
+                            <span class="stat-label">Total Students</span>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-number">89%</span>
+                            <span class="stat-label">Avg Attendance</span>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-number">3.2</span>
+                            <span class="stat-label">Avg Grade</span>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-tasks"></i>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-number">12</span>
+                            <span class="stat-label">Pending Tasks</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Classes Tab -->
+        <div id="classes" class="tab-content">
+            <div class="classes-header">
+                <h2>My Classes</h2>
+                <div class="semester-info">
+                    <span class="semester">2nd Semester 2023-2024</span>
+                </div>
+            </div>
+            
+            <div class="classes-list">
+                <div class="class-item">
+                    <div class="class-header">
+                        <div class="class-info">
+                            <h3>CS 123 - Data Structures</h3>
+                            <p>Mon, Wed, Fri • 10:00 AM - 12:00 PM</p>
+                            <p>Room 401 - Engineering Building</p>
+                        </div>
+                        <div class="enrollment-count">
+                            <i class="fas fa-users"></i>
+                            <span>35</span>
+                        </div>
+                    </div>
+                    
+                    <div class="class-details">
+                        <div class="detail-row">
+                            <span>Attendance Rate:</span>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 92%"></div>
+                                <span class="progress-text">92%</span>
+                            </div>
+                        </div>
+                        <div class="detail-row">
+                            <span>Average Grade:</span>
+                            <span class="grade-display">B+ (3.3)</span>
+                        </div>
+                    </div>
+                    
+                    <div class="class-actions">
+                        <button class="action-btn primary" onclick="manageClass('CS123')">
+                            <i class="fas fa-cog"></i> Manage Class
+                        </button>
+                        <button class="action-btn secondary" onclick="viewStudents('CS123')">
+                            <i class="fas fa-users"></i> Students
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="class-item">
+                    <div class="class-header">
+                        <div class="class-info">
+                            <h3>CS 456 - Software Engineering</h3>
+                            <p>Tue, Thu • 2:00 PM - 3:30 PM</p>
+                            <p>Room 502 - Engineering Building</p>
+                        </div>
+                        <div class="enrollment-count">
+                            <i class="fas fa-users"></i>
+                            <span>28</span>
+                        </div>
+                    </div>
+                    
+                    <div class="class-details">
+                        <div class="detail-row">
+                            <span>Attendance Rate:</span>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 85%"></div>
+                                <span class="progress-text">85%</span>
+                            </div>
+                        </div>
+                        <div class="detail-row">
+                            <span>Average Grade:</span>
+                            <span class="grade-display">A- (3.7)</span>
+                        </div>
+                    </div>
+                    
+                    <div class="class-actions">
+                        <button class="action-btn primary" onclick="manageClass('CS456')">
+                            <i class="fas fa-cog"></i> Manage Class
+                        </button>
+                        <button class="action-btn secondary" onclick="viewStudents('CS456')">
+                            <i class="fas fa-users"></i> Students
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Announcements Tab -->
+        <div id="announcements" class="tab-content">
+            <div class="announcements-header">
+                <h2>Announcements</h2>
+                <button class="create-btn" onclick="createAnnouncement()">
+                    <i class="fas fa-plus"></i>
+                    Create New
+                </button>
+            </div>
+            
+            <div class="filter-tabs">
+                <button class="filter-tab active" onclick="filterAnnouncements('all')">All</button>
+                <button class="filter-tab" onclick="filterAnnouncements('published')">Published</button>
+                <button class="filter-tab" onclick="filterAnnouncements('draft')">Drafts</button>
+                <button class="filter-tab" onclick="filterAnnouncements('scheduled')">Scheduled</button>
+            </div>
+            
+            <div class="announcements-list">
+                <div class="announcement-item published">
+                    <div class="announcement-header">
+                        <div class="status-indicator published">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Published</span>
+                        </div>
+                        <div class="announcement-meta">
+                            <span class="views"><i class="fas fa-eye"></i> 142 views</span>
+                            <span class="timestamp">2 hours ago</span>
+                        </div>
+                    </div>
+                    
+                    <div class="announcement-content">
+                        <h3>Midterm Exam Schedule Update</h3>
+                        <p>The midterm examination for CS 123 has been rescheduled to March 25, 2024, at 10:00 AM in Room 401.</p>
+                        <div class="announcement-footer">
+                            <span class="target-audience">
+                                <i class="fas fa-users"></i> CS 123 Students (35)
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="announcement-actions">
+                        <button class="action-btn secondary" onclick="editAnnouncement(1)">
+                            <i class="fas fa-edit"></i> Edit
+                        </button>
+                        <button class="action-btn secondary" onclick="viewAnalytics(1)">
+                            <i class="fas fa-chart-bar"></i> Analytics
+                        </button>
+                        <button class="action-btn danger" onclick="deleteAnnouncement(1)">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="announcement-item draft">
+                    <div class="announcement-header">
+                        <div class="status-indicator draft">
+                            <i class="fas fa-file-alt"></i>
+                            <span>Draft</span>
+                        </div>
+                        <div class="announcement-meta">
+                            <span class="timestamp">1 day ago</span>
+                        </div>
+                    </div>
+                    
+                    <div class="announcement-content">
+                        <h3>Lab Assignment #4 Guidelines</h3>
+                        <p>Detailed instructions for the upcoming data structures lab assignment focusing on tree implementations...</p>
+                        <div class="announcement-footer">
+                            <span class="target-audience">
+                                <i class="fas fa-users"></i> CS 123 Students (35)
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="announcement-actions">
+                        <button class="action-btn primary" onclick="publishAnnouncement(2)">
+                            <i class="fas fa-paper-plane"></i> Publish
+                        </button>
+                        <button class="action-btn secondary" onclick="editAnnouncement(2)">
+                            <i class="fas fa-edit"></i> Edit
+                        </button>
+                        <button class="action-btn danger" onclick="deleteAnnouncement(2)">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Schedule Tab -->
+        <div id="schedule" class="tab-content">
+            <div class="schedule-header">
+                <h2>Room Schedule</h2>
+                <div class="schedule-controls">
+                    <button class="schedule-btn active" onclick="showScheduleView('today')">Today</button>
+                    <button class="schedule-btn" onclick="showScheduleView('week')">Week</button>
+                    <button class="schedule-btn" onclick="showScheduleView('rooms')">Rooms</button>
+                </div>
+            </div>
+            
+            <div id="today-view" class="schedule-view active">
+                <div class="date-header">
+                    <div class="date-nav">
+                        <button class="nav-btn" onclick="previousDay()">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <span class="current-date">Tuesday, March 19, 2024</span>
+                        <button class="nav-btn" onclick="nextDay()">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="schedule-timeline">
+                    <div class="time-slot">
+                        <div class="time-label">8:00 AM</div>
+                        <div class="slot-content empty">
+                            <span class="empty-text">Available</span>
+                        </div>
+                    </div>
+                    
+                    <div class="time-slot">
+                        <div class="time-label">9:00 AM</div>
+                        <div class="slot-content empty">
+                            <span class="empty-text">Available</span>
+                        </div>
+                    </div>
+                    
+                    <div class="time-slot">
+                        <div class="time-label">10:00 AM</div>
+                        <div class="slot-content occupied current">
+                            <div class="class-block">
+                                <h4>CS 123 - Data Structures</h4>
+                                <p><i class="fas fa-map-marker-alt"></i> Room 401</p>
+                                <p><i class="fas fa-users"></i> 35 students</p>
+                                <span class="status-badge current">Current</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="time-slot">
+                        <div class="time-label">11:00 AM</div>
+                        <div class="slot-content occupied current">
+                            <div class="class-block continuing">
+                                <span class="continuing-text">CS 123 continues...</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="time-slot">
+                        <div class="time-label">12:00 PM</div>
+                        <div class="slot-content break">
+                            <span class="break-text">Lunch Break</span>
+                        </div>
+                    </div>
+                    
+                    <div class="time-slot">
+                        <div class="time-label">1:00 PM</div>
+                        <div class="slot-content empty">
+                            <span class="empty-text">Available</span>
+                        </div>
+                    </div>
+                    
+                    <div class="time-slot">
+                        <div class="time-label">2:00 PM</div>
+                        <div class="slot-content occupied upcoming">
+                            <div class="class-block">
+                                <h4>CS 456 - Software Engineering</h4>
+                                <p><i class="fas fa-map-marker-alt"></i> Room 502</p>
+                                <p><i class="fas fa-users"></i> 28 students</p>
+                                <span class="status-badge upcoming">Next</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="time-slot">
+                        <div class="time-label">3:00 PM</div>
+                        <div class="slot-content occupied upcoming">
+                            <div class="class-block continuing">
+                                <span class="continuing-text">CS 456 continues...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- More Tab -->
+        <div id="more" class="tab-content">
+            <div class="more-header">
+                <h2>More Options</h2>
+            </div>
+            
+            <div class="menu-sections">
+                <div class="menu-section">
+                    <h3>Teaching Tools</h3>
+                    <div class="menu-items">
+                        <a href="#" class="menu-item">
+                            <div class="item-icon">
+                                <i class="fas fa-user-check"></i>
+                            </div>
+                            <div class="item-info">
+                                <span class="item-title">Attendance</span>
+                                <span class="item-subtitle">Manage class attendance</span>
+                            </div>
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                        
+                        <a href="#" class="menu-item">
+                            <div class="item-icon">
+                                <i class="fas fa-chart-bar"></i>
+                            </div>
+                            <div class="item-info">
+                                <span class="item-title">Grade Book</span>
+                                <span class="item-subtitle">Student grades & analytics</span>
+                            </div>
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                        
+                        <a href="#" class="menu-item">
+                            <div class="item-icon">
+                                <i class="fas fa-tasks"></i>
+                            </div>
+                            <div class="item-info">
+                                <span class="item-title">Assignments</span>
+                                <span class="item-subtitle">Create & manage assignments</span>
+                            </div>
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                        
+                        <a href="#" class="menu-item">
+                            <div class="item-icon">
+                                <i class="fas fa-file-alt"></i>
+                            </div>
+                            <div class="item-info">
+                                <span class="item-title">Reports</span>
+                                <span class="item-subtitle">Generate class reports</span>
+                            </div>
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="menu-section">
+                    <h3>Resources</h3>
+                    <div class="menu-items">
+                        <a href="#" class="menu-item">
+                            <div class="item-icon">
+                                <i class="fas fa-door-open"></i>
+                            </div>
+                            <div class="item-info">
+                                <span class="item-title">Room Finder</span>
+                                <span class="item-subtitle">Find available rooms</span>
+                            </div>
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                        
+                        <a href="#" class="menu-item">
+                            <div class="item-icon">
+                                <i class="fas fa-book"></i>
+                            </div>
+                            <div class="item-info">
+                                <span class="item-title">Library Resources</span>
+                                <span class="item-subtitle">Books & digital resources</span>
+                            </div>
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                        
+                        <a href="#" class="menu-item">
+                            <div class="item-icon">
+                                <i class="fas fa-question-circle"></i>
+                            </div>
+                            <div class="item-info">
+                                <span class="item-title">Help & Support</span>
+                                <span class="item-subtitle">Get assistance</span>
+                            </div>
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="menu-section">
+                    <h3>Settings</h3>
+                    <div class="menu-items">
+                        <a href="#" class="menu-item">
+                            <div class="item-icon">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="item-info">
+                                <span class="item-title">Profile</span>
+                                <span class="item-subtitle">Personal information</span>
+                            </div>
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                        
+                        <a href="#" class="menu-item">
+                            <div class="item-icon">
+                                <i class="fas fa-bell"></i>
+                            </div>
+                            <div class="item-info">
+                                <span class="item-title">Notifications</span>
+                                <span class="item-subtitle">Manage alerts</span>
+                            </div>
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                        
+                        <a href="#" class="menu-item">
+                            <div class="item-icon">
+                                <i class="fas fa-moon"></i>
+                            </div>
+                            <div class="item-info">
+                                <span class="item-title">Dark Mode</span>
+                                <span class="item-subtitle">Toggle theme</span>
+                            </div>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="dark-mode-toggle">
+                                <label for="dark-mode-toggle"></label>
+                            </div>
+                        </a>
+                        
+                        <a href="#" class="menu-item logout">
+                            <div class="item-icon">
+                                <i class="fas fa-sign-out-alt"></i>
+                            </div>
+                            <div class="item-info">
+                                <span class="item-title">Logout</span>
+                                <span class="item-subtitle">Sign out of account</span>
+                            </div>
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Floating Action Button for AI Assistant -->
+    <button class="fab-chatbot" onclick="toggleChatbot()">
+        <i class="fas fa-robot"></i>
+    </button>
+
+    <!-- Mobile Chatbot -->
+    <div class="mobile-chatbot" id="mobile-chatbot">
+        <div class="chatbot-header">
+            <div class="chatbot-info">
+                <div class="chatbot-avatar">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div class="chatbot-details">
+                    <span class="chatbot-name">Faculty Assistant</span>
+                    <span class="chatbot-status">Online</span>
+                </div>
+            </div>
+            <button class="close-chatbot" onclick="toggleChatbot()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <div class="chatbot-messages" id="chatbot-messages">
+            <div class="message bot-message">
+                <div class="message-content">
+                    <p>Hello Prof. Santos! How can I assist you with your classes today?</p>
+                </div>
+                <span class="message-time">Now</span>
+            </div>
+        </div>
+        
+        <div class="quick-suggestions">
+            <button class="suggestion-btn" onclick="sendQuickMessage('Take attendance for CS 123')">Take attendance for CS 123</button>
+            <button class="suggestion-btn" onclick="sendQuickMessage('Show class statistics')">Show class statistics</button>
+            <button class="suggestion-btn" onclick="sendQuickMessage('Find available room')">Find available room</button>
+        </div>
+        
+        <div class="chatbot-input">
+            <input type="text" placeholder="Type your message..." id="chat-input">
+            <button class="send-btn" onclick="sendMessage()">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Create Announcement Modal -->
+    <div class="modal" id="announcement-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Create Announcement</h3>
+                <button class="close-modal" onclick="closeModal('announcement-modal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="announcement-form">
+                    <div class="form-group">
+                        <label for="announcement-title">Title</label>
+                        <input type="text" id="announcement-title" placeholder="Enter announcement title">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="announcement-content">Content</label>
+                        <textarea id="announcement-content" rows="4" placeholder="Enter announcement content"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="target-class">Target Class</label>
+                        <select id="target-class">
+                            <option value="CS123">CS 123 - Data Structures</option>
+                            <option value="CS456">CS 456 - Software Engineering</option>
+                            <option value="all">All Classes</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="announcement-priority">Priority</label>
+                        <select id="announcement-priority">
+                            <option value="normal">Normal</option>
+                            <option value="important">Important</option>
+                            <option value="urgent">Urgent</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary" onclick="saveDraft()">Save Draft</button>
+                        <button type="button" class="btn-primary" onclick="publishAnnouncement()">Publish Now</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Panel -->
+    <div class="notification-panel" id="notification-panel">
+        <div class="panel-header">
+            <h3>Notifications</h3>
+            <button class="close-panel" onclick="toggleNotifications()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="notifications-list">
+            <div class="notification-item unread">
+                <div class="notification-icon">
+                    <i class="fas fa-user-check"></i>
+                </div>
+                <div class="notification-content">
+                    <h4>New Assignment Submission</h4>
+                    <p>Juan Dela Cruz submitted Lab Report #3 for CS 123</p>
+                    <span class="notification-time">5 minutes ago</span>
+                </div>
+                <button class="dismiss-btn" onclick="dismissNotification(this)">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="notification-item">
+                <div class="notification-icon">
+                    <i class="fas fa-calendar-check"></i>
+                </div>
+                <div class="notification-content">
+                    <h4>Class Starting Soon</h4>
+                    <p>CS 456 - Software Engineering starts in 30 minutes</p>
+                    <span class="notification-time">1 hour ago</span>
+                </div>
+                <button class="dismiss-btn" onclick="dismissNotification(this)">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="javascript/faculty-mobile.js"></script>
+</body>
+</html>

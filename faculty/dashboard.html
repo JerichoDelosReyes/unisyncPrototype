@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty Dashboard - UNISYNC</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="css/faculty.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="faculty-container">
+        <!-- Header -->
+        <header class="main-header">
+            <div class="header-left">
+                <div class="logo">
+                    <i class="fas fa-university"></i>
+                    <span>UNISYNC Faculty</span>
+                </div>
+            </div>
+            
+            <div class="header-center">
+                <nav class="main-nav">
+                    <a href="#dashboard" class="nav-link active" onclick="showSection('dashboard')">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>Dashboard</span>
+                    </a>
+                    <a href="#announcements" class="nav-link" onclick="showSection('announcements')">
+                        <i class="fas fa-bullhorn"></i>
+                        <span>Announcements</span>
+                    </a>
+                    <a href="#schedule" class="nav-link" onclick="showSection('schedule')">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Room Schedule</span>
+                    </a>
+                    <a href="#classes" class="nav-link" onclick="showSection('classes')">
+                        <i class="fas fa-chalkboard"></i>
+                        <span>My Classes</span>
+                    </a>
+                </nav>
+            </div>
+            
+            <div class="header-right">
+                <div class="notifications">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-count">5</span>
+                </div>
+                <div class="user-profile">
+                    <img src="img/faculty-avatar.jpg" alt="Faculty" class="avatar">
+                    <div class="user-info">
+                        <span class="user-name">Prof. Maria Santos</span>
+                        <span class="user-role">Computer Science Department</span>
+                    </div>
+                </div>
+                <a href="../index.html" class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                </a>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="content-section active">
+                <div class="welcome-banner">
+                    <h1>Welcome back, Prof. Santos!</h1>
+                    <p>Here's what's happening in your classes today</p>
+                </div>
+
+                <div class="dashboard-overview">
+                    <div class="overview-card">
+                        <div class="card-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Total Students</h3>
+                            <p class="card-number">156</p>
+                            <span class="card-subtitle">Across 5 classes</span>
+                        </div>
+                    </div>
+
+                    <div class="overview-card">
+                        <div class="card-icon">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Today's Classes</h3>
+                            <p class="card-number">3</p>
+                            <span class="card-subtitle">Next: 10:00 AM</span>
+                        </div>
+                    </div>
+
+                    <div class="overview-card">
+                        <div class="card-icon">
+                            <i class="fas fa-bullhorn"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Announcements</h3>
+                            <p class="card-number">8</p>
+                            <span class="card-subtitle">This semester</span>
+                        </div>
+                    </div>
+
+                    <div class="overview-card">
+                        <div class="card-icon">
+                            <i class="fas fa-door-open"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Assigned Rooms</h3>
+                            <p class="card-number">4</p>
+                            <span class="card-subtitle">Regular schedule</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-content">
+                    <div class="today-schedule">
+                        <h2>Today's Schedule</h2>
+                        <div class="schedule-list">
+                            <div class="schedule-item current">
+                                <div class="schedule-time">
+                                    <span class="time">8:00 - 9:30 AM</span>
+                                    <span class="status">Current</span>
+                                </div>
+                                <div class="schedule-details">
+                                    <h4>Database Systems</h4>
+                                    <p>BSCS 3A • Room 401 • Main Building</p>
+                                </div>
+                                <div class="schedule-actions">
+                                    <button class="btn-small primary">View Details</button>
+                                </div>
+                            </div>
+
+                            <div class="schedule-item upcoming">
+                                <div class="schedule-time">
+                                    <span class="time">10:00 - 11:30 AM</span>
+                                    <span class="status">Next</span>
+                                </div>
+                                <div class="schedule-details">
+                                    <h4>Software Engineering</h4>
+                                    <p>BSCS 4A • Room 402 • Main Building</p>
+                                </div>
+                                <div class="schedule-actions">
+                                    <button class="btn-small secondary">View Details</button>
+                                </div>
+                            </div>
+
+                            <div class="schedule-item upcoming">
+                                <div class="schedule-time">
+                                    <span class="time">2:00 - 3:30 PM</span>
+                                    <span class="status">Later</span>
+                                </div>
+                                <div class="schedule-details">
+                                    <h4>Web Development</h4>
+                                    <p>BSIT 3B • Room 301 • IT Building</p>
+                                </div>
+                                <div class="schedule-actions">
+                                    <button class="btn-small secondary">View Details</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="quick-actions">
+                        <h2>Quick Actions</h2>
+                        <div class="actions-grid">
+                            <button class="action-card" onclick="openAnnouncementModal()">
+                                <i class="fas fa-plus"></i>
+                                <span>Create Announcement</span>
+                            </button>
+                            <button class="action-card" onclick="checkRoomAvailability()">
+                                <i class="fas fa-search"></i>
+                                <span>Check Room Availability</span>
+                            </button>
+                            <button class="action-card" onclick="viewStudentList()">
+                                <i class="fas fa-list"></i>
+                                <span>View Student Lists</span>
+                            </button>
+                            <button class="action-card" onclick="requestRoom()">
+                                <i class="fas fa-key"></i>
+                                <span>Request Room</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Announcements Section -->
+            <section id="announcements" class="content-section">
+                <div class="section-header">
+                    <h2>Announcements Management</h2>
+                    <button class="btn-primary" onclick="openAnnouncementModal()">
+                        <i class="fas fa-plus"></i> Create New Announcement
+                    </button>
+                </div>
+
+                <div class="announcements-tabs">
+                    <button class="tab-btn active" onclick="showAnnouncementTab('posted')">
+                        My Announcements (8)
+                    </button>
+                    <button class="tab-btn" onclick="showAnnouncementTab('drafts')">
+                        Drafts (2)
+                    </button>
+                </div>
+
+                <div class="announcements-content">
+                    <div id="posted" class="tab-content active">
+                        <div class="announcements-list">
+                            <div class="announcement-item">
+                                <div class="announcement-header">
+                                    <h3>Database Systems Final Project Guidelines</h3>
+                                    <div class="announcement-meta">
+                                        <span class="date">Dec 14, 2024</span>
+                                        <span class="visibility">Public</span>
+                                    </div>
+                                </div>
+                                <p class="announcement-preview">
+                                    The final project for Database Systems will require students to design and implement a complete database solution...
+                                </p>
+                                <div class="announcement-stats">
+                                    <span><i class="fas fa-eye"></i> 89 views</span>
+                                    <span><i class="fas fa-users"></i> BSCS 3A</span>
+                                </div>
+                                <div class="announcement-actions">
+                                    <button class="btn-icon edit" title="Edit">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn-icon delete" title="Delete">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                    <button class="btn-icon share" title="Share">
+                                        <i class="fas fa-share"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="announcement-item">
+                                <div class="announcement-header">
+                                    <h3>Software Engineering Mid-term Exam Schedule</h3>
+                                    <div class="announcement-meta">
+                                        <span class="date">Dec 12, 2024</span>
+                                        <span class="visibility">Class Only</span>
+                                    </div>
+                                </div>
+                                <p class="announcement-preview">
+                                    The mid-term examination for Software Engineering will be held on December 18, 2024...
+                                </p>
+                                <div class="announcement-stats">
+                                    <span><i class="fas fa-eye"></i> 45 views</span>
+                                    <span><i class="fas fa-users"></i> BSCS 4A</span>
+                                </div>
+                                <div class="announcement-actions">
+                                    <button class="btn-icon edit" title="Edit">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn-icon delete" title="Delete">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                    <button class="btn-icon share" title="Share">
+                                        <i class="fas fa-share"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="announcement-item">
+                                <div class="announcement-header">
+                                    <h3>Web Development Lab Requirements</h3>
+                                    <div class="announcement-meta">
+                                        <span class="date">Dec 10, 2024</span>
+                                        <span class="visibility">Public</span>
+                                    </div>
+                                </div>
+                                <p class="announcement-preview">
+                                    Students enrolled in Web Development are required to bring their laptops for the upcoming laboratory sessions...
+                                </p>
+                                <div class="announcement-stats">
+                                    <span><i class="fas fa-eye"></i> 67 views</span>
+                                    <span><i class="fas fa-users"></i> BSIT 3B</span>
+                                </div>
+                                <div class="announcement-actions">
+                                    <button class="btn-icon edit" title="Edit">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn-icon delete" title="Delete">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                    <button class="btn-icon share" title="Share">
+                                        <i class="fas fa-share"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="drafts" class="tab-content">
+                        <div class="announcements-list">
+                            <div class="announcement-item draft">
+                                <div class="announcement-header">
+                                    <h3>Semester Final Exam Schedule</h3>
+                                    <div class="announcement-meta">
+                                        <span class="date">Draft • Dec 15, 2024</span>
+                                        <span class="visibility">Not Published</span>
+                                    </div>
+                                </div>
+                                <p class="announcement-preview">
+                                    The final examination schedule for all classes will be announced soon...
+                                </p>
+                                <div class="announcement-actions">
+                                    <button class="btn-small primary">Continue Editing</button>
+                                    <button class="btn-small secondary">Publish</button>
+                                    <button class="btn-icon delete" title="Delete">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Room Schedule Section -->
+            <section id="schedule" class="content-section">
+                <div class="section-header">
+                    <h2>Room Schedule Viewer</h2>
+                </div>
+
+                <div class="schedule-filters">
+                    <div class="filter-row">
+                        <div class="filter-group">
+                            <label>Building:</label>
+                            <select id="buildingSelect">
+                                <option value="">Select Building</option>
+                                <option value="main">Main Building</option>
+                                <option value="engineering">Engineering Building</option>
+                                <option value="science">Science Building</option>
+                                <option value="it">IT Building</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label>Room:</label>
+                            <select id="roomSelect">
+                                <option value="">Select Room</option>
+                                <option value="401">Room 401</option>
+                                <option value="402">Room 402</option>
+                                <option value="403">Room 403</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label>Date:</label>
+                            <input type="date" id="scheduleDate" value="2024-12-15">
+                        </div>
+                        <button class="btn-primary" onclick="loadSchedule()">
+                            <i class="fas fa-search"></i> View Schedule
+                        </button>
+                    </div>
+                </div>
+
+                <div class="schedule-display">
+                    <div class="schedule-header">
+                        <h3>Room 401 - Main Building</h3>
+                        <p>Schedule for December 15, 2024</p>
+                    </div>
+                    
+                    <div class="time-grid">
+                        <div class="time-slot occupied">
+                            <div class="time-label">7:00 - 8:30 AM</div>
+                            <div class="slot-content">
+                                <h4>Mathematics for IT</h4>
+                                <p>BSIT 1A</p>
+                                <p>Prof. Juan Dela Cruz</p>
+                            </div>
+                        </div>
+
+                        <div class="time-slot occupied current-slot">
+                            <div class="time-label">8:30 - 10:00 AM</div>
+                            <div class="slot-content">
+                                <h4>Database Systems</h4>
+                                <p>BSCS 3A</p>
+                                <p>Prof. Maria Santos (You)</p>
+                            </div>
+                        </div>
+
+                        <div class="time-slot available">
+                            <div class="time-label">10:00 - 11:30 AM</div>
+                            <div class="slot-content">
+                                <h4>Available</h4>
+                                <button class="btn-small primary">Request Room</button>
+                            </div>
+                        </div>
+
+                        <div class="time-slot occupied">
+                            <div class="time-label">11:30 - 1:00 PM</div>
+                            <div class="slot-content">
+                                <h4>Data Structures</h4>
+                                <p>BSCS 2B</p>
+                                <p>Prof. Ana Reyes</p>
+                            </div>
+                        </div>
+
+                        <div class="time-slot break">
+                            <div class="time-label">1:00 - 2:00 PM</div>
+                            <div class="slot-content">
+                                <h4>Lunch Break</h4>
+                            </div>
+                        </div>
+
+                        <div class="time-slot occupied">
+                            <div class="time-label">2:00 - 3:30 PM</div>
+                            <div class="slot-content">
+                                <h4>Web Development</h4>
+                                <p>BSIT 3B</p>
+                                <p>Prof. Maria Santos (You)</p>
+                            </div>
+                        </div>
+
+                        <div class="time-slot available">
+                            <div class="time-label">3:30 - 5:00 PM</div>
+                            <div class="slot-content">
+                                <h4>Available</h4>
+                                <button class="btn-small primary">Request Room</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- My Classes Section -->
+            <section id="classes" class="content-section">
+                <div class="section-header">
+                    <h2>My Classes</h2>
+                </div>
+
+                <div class="classes-grid">
+                    <div class="class-card">
+                        <div class="class-header">
+                            <h3>Database Systems</h3>
+                            <span class="class-code">CS 321</span>
+                        </div>
+                        <div class="class-info">
+                            <p><i class="fas fa-users"></i> BSCS 3A • 35 students</p>
+                            <p><i class="fas fa-clock"></i> MWF 8:00-9:30 AM</p>
+                            <p><i class="fas fa-map-marker-alt"></i> Room 401, Main Building</p>
+                        </div>
+                        <div class="class-actions">
+                            <button class="btn-small primary">View Students</button>
+                            <button class="btn-small secondary">Class Materials</button>
+                        </div>
+                    </div>
+
+                    <div class="class-card">
+                        <div class="class-header">
+                            <h3>Software Engineering</h3>
+                            <span class="class-code">CS 422</span>
+                        </div>
+                        <div class="class-info">
+                            <p><i class="fas fa-users"></i> BSCS 4A • 28 students</p>
+                            <p><i class="fas fa-clock"></i> TTH 10:00-11:30 AM</p>
+                            <p><i class="fas fa-map-marker-alt"></i> Room 402, Main Building</p>
+                        </div>
+                        <div class="class-actions">
+                            <button class="btn-small primary">View Students</button>
+                            <button class="btn-small secondary">Class Materials</button>
+                        </div>
+                    </div>
+
+                    <div class="class-card">
+                        <div class="class-header">
+                            <h3>Web Development</h3>
+                            <span class="class-code">IT 312</span>
+                        </div>
+                        <div class="class-info">
+                            <p><i class="fas fa-users"></i> BSIT 3B • 32 students</p>
+                            <p><i class="fas fa-clock"></i> MWF 2:00-3:30 PM</p>
+                            <p><i class="fas fa-map-marker-alt"></i> Room 301, IT Building</p>
+                        </div>
+                        <div class="class-actions">
+                            <button class="btn-small primary">View Students</button>
+                            <button class="btn-small secondary">Class Materials</button>
+                        </div>
+                    </div>
+
+                    <div class="class-card">
+                        <div class="class-header">
+                            <h3>Computer Programming</h3>
+                            <span class="class-code">CS 111</span>
+                        </div>
+                        <div class="class-info">
+                            <p><i class="fas fa-users"></i> BSCS 1B • 38 students</p>
+                            <p><i class="fas fa-clock"></i> TTH 3:30-5:00 PM</p>
+                            <p><i class="fas fa-map-marker-alt"></i> Room 201, IT Building</p>
+                        </div>
+                        <div class="class-actions">
+                            <button class="btn-small primary">View Students</button>
+                            <button class="btn-small secondary">Class Materials</button>
+                        </div>
+                    </div>
+
+                    <div class="class-card">
+                        <div class="class-header">
+                            <h3>Data Structures</h3>
+                            <span class="class-code">CS 221</span>
+                        </div>
+                        <div class="class-info">
+                            <p><i class="fas fa-users"></i> BSCS 2A • 31 students</p>
+                            <p><i class="fas fa-clock"></i> MWF 10:00-11:30 AM</p>
+                            <p><i class="fas fa-map-marker-alt"></i> Room 403, Main Building</p>
+                        </div>
+                        <div class="class-actions">
+                            <button class="btn-small primary">View Students</button>
+                            <button class="btn-small secondary">Class Materials</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- AI Chatbot -->
+        <div class="chatbot-container" id="chatbot">
+            <div class="chatbot-header" onclick="toggleChat()">
+                <i class="fas fa-robot"></i>
+                <span>AI Assistant</span>
+                <i class="fas fa-chevron-up" id="chatToggle"></i>
+            </div>
+            <div class="chatbot-body">
+                <div class="chat-messages" id="chatMessages">
+                    <div class="message bot-message">
+                        <div class="message-content">
+                            Hello Prof. Santos! I can help you with room schedules, student information, and answer questions about campus facilities. How can I assist you today?
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-input">
+                    <input type="text" placeholder="Ask me anything..." id="chatInput">
+                    <button onclick="sendMessage()">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="javascript/faculty.js"></script>
+</body>
+</html>
