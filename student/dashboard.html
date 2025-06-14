@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Dashboard - UNISYNC</title>    <link rel="stylesheet" href="../assets/landing/css/styles.css">
+    <title>Student Dashboard - UNISYNC</title>
+    <link rel="icon" href="../assets/landing/img/logo.png" type="image/png">    <link rel="stylesheet" href="../assets/landing/css/styles.css">
     <link rel="stylesheet" href="css/student.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -15,9 +16,9 @@
             <div class="header-left">
                 <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
                     <i class="fas fa-bars"></i>
-                </button>
-                <div class="logo">
-                    <i class="fas fa-university"></i>
+                </button>                <div class="logo" onclick="window.location.href='../index.html'" style="cursor: pointer;">
+                    <img src="../assets/landing/img/logo.png" alt="CvSU Imus Logo" style="width: 24px; height: 24px; margin-right: 8px;" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline'">
+                    <i class="fas fa-university" style="display: none;"></i>
                     <span>UNISYNC</span>
                 </div>
             </div>

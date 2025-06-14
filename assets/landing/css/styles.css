@@ -316,9 +316,17 @@ body {
 /* Modern Login Cards */
 .login-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 32px;
     margin-top: 60px;
+}
+
+/* Media query for medium screens */
+@media (max-width: 1024px) {
+    .login-cards {
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 32px;
+    }
 }
 
 .login-card {
@@ -617,6 +625,29 @@ body {
 
     .feature-card {
         padding: 40px 24px;
+    }
+}
+
+/* About Features Layout */
+.about-features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    margin-top: 60px;
+}
+
+/* Media query for medium screens */
+@media (max-width: 1024px) {
+    .about-features {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)) !important;
+        gap: 40px !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .about-features {
+        grid-template-columns: 1fr;
+        gap: 32px;
     }
 }
 
