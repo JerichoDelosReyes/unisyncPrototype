@@ -4,7 +4,7 @@
 UNISYNC is a centralized University Management System designed for Cavite State University – Imus Campus. This prototype includes high-fidelity UI/UX mockups for web and mobile dashboards supporting Admin, Faculty, and Student roles, featuring a modern, enthusiastic landing page with smooth animations and enhanced user experience.
 
 ## Features
-- **🚀 Modern Landing Page**: Enthusiastic design with smooth animations, interactive elements, and glass-morphism effects
+- **🚀 Clean Landing Page**: Simple, elegant design with role selection cards
 - **Multi-Role Dashboard System**: Admin, Faculty, and Student interfaces
 - **Responsive Design**: Optimized for both web and mobile devices
 - **AI Virtual Assistant**: Interactive chatbot for each user role
@@ -12,7 +12,6 @@ UNISYNC is a centralized University Management System designed for Cavite State 
 - **Room Scheduling & Viewing**: Comprehensive room management
 - **Real-time Notifications**: System alerts and updates
 - **Clean Academic Design**: Using CvSU green (#006400) color scheme with modern gradients
-- **Enhanced UX**: Smooth transitions, hover effects, and loading animations
 
 ## Project Structure
 ```
@@ -198,18 +197,17 @@ All dashboards include realistic sample data:
 ## Usage Instructions
 
 ### Viewing the Prototype
-1. **Landing Page**: Open `index.html` for the main enthusiastic landing page with role selection
-2. **Quick Navigation**: Open `mockups.html` for easy access to all dashboard mockups
-3. **Individual Dashboards**: Access each role's web and mobile dashboards directly
-4. **Mobile Testing**: Use browser developer tools to simulate mobile devices
-5. **Responsive Testing**: Resize browser window to test responsive features
+1. **Landing Page**: Open `index.html` for the main landing page with role selection
+2. **Individual Dashboards**: Access each role's web and mobile dashboards directly
+3. **Mobile Testing**: Use browser developer tools to simulate mobile devices
+4. **Responsive Testing**: Resize browser window to test responsive features
 
 ### Navigation Options
-- **Main Landing**: Modern, animated landing page with About, Features, and Contact sections
-- **All Mockups Page**: Quick access hub to all 6 dashboard mockups (3 roles × 2 versions each)
+- **Main Landing**: Clean landing page with About and Contact sections
+- **Role Selection**: Simple cards for accessing Student, Faculty, and Admin dashboards
 - **Web Dashboards**: Full-featured desktop interfaces with comprehensive functionality
 - **Mobile Dashboards**: Touch-optimized mobile interfaces with tab navigation
-- **Direct Links**: Each login card provides both web and mobile access buttons
+- **Direct Access**: Each login card provides direct access to the main dashboard
 
 ### File Structure Access
 - **Assets Folder**: Contains all shared resources (landing CSS, images, avatars)
