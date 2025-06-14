@@ -1,5 +1,7 @@
 # UNISYNC - University Management System Prototype
 
+## Live Server: https://jerichodelosreyes.github.io/unisyncPrototype/
+
 ## Overview
 UNISYNC is a centralized University Management System designed for Cavite State University – Imus Campus. This prototype includes high-fidelity UI/UX mockups for web and mobile dashboards supporting Admin, Faculty, and Student roles, featuring a modern, enthusiastic landing page with smooth animations and enhanced user experience.
 
