@@ -352,84 +352,82 @@
                         </div>
                     </div>
                 </div>
-                
-                <!-- Student Organizations Filter (Hidden by default) -->
-                <div id="organizationsFilter" class="organizations-filter">
+                  <!-- Student Organizations Filter (Hidden by default) -->
+                <div id="organizationsFilter" class="organizations-filter" style="display: none;">
                     <h3>Student Organizations</h3>
-                    <div class="organizations-grid">
-                        <div class="org-item" onclick="filterAnnouncements('csg')">
+                    <div class="organizations-grid">                        <div class="org-item" onclick="filterAnnouncements('csg', true)">
                             <div class="org-logo">
                                 <img src="img/CSG-removebg-preview.png" alt="Central Student Government">
                             </div>
                             <p>Central Student Government</p>
                         </div>
-                        <div class="org-item" onclick="filterAnnouncements('bits')">
+                        <div class="org-item" onclick="filterAnnouncements('bits', true)">
                             <div class="org-logo">
                                 <img src="img/BITS-removebg-preview.png" alt="Builders of Innovative Technologist Society">
                             </div>
                             <p>BITS - IT Course</p>
                         </div>
-                        <div class="org-item" onclick="filterAnnouncements('bms')">
+                        <div class="org-item" onclick="filterAnnouncements('bms', true)">
                             <div class="org-logo">
                                 <img src="img/BMS-removebg-preview.png" alt="Business Management Society">
                             </div>
                             <p>Business Management Society</p>
                         </div>
-                        <div class="org-item" onclick="filterAnnouncements('cc')">
+                        <div class="org-item" onclick="filterAnnouncements('cc', true)">
                             <div class="org-logo">
                                 <img src="img/CAVITECOMMUNICATOR-removebg-preview.png" alt="Cavite Communicators">
                             </div>
                             <p>Cavite Communicators</p>
                         </div>
-                        <div class="org-item" onclick="filterAnnouncements('chts')">
+                        <div class="org-item" onclick="filterAnnouncements('chts', true)">
                             <div class="org-logo">
                                 <img src="img/CHTS-removebg-preview.png" alt="Circle of Hospitality and Tourism Students">
                             </div>
                             <p>Hospitality & Tourism</p>
                         </div>
-                        <div class="org-item" onclick="filterAnnouncements('cyle')">
+                        <div class="org-item" onclick="filterAnnouncements('cyle', true)">
                             <div class="org-logo">
                                 <img src="img/CYLE-removebg-preview.png" alt="Cavite Young Leaders for Entrepreneurship">
                             </div>
                             <p>Young Leaders</p>
                         </div>
-                        <div class="org-item" onclick="filterAnnouncements('csc')">
+                        <div class="org-item" onclick="filterAnnouncements('csc', true)">
                             <div class="org-logo">
                                 <img src="img/CSC-removebg-preview.png" alt="Computer Science Clique">
                             </div>
                             <p>Computer Science Clique</p>
                         </div>
-                        <div class="org-item" onclick="filterAnnouncements('edge')">
+                        <div class="org-item" onclick="filterAnnouncements('edge', true)">
                             <div class="org-logo">
                                 <img src="img/EDGE-removebg-preview.png" alt="Educators' Guild for Excellence">
                             </div>
                             <p>Educators' Guild</p>
                         </div>
-                        <div class="org-item" onclick="filterAnnouncements('sikolohiya')">
+                        <div class="org-item" onclick="filterAnnouncements('sikolohiya', true)">
                             <div class="org-logo">
                                 <img src="img/SIKOLOHIYA-removebg-preview (1).png" alt="Samahan ng mga Mag-aaral ng Sikolohiya">
                             </div>
                             <p>Psychology Society</p>
                         </div>
-                        <div class="org-item" onclick="filterAnnouncements('yopa')">
+                        <div class="org-item" onclick="filterAnnouncements('yopa', true)">
                             <div class="org-logo">
                                 <img src="img/YOPA-removebg-preview.png" alt="Young Office Professional Advocates">
                             </div>
                             <p>YOPA</p>
                         </div>
-                        <div class="org-item" onclick="filterAnnouncements('sinagtala')">
+                        <div class="org-item" onclick="filterAnnouncements('sinagtala', true)">
                             <div class="org-logo">
                                 <img src="img/SINAGTALA-removebg-preview.png" alt="Sinag-Tala">
                             </div>
                             <p>Sinag-Tala (Dance)</p>
                         </div>
-                        <div class="org-item" onclick="filterAnnouncements('flare')">
+                        <div class="org-item" onclick="filterAnnouncements('flare', true)">
                             <div class="org-logo">
-                                <img src="img/THE_FLARE-removebg-preview (1).png" alt="The Flare">
+                                <img src="img/THE_FLARE-removebg-preview.png" alt="The Flare">
                             </div>
                             <p>The Flare (Publication)</p>
                         </div>
-                        <div class="org-item" onclick="filterAnnouncements('honor')">
+                        <div class="org-item" onclick="filterAnnouncements('honor', true)">
                             <div class="org-logo">
                                 <img src="img/HONORSOC-removebg-preview.png" alt="Honor Society">
                             </div>
@@ -1286,141 +1284,6 @@
                 </div>
             </section>
         </main>
-
-        <!-- AI Chatbot -->
-        <div class="chatbot-fab" onclick="toggleChatbot()">
-            <i class="fas fa-robot"></i>
-        </div>
-
-        <div class="chatbot-container" id="chatbot">
-            <div class="chatbot-header">
-                <div class="chatbot-info">
-                    <i class="fas fa-robot"></i>
-                    <div>
-                        <h4>AI Assistant</h4>
-                        <p>Ask me anything about campus!</p>
-                    </div>
-                </div>
-                <button class="chatbot-close" onclick="toggleChatbot()">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div class="chatbot-body">
-                <div class="chat-messages" id="chatMessages">
-                    <div class="message bot-message">
-                        <div class="message-avatar">
-                            <i class="fas fa-robot"></i>
-                        </div>
-                        <div class="message-content">
-                            Hi Jericho! I'm your AI assistant. I can help you find rooms, check schedules, answer questions about announcements, or provide directions around campus. What would you like to know?
-                        </div>
-                    </div>
-                </div>
-                <div class="quick-suggestions">
-                    <button class="suggestion-btn" onclick="sendSuggestion('Where is Room 401?')">
-                        📍 Where is Room 401?
-                    </button>
-                    <button class="suggestion-btn" onclick="sendSuggestion('What\'s my next class?')">
-                        📅 What's my next class?
-                    </button>
-                    <button class="suggestion-btn" onclick="sendSuggestion('Show me available rooms')">
-                        🚪 Show me available rooms
-                    </button>
-                </div>
-                <div class="chat-input">
-                    <input type="text" placeholder="Type your message..." id="chatInput">
-                    <button onclick="sendMessage()">
-                        <i class="fas fa-paper-plane"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Notification Panel -->
-        <div class="notification-panel" id="notificationPanel">
-            <div class="notification-header">
-                <h3>Notifications</h3>
-                <button class="clear-all-btn" onclick="clearAllNotifications()">Clear All</button>
-            </div>
-            <div class="notification-list">
-                <div class="notification-item unread">
-                    <div class="notification-icon">
-                        <i class="fas fa-exclamation-circle"></i>
-                    </div>
-                    <div class="notification-content">
-                        <h4>Final Exam Schedule Released</h4>
-                        <p>Check your examination schedule for December 18-22</p>
-                        <span class="notification-time">2 hours ago</span>
-                    </div>
-                    <button class="dismiss-btn" onclick="dismissNotification(this)">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-
-                <div class="notification-item unread">
-                    <div class="notification-icon">
-                        <i class="fas fa-calendar-check"></i>
-                    </div>
-                    <div class="notification-content">
-                        <h4>Database Systems Project Due</h4>
-                        <p>Submit your final project by December 20, 2024</p>
-                        <span class="notification-time">1 day ago</span>
-                    </div>
-                    <button class="dismiss-btn" onclick="dismissNotification(this)">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-
-                <div class="notification-item">
-                    <div class="notification-icon">
-                        <i class="fas fa-info-circle"></i>
-                    </div>
-                    <div class="notification-content">
-                        <h4>Library Hours Extended</h4>
-                        <p>Library will be open until 10:00 PM during exam week</p>
-                        <span class="notification-time">2 days ago</span>
-                    </div>
-                    <button class="dismiss-btn" onclick="dismissNotification(this)">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- User Menu -->
-        <div class="user-menu" id="userMenu">
-            <div class="user-menu-header">
-                <img src="../assets/landing/img/aCvSUAlumni.png" alt="Student" class="user-avatar">
-                <div class="user-details">
-                    <h4>Jericho Delos Reyes</h4>
-                    <p>BSCS 3A • 2024-00123</p>
-                </div>
-            </div>
-            <div class="user-menu-items">
-                <a href="#profile" class="menu-item">
-                    <i class="fas fa-user"></i>
-                    <span>My Profile</span>
-                </a>
-                <a href="#grades" class="menu-item">
-                    <i class="fas fa-chart-line"></i>
-                    <span>View Grades</span>
-                </a>
-                <a href="#settings" class="menu-item">
-                    <i class="fas fa-cog"></i>
-                    <span>Settings</span>
-                </a>
-                <a href="#help" class="menu-item">
-                    <i class="fas fa-question-circle"></i>
-                    <span>Help & Support</span>
-                </a>
-                <div class="menu-divider"></div>
-                <a href="../index.html" class="menu-item logout">
-                    <i class="fas fa-sign-out-alt"></i>
-                    <span>Logout</span>
-                </a>
-            </div>
-        </div>
-    </div>
 
     <script src="javascript/student.js"></script>
 </body>

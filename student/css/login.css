@@ -65,12 +65,12 @@
 }
 
 .login-form-card {
-
+    background: #fff; /* Set background to white */
     backdrop-filter: blur(20px);
     padding: 48px;
     border-radius: var(--border-radius-lg);
     box-shadow: var(--shadow-card);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(220, 220, 220, 0.5); /* Lighter border for contrast */
     animation: slideInUp 0.6s ease-out;
     width: 100%; /* ADDED */
     max-width: 600px; /* ADDED */

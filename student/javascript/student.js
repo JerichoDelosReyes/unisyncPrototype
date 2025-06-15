@@ -4,6 +4,11 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeChatbot();
     updateCurrentTime();
     setInterval(updateCurrentTime, 60000); // Update every minute
+    
+    // Initialize announcements filter to "All" by default
+    setTimeout(() => {
+        filterAnnouncements('all');
+    }, 100);
 });
 
 // Global state
@@ -73,12 +78,28 @@ function setupEventListeners() {
 
 // Navigation Functions
 function showSection(sectionId) {
+    // Reset organization filter when changing sections
+    const orgFilterPanel = document.getElementById('organizationsFilter');
+    if (orgFilterPanel && orgFilterPanel.style.display === 'block') {
+        orgFilterPanel.style.display = 'none';
+        const filterTabs = document.querySelectorAll('#announcements .filter-tab');
+        const orgTab = Array.from(filterTabs).find(tab => tab.innerText.includes('Organizations'));
+        if (orgTab) orgTab.classList.remove('active');
+        // Potentially reset to 'All' announcements or the default active tab for announcements
+    }
+    const promptMessage = document.getElementById('selectOrgPrompt');
+    if (promptMessage) promptMessage.style.display = 'none';
+
+
     // Hide all sections
     const sections = document.querySelectorAll('.content-section');
     sections.forEach(section => section.classList.remove('active'));
     
     // Show selected section
-    document.getElementById(sectionId).classList.add('active');
+    const targetSection = document.getElementById(sectionId);
+    if (targetSection) {
+        targetSection.classList.add('active');
+    }
     
     // Update navigation active state
     const navItems = document.querySelectorAll('.nav-item, .nav-tab, .side-nav-item');
@@ -97,7 +118,7 @@ function showSection(sectionId) {
     // Close mobile side menu if open and on mobile view
     if (window.innerWidth <= 768) {
         const sideNav = document.getElementById('mobileSideNav');
-        if (sideNav.classList.contains('open')) {
+        if (sideNav && sideNav.classList.contains('open')) {
             toggleMobileSideMenu(); 
         }
     }
@@ -252,64 +273,71 @@ function loadAnnouncements() {
 }
 
 function toggleOrganizationsFilter() {
-    const filterPanel = document.getElementById('organizationsFilter');
-    
-    if (filterPanel.style.display === 'block') {
-        // Hide the panel with animation
-        filterPanel.classList.add('closing');
-        setTimeout(() => {
-            filterPanel.style.display = 'none';
-            filterPanel.classList.remove('closing');
-        }, 280);
-    } else {
-        // Show the panel
-        filterPanel.style.display = 'block';
-    }
-    
-    // Update active state of the Organizations filter button
-    const filterTabs = document.querySelectorAll('.filter-tab');
-    const orgTab = Array.from(filterTabs).find(tab => tab.innerText.includes('Organizations'));
-    
-    if (filterPanel.style.display === 'block') {
-        filterTabs.forEach(tab => tab.classList.remove('active'));
-        orgTab.classList.add('active');
-    }
+    // This function now calls filterAnnouncements with a special category
+    filterAnnouncements('orgFilterToggle');
 }
 
 // Update filterAnnouncements to handle organization filtering
-function filterAnnouncements(category) {
-    const filterTabs = document.querySelectorAll('.filter-tab');
-    
-    // Don't add active class if toggling organizations filter
-    if (category !== 'orgFilter') {
-        filterTabs.forEach(tab => tab.classList.remove('active'));
-        
-        // Find the button that was clicked
-        if (event && event.target) {
-            // If it's the organizations filter button, don't add active class here
-            if (!event.target.innerText.includes('Organizations')) {
-                event.target.classList.add('active');
+function filterAnnouncements(category, isOrgClick = false) {
+    const filterTabs = document.querySelectorAll('#announcements .filter-tab');
+    const announcementCards = document.querySelectorAll('#announcementsContainer .announcement-card');
+    const orgFilterPanel = document.getElementById('organizationsFilter');
+    const orgFilterButton = Array.from(filterTabs).find(tab => tab.innerText.includes('Organizations'));
+
+    // Deactivate all tabs first
+    filterTabs.forEach(tab => tab.classList.remove('active'));
+
+    if (isOrgClick) {
+        // An organization was clicked from the panel
+        if (orgFilterButton) orgFilterButton.classList.add('active'); // Keep "Organizations" tab active
+        // Optionally, highlight the selected org item in the panel
+        const orgItems = document.querySelectorAll('#organizationsFilter .org-item');
+        orgItems.forEach(item => item.classList.remove('selected-org'));
+        const clickedOrgItem = Array.from(orgItems).find(item => item.getAttribute('onclick').includes(`'${category}'`));
+        if (clickedOrgItem) clickedOrgItem.classList.add('selected-org');
+
+    } else if (category === 'orgFilterToggle') {
+        // The main "Organizations" tab was clicked
+        if (orgFilterPanel.style.display === 'block') {
+            orgFilterPanel.classList.add('closing');
+            setTimeout(() => {
+                orgFilterPanel.style.display = 'none';
+                orgFilterPanel.classList.remove('closing');
+            }, 280);
+            // If panel is closing, try to revert to 'all' or last active non-org filter if desired, or just remove active from org button
+            const activeMainFilter = Array.from(filterTabs).find(tab => tab.classList.contains('active') && !tab.innerText.includes('Organizations'));
+            if (activeMainFilter) {
+                activeMainFilter.classList.add('active');
+            } else {
+                 // If no other main filter was active, default to 'All'
+                const allTab = Array.from(filterTabs).find(tab => tab.innerText.trim() === 'All');
+                if (allTab) allTab.classList.add('active');
+                filterAnnouncements('all'); // Re-filter to all
+                return; // Exit to avoid double filtering
             }
         } else {
-            // Find the appropriate tab if event.target is not available
-            const tabToActivate = Array.from(filterTabs).find(tab => {
-                if (category === 'all' && tab.innerText.trim() === 'All') return true;
-                if (category === 'important' && tab.innerText.trim() === 'Important') return true;
-                if (category === 'academic' && tab.innerText.trim() === 'Academic') return true;
-                if (category === 'general' && tab.innerText.trim() === 'General') return true;
-                return false;
-            });
-            if (tabToActivate) tabToActivate.classList.add('active');
+            orgFilterPanel.style.display = 'block';
+            if (orgFilterButton) orgFilterButton.classList.add('active');
+            // When opening, don't filter yet, let user pick an org or close
+            announcementCards.forEach(card => card.style.display = 'none'); // Hide all cards until an org is selected
+            const promptMessage = document.getElementById('selectOrgPrompt');
+            if (promptMessage) promptMessage.style.display = 'block';
+            return; // Exit, wait for org selection
         }
-    }
-    
-    const announcementCards = document.querySelectorAll('.announcement-card');
-    
-    // Handle organization filter panel visibility
-    const orgFilterPanel = document.getElementById('organizationsFilter');
-    
-    // If selecting a non-organization filter, hide the organization panel
-    if (category !== 'orgFilter' && !['csg', 'bits', 'bms', 'cc', 'chts', 'cyle', 'csc', 'edge', 'sikolohiya', 'yopa', 'sinagtala', 'flare', 'honor'].includes(category)) {
+    } else {
+        // A main filter tab (All, Important, etc.) was clicked
+        const clickedTab = Array.from(filterTabs).find(tab => {
+            const tabText = tab.innerText.trim().toLowerCase();
+            const categoryLower = category.toLowerCase();
+            if (tabText === categoryLower) return true;
+            if (categoryLower === 'all' && tabText === 'all') return true;
+            if (categoryLower === 'important' && tabText === 'important') return true;
+            if (categoryLower === 'academic' && tabText === 'academic') return true;
+            if (categoryLower === 'general' && tabText === 'general') return true;
+            return false;
+        });
+        if (clickedTab) clickedTab.classList.add('active');
+
         if (orgFilterPanel.style.display === 'block') {
             orgFilterPanel.classList.add('closing');
             setTimeout(() => {
@@ -319,17 +347,20 @@ function filterAnnouncements(category) {
         }
     }
     
-    if (category === 'all') {
-        announcementCards.forEach(card => card.style.display = 'block');
-    } else {
-        announcementCards.forEach(card => {
+    const promptMessage = document.getElementById('selectOrgPrompt');
+    if (promptMessage) promptMessage.style.display = 'none';
+
+    announcementCards.forEach(card => {
+        if (category === 'all' && !isOrgClick && category !== 'orgFilterToggle') {
+            card.style.display = 'block';
+        } else {
             if (card.classList.contains(category)) {
                 card.style.display = 'block';
             } else {
                 card.style.display = 'none';
             }
-        });
-    }
+        }
+    });
 }
 
 function toggleView(viewType) {
@@ -800,6 +831,18 @@ function initializeFilters() {
     const dateFilter = document.getElementById('scheduleDate');
     if (dateFilter) {
         dateFilter.valueAsDate = new Date();
+    }
+
+    // Add a prompt message for organization selection if it doesn't exist
+    const announcementsContainer = document.getElementById('announcementsContainer');
+    if (announcementsContainer && !document.getElementById('selectOrgPrompt')) {
+        const promptMessage = document.createElement('p');
+        promptMessage.id = 'selectOrgPrompt';
+        promptMessage.textContent = 'Please select an organization from the panel above to see its announcements.';
+        promptMessage.style.textAlign = 'center';
+        promptMessage.style.padding = '20px';
+        promptMessage.style.display = 'none'; // Initially hidden
+        announcementsContainer.parentNode.insertBefore(promptMessage, announcementsContainer);
     }
 }
 

@@ -15,7 +15,6 @@
     --border-radius: 16px;
     --border-radius-lg: 24px;
     --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    --gradient-primary: linear-gradient(135deg, var(--cvsu-green) 0%, var(--cvsu-light-green) 50%, var(--cvsu-accent) 100%);
     --gradient-bg: linear-gradient(135deg, #f0fff4 0%, #e8f8e8 50%, #f8fffe 100%);
     --gradient-hero: linear-gradient(135deg, rgba(0, 100, 0, 0.02) 0%, rgba(34, 139, 34, 0.05) 100%);
 }
@@ -57,7 +56,7 @@ body {
     content: '';
     position: absolute;
     border-radius: 50%;
-    background: var(--gradient-primary);
+    background: var(--cvsu-green);
     opacity: 0.03;
     animation: float 20s ease-in-out infinite;
 }
@@ -119,7 +118,7 @@ body {
 .logo-icon {
     width: 56px;
     height: 56px;
-    background: var(--gradient-primary);
+    background: var(--cvsu-green);
     border-radius: var(--border-radius);
     display: flex;
     align-items: center;
@@ -135,7 +134,7 @@ body {
 }
 
 .logo-text h1 {
-    background: var(--gradient-primary);
+    background: var(--cvsu-green);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -182,7 +181,7 @@ body {
     left: 50%;
     width: 0;
     height: 2px;
-    background: var(--gradient-primary);
+    background: var(--cvsu-green);
     transition: var(--transition);
     transform: translateX(-50%);
 }
@@ -241,7 +240,7 @@ body {
 .hero h1 {
     font-size: 4rem;
     font-weight: 900;
-    background: var(--gradient-primary);
+    background: var(--cvsu-green);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -373,7 +372,7 @@ body {
 .card-icon {
     width: 96px;
     height: 96px;
-    background: var(--gradient-primary);
+    background: var(--cvsu-green);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -410,7 +409,7 @@ body {
 }
 
 .btn-primary {
-    background: var(--gradient-primary);
+    background: var(--cvsu-green);
     color: var(--white);
     border: none;
     padding: 16px 32px;
@@ -460,7 +459,7 @@ body {
 .features h2 {
     text-align: center;
     font-size: 3rem;
-    background: var(--gradient-primary);
+    background: var(--cvsu-green);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -504,7 +503,7 @@ body {
     left: 0;
     right: 0;
     height: 4px;
-    background: var(--gradient-primary);
+    background: var(--cvsu-green);
     transform: scaleX(0);
     transition: var(--transition);
 }
@@ -521,7 +520,7 @@ body {
 
 .feature-card i {
     font-size: 3.5rem;
-    background: var(--gradient-primary);
+    background: var(--cvsu-green);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
