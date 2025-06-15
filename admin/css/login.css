@@ -166,13 +166,18 @@
 
 .input-container input {
     width: 100%;
-    padding: 16px 16px 16px 48px;
+    padding: 16px 50px 16px 48px;
     border: 2px solid var(--medium-gray);
     border-radius: 12px;
     font-size: 1rem;
     background: white;
     transition: all 0.3s ease;
     font-family: inherit;
+}
+
+/* Specific styling for password input to make room for toggle button */
+.input-container input[type="password"] {
+    padding-right: 50px;
 }
 
 .input-container input:focus {
@@ -183,14 +188,22 @@
 
 .toggle-password {
     position: absolute;
-    right: 16px;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
     background: none;
     border: none;
     color: var(--text-light);
     cursor: pointer;
-    padding: 4px;
+    padding: 8px;
     border-radius: 4px;
     transition: color 0.3s ease;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
 }
 
 .toggle-password:hover {
