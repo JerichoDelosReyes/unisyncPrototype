@@ -225,12 +225,73 @@ function loadAnnouncements() {
     console.log('Loading announcements...');
 }
 
+function toggleOrganizationsFilter() {
+    const filterPanel = document.getElementById('organizationsFilter');
+    
+    if (filterPanel.style.display === 'block') {
+        // Hide the panel with animation
+        filterPanel.classList.add('closing');
+        setTimeout(() => {
+            filterPanel.style.display = 'none';
+            filterPanel.classList.remove('closing');
+        }, 280);
+    } else {
+        // Show the panel
+        filterPanel.style.display = 'block';
+    }
+    
+    // Update active state of the Organizations filter button
+    const filterTabs = document.querySelectorAll('.filter-tab');
+    const orgTab = Array.from(filterTabs).find(tab => tab.innerText.includes('Organizations'));
+    
+    if (filterPanel.style.display === 'block') {
+        filterTabs.forEach(tab => tab.classList.remove('active'));
+        orgTab.classList.add('active');
+    }
+}
+
+// Update filterAnnouncements to handle organization filtering
 function filterAnnouncements(category) {
     const filterTabs = document.querySelectorAll('.filter-tab');
-    filterTabs.forEach(tab => tab.classList.remove('active'));
-    event.target.classList.add('active');
+    
+    // Don't add active class if toggling organizations filter
+    if (category !== 'orgFilter') {
+        filterTabs.forEach(tab => tab.classList.remove('active'));
+        
+        // Find the button that was clicked
+        if (event && event.target) {
+            // If it's the organizations filter button, don't add active class here
+            if (!event.target.innerText.includes('Organizations')) {
+                event.target.classList.add('active');
+            }
+        } else {
+            // Find the appropriate tab if event.target is not available
+            const tabToActivate = Array.from(filterTabs).find(tab => {
+                if (category === 'all' && tab.innerText.trim() === 'All') return true;
+                if (category === 'important' && tab.innerText.trim() === 'Important') return true;
+                if (category === 'academic' && tab.innerText.trim() === 'Academic') return true;
+                if (category === 'general' && tab.innerText.trim() === 'General') return true;
+                return false;
+            });
+            if (tabToActivate) tabToActivate.classList.add('active');
+        }
+    }
     
     const announcementCards = document.querySelectorAll('.announcement-card');
+    
+    // Handle organization filter panel visibility
+    const orgFilterPanel = document.getElementById('organizationsFilter');
+    
+    // If selecting a non-organization filter, hide the organization panel
+    if (category !== 'orgFilter' && !['csg', 'bits', 'bms', 'cc', 'chts', 'cyle', 'csc', 'edge', 'sikolohiya', 'yopa', 'sinagtala', 'flare', 'honor'].includes(category)) {
+        if (orgFilterPanel.style.display === 'block') {
+            orgFilterPanel.classList.add('closing');
+            setTimeout(() => {
+                orgFilterPanel.style.display = 'none';
+                orgFilterPanel.classList.remove('closing');
+            }, 280);
+        }
+    }
     
     if (category === 'all') {
         announcementCards.forEach(card => card.style.display = 'block');

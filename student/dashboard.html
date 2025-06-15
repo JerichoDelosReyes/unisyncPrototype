@@ -296,8 +296,7 @@
             </section>
 
             <!-- Announcements Section -->
-            <section id="announcements" class="content-section">
-                <div class="section-header">
+            <section id="announcements" class="content-section">                <div class="section-header">
                     <h2>Announcements</h2>
                     <div class="section-controls">
                         <div class="filter-tabs">
@@ -305,6 +304,9 @@
                             <button class="filter-tab" onclick="filterAnnouncements('important')">Important</button>
                             <button class="filter-tab" onclick="filterAnnouncements('academic')">Academic</button>
                             <button class="filter-tab" onclick="filterAnnouncements('general')">General</button>
+                            <button class="filter-tab" onclick="toggleOrganizationsFilter()">
+                                <i class="fas fa-users"></i> Organizations
+                            </button>
                         </div>
                         <div class="view-toggle">
                             <button class="view-btn active" onclick="toggleView('list')">
@@ -316,9 +318,92 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="announcements-container list-view" id="announcementsContainer">
-                    <div class="announcement-card important">
+                
+                <!-- Student Organizations Filter (Hidden by default) -->
+                <div id="organizationsFilter" class="organizations-filter">
+                    <h3>Student Organizations</h3>
+                    <div class="organizations-grid">
+                        <div class="org-item" onclick="filterAnnouncements('csg')">
+                            <div class="org-logo">
+                                <img src="img/CSG-removebg-preview.png" alt="Central Student Government">
+                            </div>
+                            <p>Central Student Government</p>
+                        </div>
+                        <div class="org-item" onclick="filterAnnouncements('bits')">
+                            <div class="org-logo">
+                                <img src="img/BITS-removebg-preview.png" alt="Builders of Innovative Technologist Society">
+                            </div>
+                            <p>BITS - IT Course</p>
+                        </div>
+                        <div class="org-item" onclick="filterAnnouncements('bms')">
+                            <div class="org-logo">
+                                <img src="img/BMS-removebg-preview.png" alt="Business Management Society">
+                            </div>
+                            <p>Business Management Society</p>
+                        </div>
+                        <div class="org-item" onclick="filterAnnouncements('cc')">
+                            <div class="org-logo">
+                                <img src="img/CAVITECOMMUNICATOR-removebg-preview.png" alt="Cavite Communicators">
+                            </div>
+                            <p>Cavite Communicators</p>
+                        </div>
+                        <div class="org-item" onclick="filterAnnouncements('chts')">
+                            <div class="org-logo">
+                                <img src="img/CHTS-removebg-preview.png" alt="Circle of Hospitality and Tourism Students">
+                            </div>
+                            <p>Hospitality & Tourism</p>
+                        </div>
+                        <div class="org-item" onclick="filterAnnouncements('cyle')">
+                            <div class="org-logo">
+                                <img src="img/CYLE-removebg-preview.png" alt="Cavite Young Leaders for Entrepreneurship">
+                            </div>
+                            <p>Young Leaders</p>
+                        </div>
+                        <div class="org-item" onclick="filterAnnouncements('csc')">
+                            <div class="org-logo">
+                                <img src="img/CSC-removebg-preview.png" alt="Computer Science Clique">
+                            </div>
+                            <p>Computer Science Clique</p>
+                        </div>
+                        <div class="org-item" onclick="filterAnnouncements('edge')">
+                            <div class="org-logo">
+                                <img src="img/EDGE-removebg-preview.png" alt="Educators' Guild for Excellence">
+                            </div>
+                            <p>Educators' Guild</p>
+                        </div>
+                        <div class="org-item" onclick="filterAnnouncements('sikolohiya')">
+                            <div class="org-logo">
+                                <img src="img/SIKOLOHIYA-removebg-preview (1).png" alt="Samahan ng mga Mag-aaral ng Sikolohiya">
+                            </div>
+                            <p>Psychology Society</p>
+                        </div>
+                        <div class="org-item" onclick="filterAnnouncements('yopa')">
+                            <div class="org-logo">
+                                <img src="img/YOPA-removebg-preview.png" alt="Young Office Professional Advocates">
+                            </div>
+                            <p>YOPA</p>
+                        </div>
+                        <div class="org-item" onclick="filterAnnouncements('sinagtala')">
+                            <div class="org-logo">
+                                <img src="img/SINAGTALA-removebg-preview.png" alt="Sinag-Tala">
+                            </div>
+                            <p>Sinag-Tala (Dance)</p>
+                        </div>
+                        <div class="org-item" onclick="filterAnnouncements('flare')">
+                            <div class="org-logo">
+                                <img src="img/THE_FLARE-removebg-preview (1).png" alt="The Flare">
+                            </div>
+                            <p>The Flare (Publication)</p>
+                        </div>
+                        <div class="org-item" onclick="filterAnnouncements('honor')">
+                            <div class="org-logo">
+                                <img src="img/HONORSOC-removebg-preview.png" alt="Honor Society">
+                            </div>
+                            <p>Honor Society</p>
+                        </div>
+                    </div>
+                </div>                <div class="announcements-container list-view" id="announcementsContainer">
+                    <div class="announcement-card important academic">
                         <div class="announcement-header">
                             <div class="announcement-meta">
                                 <span class="announcement-tag important">Important</span>
@@ -334,6 +419,43 @@
                             <div class="announcement-details">
                                 <span class="author"><i class="fas fa-user"></i> Academic Affairs Office</span>
                                 <span class="category"><i class="fas fa-folder"></i> Academic</span>
+                            </div>
+                        </div>
+                        <div class="announcement-actions">
+                            <button class="action-btn" onclick="readMore(this)">
+                                <i class="fas fa-eye"></i> Read More
+                            </button>
+                            <button class="action-btn" onclick="shareAnnouncement(this)">
+                                <i class="fas fa-share"></i> Share
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Central Student Government Announcement -->
+                    <div class="announcement-card csg">
+                        <div class="announcement-header">
+                            <div class="announcement-meta">
+                                <span class="announcement-tag org">Organization</span>
+                                <span class="announcement-date">December 14, 2024</span>
+                            </div>
+                            <button class="bookmark-btn" onclick="toggleBookmark(this)">
+                                <i class="far fa-bookmark"></i>
+                            </button>
+                        </div>
+                        <div class="announcement-body">
+                            <h3>CSG General Assembly and Semester Membership Drive</h3>
+                            <p>The Central Student Government invites all students to attend our General Assembly on December 20, 2024. Learn about our initiatives for the upcoming semester and opportunities to get involved in student leadership.</p>
+                            <div class="org-preview">
+                                <img src="img/CSG-removebg-preview.png" alt="CSG Logo">                                <div class="org-details">
+                                    <h4>Membership Details:</h4>
+                                    <p>Membership Fee: ₱75/semester</p>
+                                    <p>Location: Old building, 2nd floor in the Student Center</p>
+                                    <p>Time: 2:00 PM - 5:00 PM</p>
+                                </div>
+                            </div>
+                            <div class="announcement-details">
+                                <span class="author"><i class="fas fa-user"></i> CSG President</span>
+                                <span class="category"><i class="fas fa-users"></i> Central Student Government</span>
                             </div>
                         </div>
                         <div class="announcement-actions">
@@ -418,6 +540,272 @@
                             <div class="announcement-details">
                                 <span class="author"><i class="fas fa-user"></i> IT Services</span>
                                 <span class="category"><i class="fas fa-folder"></i> Technical</span>
+                            </div>
+                        </div>
+                        <div class="announcement-actions">
+                            <button class="action-btn" onclick="readMore(this)">
+                                <i class="fas fa-eye"></i> Read More
+                            </button>
+                            <button class="action-btn" onclick="shareAnnouncement(this)">
+                                <i class="fas fa-share"></i> Share
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Computer Science Clique Announcement -->
+                    <div class="announcement-card csc">
+                        <div class="announcement-header">
+                            <div class="announcement-meta">
+                                <span class="announcement-tag org">Organization</span>
+                                <span class="announcement-date">December 13, 2024</span>
+                            </div>
+                            <button class="bookmark-btn" onclick="toggleBookmark(this)">
+                                <i class="far fa-bookmark"></i>
+                            </button>
+                        </div>
+                        <div class="announcement-body">
+                            <h3>Annual Hackathon and Programming Competition</h3>
+                            <p>The Computer Science Clique is organizing its annual hackathon and programming competition on January 10-12, 2025. Form your teams and showcase your coding skills! Registration is now open.</p>
+                            <div class="org-preview">
+                                <img src="img/CSC-removebg-preview.png" alt="CSC Logo">                                <div class="org-details">
+                                    <h4>Event Details:</h4>
+                                    <p>Registration Fee: ₱300 per team (max 4 members)</p>
+                                    <p>Membership Fee: ₱75/semester</p>
+                                    <p>Location: Old building, 2nd floor in the Student Center</p>
+                                    <p>Theme: "Tech Solutions for a Sustainable Campus"</p>
+                                </div>
+                            </div>
+                            <div class="announcement-details">
+                                <span class="author"><i class="fas fa-user"></i> CSC Events Committee</span>
+                                <span class="category"><i class="fas fa-users"></i> Computer Science Clique</span>
+                            </div>
+                        </div>
+                        <div class="announcement-actions">
+                            <button class="action-btn" onclick="readMore(this)">
+                                <i class="fas fa-eye"></i> Read More
+                            </button>
+                            <button class="action-btn" onclick="shareAnnouncement(this)">
+                                <i class="fas fa-share"></i> Share
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- BITS Announcement -->
+                    <div class="announcement-card bits">
+                        <div class="announcement-header">
+                            <div class="announcement-meta">
+                                <span class="announcement-tag org">Organization</span>
+                                <span class="announcement-date">December 12, 2024</span>
+                            </div>
+                            <button class="bookmark-btn" onclick="toggleBookmark(this)">
+                                <i class="far fa-bookmark"></i>
+                            </button>
+                        </div>
+                        <div class="announcement-body">
+                            <h3>Tech Trends 2025: Workshop Series</h3>
+                            <p>Join BITS for our upcoming workshop series on emerging technology trends for 2025. Industry professionals will guide you through hands-on sessions on AI, cloud computing, and cybersecurity.</p>
+                            <div class="org-preview">
+                                <img src="img/BITS-removebg-preview.png" alt="BITS Logo">                                <div class="org-details">
+                                    <h4>Workshop Details:</h4>
+                                    <p>Membership Fee: ₱75/semester</p>
+                                    <p>Workshop Date: January 15-17, 2025</p>
+                                    <p>Location: Old building, 2nd floor in the Student Center</p>
+                                    <p>Requirements: Personal laptop</p>
+                                </div>
+                            </div>
+                            <div class="announcement-details">
+                                <span class="author"><i class="fas fa-user"></i> BITS Secretary</span>
+                                <span class="category"><i class="fas fa-users"></i> Builders of Innovative Technologist Society</span>
+                            </div>
+                        </div>
+                        <div class="announcement-actions">
+                            <button class="action-btn" onclick="readMore(this)">
+                                <i class="fas fa-eye"></i> Read More
+                            </button>
+                            <button class="action-btn" onclick="shareAnnouncement(this)">
+                                <i class="fas fa-share"></i> Share
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- The Flare Announcement -->
+                    <div class="announcement-card flare">
+                        <div class="announcement-header">
+                            <div class="announcement-meta">
+                                <span class="announcement-tag org">Organization</span>
+                                <span class="announcement-date">December 11, 2024</span>
+                            </div>
+                            <button class="bookmark-btn" onclick="toggleBookmark(this)">
+                                <i class="far fa-bookmark"></i>
+                            </button>
+                        </div>
+                        <div class="announcement-body">
+                            <h3>Call for Contributors: Campus Magazine</h3>
+                            <p>The Flare is looking for writers, photographers, and designers for our upcoming campus magazine issue. Share your creativity and gain publication experience!</p>
+                            <div class="org-preview">
+                                <img src="img/THE_FLARE-removebg-preview (1).png" alt="The Flare Logo">                                <div class="org-details">
+                                    <h4>Contribution Details:</h4>
+                                    <p>Membership Fee: ₱75/semester</p>
+                                    <p>Submission Deadline: January 5, 2025</p>
+                                    <p>Meeting: Every Friday, 4PM at Old building, 2nd floor in the Student Center</p>
+                                    <p>Benefits: Publication credits and portfolio development</p>
+                                </div>
+                            </div>
+                            <div class="announcement-details">
+                                <span class="author"><i class="fas fa-user"></i> The Flare Editor-in-Chief</span>
+                                <span class="category"><i class="fas fa-users"></i> The Flare Publication</span>
+                            </div>
+                        </div>
+                        <div class="announcement-actions">
+                            <button class="action-btn" onclick="readMore(this)">
+                                <i class="fas fa-eye"></i> Read More
+                            </button>
+                            <button class="action-btn" onclick="shareAnnouncement(this)">
+                                <i class="fas fa-share"></i> Share
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Sinag-Tala Announcement -->
+                    <div class="announcement-card sinagtala">
+                        <div class="announcement-header">
+                            <div class="announcement-meta">
+                                <span class="announcement-tag org">Organization</span>
+                                <span class="announcement-date">December 10, 2024</span>
+                            </div>
+                            <button class="bookmark-btn" onclick="toggleBookmark(this)">
+                                <i class="far fa-bookmark"></i>
+                            </button>
+                        </div>
+                        <div class="announcement-body">
+                            <h3>Dance Group Auditions and Membership Drive</h3>
+                            <p>Sinag-Tala is holding open auditions for new dance members. Whether you're experienced or a beginner with passion, we welcome you to join our dynamic dance community!</p>
+                            <div class="org-preview">
+                                <img src="img/SINAGTALA-removebg-preview.png" alt="Sinag-Tala Logo">                                <div class="org-details">
+                                    <h4>Audition Details:</h4>
+                                    <p>Membership Fee: ₱75/semester</p>
+                                    <p>Audition Date: January 8, 2025</p>
+                                    <p>Location: Old building, 2nd floor in the Student Center</p>
+                                    <p>Requirements: Comfortable clothing, water bottle, dance experience (preferred but not required)</p>
+                                </div>
+                            </div>
+                            <div class="announcement-details">
+                                <span class="author"><i class="fas fa-user"></i> Sinag-Tala Dance Director</span>
+                                <span class="category"><i class="fas fa-users"></i> Sinag-Tala Dance Group</span>
+                            </div>
+                        </div>
+                        <div class="announcement-actions">
+                            <button class="action-btn" onclick="readMore(this)">
+                                <i class="fas fa-eye"></i> Read More
+                            </button>
+                            <button class="action-btn" onclick="shareAnnouncement(this)">
+                                <i class="fas fa-share"></i> Share
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Honor Society Announcement -->
+                    <div class="announcement-card honor">
+                        <div class="announcement-header">
+                            <div class="announcement-meta">
+                                <span class="announcement-tag org">Organization</span>
+                                <span class="announcement-date">December 10, 2024</span>
+                            </div>
+                            <button class="bookmark-btn" onclick="toggleBookmark(this)">
+                                <i class="far fa-bookmark"></i>
+                            </button>
+                        </div>
+                        <div class="announcement-body">
+                            <h3>Honor Society Recognition Ceremony & Induction</h3>
+                            <p>The Honor Society is pleased to invite students with exceptional academic performance to join our community. The induction ceremony will recognize achievements and welcome new members.</p>
+                            <div class="org-preview">
+                                <img src="img/HONORSOC-removebg-preview.png" alt="Honor Society Logo">                                <div class="org-details">
+                                    <h4>Event Details:</h4>
+                                    <p>Membership Fee: ₱75/semester</p>
+                                    <p>Eligibility: GPA of 1.75 or higher</p>
+                                    <p>Ceremony Date: January 20, 2025</p>
+                                    <p>Location: Old building, 2nd floor in the Student Center</p>
+                                </div>
+                            </div>
+                            <div class="announcement-details">
+                                <span class="author"><i class="fas fa-user"></i> Honor Society President</span>
+                                <span class="category"><i class="fas fa-users"></i> Honor Society</span>
+                            </div>
+                        </div>
+                        <div class="announcement-actions">
+                            <button class="action-btn" onclick="readMore(this)">
+                                <i class="fas fa-eye"></i> Read More
+                            </button>
+                            <button class="action-btn" onclick="shareAnnouncement(this)">
+                                <i class="fas fa-share"></i> Share
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Business Management Society Announcement -->
+                    <div class="announcement-card bms">
+                        <div class="announcement-header">
+                            <div class="announcement-meta">
+                                <span class="announcement-tag org">Organization</span>
+                                <span class="announcement-date">December 9, 2024</span>
+                            </div>
+                            <button class="bookmark-btn" onclick="toggleBookmark(this)">
+                                <i class="far fa-bookmark"></i>
+                            </button>
+                        </div>
+                        <div class="announcement-body">
+                            <h3>Entrepreneurship Summit 2025</h3>
+                            <p>The Business Management Society invites you to our annual Entrepreneurship Summit featuring successful alumni entrepreneurs and industry leaders who will share insights on business trends and opportunities.</p>
+                            <div class="org-preview">
+                                <img src="img/BMS-removebg-preview.png" alt="BMS Logo">                                <div class="org-details">
+                                    <h4>Summit Details:</h4>
+                                    <p>Membership Fee: ₱75/semester</p>
+                                    <p>Summit Registration: ₱200 (free for members)</p>
+                                    <p>Date: January 25-26, 2025</p>
+                                    <p>Location: Old building, 2nd floor in the Student Center</p>
+                                </div>
+                            </div>
+                            <div class="announcement-details">
+                                <span class="author"><i class="fas fa-user"></i> BMS Events Coordinator</span>
+                                <span class="category"><i class="fas fa-users"></i> Business Management Society</span>
+                            </div>
+                        </div>
+                        <div class="announcement-actions">
+                            <button class="action-btn" onclick="readMore(this)">
+                                <i class="fas fa-eye"></i> Read More
+                            </button>
+                            <button class="action-btn" onclick="shareAnnouncement(this)">
+                                <i class="fas fa-share"></i> Share
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Psychology Society Announcement -->
+                    <div class="announcement-card sikolohiya">
+                        <div class="announcement-header">
+                            <div class="announcement-meta">
+                                <span class="announcement-tag org">Organization</span>
+                                <span class="announcement-date">December 8, 2024</span>
+                            </div>
+                            <button class="bookmark-btn" onclick="toggleBookmark(this)">
+                                <i class="far fa-bookmark"></i>
+                            </button>
+                        </div>
+                        <div class="announcement-body">
+                            <h3>Mental Health Awareness Week</h3>
+                            <p>Join Samahan ng mga Magaaral ng Sikolohiya for a week of workshops, discussions, and activities focused on mental health awareness and support. Open to all students!</p>
+                            <div class="org-preview">
+                                <img src="img/SIKOLOHIYA-removebg-preview (1).png" alt="Psychology Society Logo">                                <div class="org-details">
+                                    <h4>Event Details:</h4>
+                                    <p>Membership Fee: ₱75/semester</p>
+                                    <p>Event Dates: January 22-26, 2025</p>
+                                    <p>Location: Old building, 2nd floor in the Student Center</p>
+                                    <p>Activities: Workshops, film screenings, peer support training</p>
+                                </div>
+                            </div>
+                            <div class="announcement-details">
+                                <span class="author"><i class="fas fa-user"></i> Psychology Society Secretary</span>
+                                <span class="category"><i class="fas fa-users"></i> Samahan ng mga Magaaral ng Sikolohiya</span>
                             </div>
                         </div>
                         <div class="announcement-actions">
