@@ -1,0 +1,12 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Launch Faculty Dashboard in Browser",
+			"type": "shell",
+			"command": "start microsoft-edge:file:///C:/Users/jeric/OneDrive/Desktop/UNISYNC_PROTOTYPE/faculty/dashboard.html",
+			"group": "test",
+			"isBackground": true
+		}
+	]
+}

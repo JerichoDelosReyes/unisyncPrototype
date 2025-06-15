@@ -160,9 +160,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="quick-actions">
+                    </div>                    <div class="quick-actions">
                         <h2>Quick Actions</h2>
                         <div class="actions-grid">
                             <button class="action-card" onclick="openAnnouncementModal()">
@@ -511,25 +509,48 @@
                     </div>
                 </div>
             </section>
-        </main>
+        </main>        <!-- AI Chatbot -->
+        <div class="chatbot-fab" onclick="toggleChatbot()">
+            <i class="fas fa-robot"></i>
+        </div>
 
-        <!-- AI Chatbot -->
         <div class="chatbot-container" id="chatbot">
-            <div class="chatbot-header" onclick="toggleChat()">
-                <i class="fas fa-robot"></i>
-                <span>AI Assistant</span>
-                <i class="fas fa-chevron-up" id="chatToggle"></i>
+            <div class="chatbot-header">
+                <div class="chatbot-info">
+                    <i class="fas fa-robot"></i>
+                    <div>
+                        <h4>AI Assistant</h4>
+                        <p>Ask me anything about campus!</p>
+                    </div>
+                </div>
+                <button class="chatbot-close" onclick="toggleChatbot()">
+                    <i class="fas fa-times"></i>
+                </button>
             </div>
             <div class="chatbot-body">
                 <div class="chat-messages" id="chatMessages">
                     <div class="message bot-message">
+                        <div class="message-avatar">
+                            <i class="fas fa-robot"></i>
+                        </div>
                         <div class="message-content">
                             Hello Prof. Delos Reyes! I can help you with room schedules, student information, and answer questions about campus facilities. How can I assist you today?
                         </div>
                     </div>
                 </div>
+                <div class="quick-suggestions">
+                    <button class="suggestion-btn" onclick="sendSuggestion('Check room availability')">
+                        🚪 Check room availability
+                    </button>
+                    <button class="suggestion-btn" onclick="sendSuggestion('Show my class schedule')">
+                        📅 Show my class schedule
+                    </button>
+                    <button class="suggestion-btn" onclick="sendSuggestion('Help with announcements')">
+                        📢 Help with announcements
+                    </button>
+                </div>
                 <div class="chat-input">
-                    <input type="text" placeholder="Ask me anything..." id="chatInput">
+                    <input type="text" placeholder="Type your message..." id="chatInput">
                     <button onclick="sendMessage()">
                         <i class="fas fa-paper-plane"></i>
                     </button>
