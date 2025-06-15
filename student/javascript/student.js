@@ -419,6 +419,41 @@ function viewRoomSchedule(roomNumber) {
 // Chatbot Functions
 function initializeChatbot() {
     loadChatHistory();
+    
+    // Set up event listeners for the chatbot
+    const chatInput = document.getElementById('chatInput');
+    if (chatInput) {
+        chatInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+                e.preventDefault(); // Prevent default form submission behavior
+            }
+        });
+    }
+    
+    // Handle window resize for responsive chatbot
+    window.addEventListener('resize', function() {
+        const chatbot = document.getElementById('chatbot');
+        if (chatbot && chatbot.classList.contains('open')) {
+            const messagesContainer = document.getElementById('chatMessages');
+            if (messagesContainer) {
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            }
+        }
+    });
+    
+    // Handle orientation change on mobile devices
+    window.addEventListener('orientationchange', function() {
+        const chatbot = document.getElementById('chatbot');
+        if (chatbot && chatbot.classList.contains('open')) {
+            setTimeout(() => {
+                const messagesContainer = document.getElementById('chatMessages');
+                if (messagesContainer) {
+                    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                }
+            }, 300); // Delay to allow orientation change to complete
+        }
+    });
 }
 
 function toggleChatbot() {
@@ -427,8 +462,18 @@ function toggleChatbot() {
     
     if (chatbot.classList.contains('open')) {
         const chatInput = document.getElementById('chatInput');
+        const messagesContainer = document.getElementById('chatMessages');
+        
+        if (messagesContainer) {
+            // Scroll to the bottom of messages
+            setTimeout(() => {
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            }, 100);
+        }
+        
         if (chatInput) {
-            setTimeout(() => chatInput.focus(), 100);
+            // Focus the input field with a delay to allow animation to complete
+            setTimeout(() => chatInput.focus(), 300);
         }
     }
 }
@@ -447,8 +492,12 @@ function sendMessage() {
     const userInput = input.value;
     chatMessages.push({ type: 'user', content: userInput, timestamp: new Date() });
     
-    // Clear input
+    // Clear input and refocus
     input.value = '';
+    input.focus();
+    
+    // Scroll to bottom immediately after user message
+    smoothScrollToBottom(messagesContainer);
     
     // Hide suggestions after first message
     const suggestions = document.querySelector('.quick-suggestions');
@@ -456,17 +505,39 @@ function sendMessage() {
         suggestions.style.display = 'none';
     }
     
+    // Show typing indicator
+    const typingIndicator = document.createElement('div');
+    typingIndicator.className = 'message bot-message typing-indicator';
+    typingIndicator.innerHTML = '<div class="message-avatar"><i class="fas fa-robot"></i></div><div class="message-content">Typing...</div>';
+    messagesContainer.appendChild(typingIndicator);
+    
+    // Scroll to show typing indicator
+    smoothScrollToBottom(messagesContainer);
+    
     // Simulate AI response
     setTimeout(() => {
+        // Remove typing indicator
+        messagesContainer.removeChild(typingIndicator);
+        
+        // Add bot response
         const response = generateAIResponse(userInput);
         const botMessage = createChatMessage(response, 'bot');
         messagesContainer.appendChild(botMessage);
         
         chatMessages.push({ type: 'bot', content: response, timestamp: new Date() });
-        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        
+        // Ensure we scroll to bottom after bot responds
+        smoothScrollToBottom(messagesContainer);
     }, 1000);
+}
+
+// Helper function to scroll chat smoothly to bottom
+function smoothScrollToBottom(element) {
+    if (!element) return;
     
-    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    setTimeout(() => {
+        element.scrollTop = element.scrollHeight;
+    }, 50);
 }
 
 function sendSuggestion(text) {

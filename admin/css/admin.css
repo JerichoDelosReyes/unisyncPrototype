@@ -13,10 +13,13 @@
     display: flex;
     flex-direction: column;
     position: fixed;
+    top: 0;
+    left: 0;
     height: 100vh;
     overflow-y: auto;
-    z-index: 1000;
-    transition: var(--transition);
+    z-index: 1001; /* Ensure it's above the overlay */
+    transition: transform 0.3s ease-in-out;
+    will-change: transform; /* Optimize for animations */
 }
 
 .sidebar-header {
@@ -125,6 +128,22 @@
     font-size: 1.5rem;
     color: var(--dark-gray);
     cursor: pointer;
+    padding: 10px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    margin-right: 10px;
+    outline: none;
+    -webkit-tap-highlight-color: transparent; /* Remove tap highlight on mobile */
+}
+
+.menu-toggle:hover, 
+.menu-toggle:focus {
+    background-color: rgba(0, 0, 0, 0.1);
+    transform: scale(1.05);
+}
+
+.menu-toggle:active {
+    transform: scale(0.95);
 }
 
 .header-left h1 {
@@ -986,22 +1005,54 @@
     background: var(--cvsu-light-green);
 }
 
+/* Sidebar Overlay */
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    display: none;
+}
+
+.sidebar-overlay.active {
+    display: block;
+}
+
+@media (max-width: 1024px) {
+    body.sidebar-open {
+        overflow: hidden;
+    }
+}
+
 /* Responsive Design */
 @media (max-width: 1024px) {
     .sidebar {
-        transform: translateX(-100%);
+        transform: translateX(-100%) !important;
+        box-shadow: none;
+        visibility: hidden; /* Hide completely when closed */
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, visibility 0s linear 0.3s;
     }
 
     .sidebar.open {
-        transform: translateX(0);
+        transform: translateX(0) !important;
+        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+        visibility: visible; /* Show when open */
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, visibility 0s;
     }
 
     .main-content {
         margin-left: 0;
+        width: 100%;
     }
 
     .menu-toggle {
-        display: block;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1002; /* Ensure it's above the sidebar */
     }
 
     .dashboard-charts {
@@ -1088,5 +1139,35 @@
         flex-direction: column;
         align-items: flex-start;
         gap: 10px;
+    }
+}
+
+/* Additional sidebar fixes */
+@media (max-width: 1024px) {
+    .sidebar {
+        transform: translateX(-100%) !important;
+    }
+
+    .sidebar.open {
+        transform: translateX(0) !important;
+    }
+}
+
+/* Fix for Safari and mobile browsers */
+.sidebar {
+    left: 0; 
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+}
+
+@media (max-width: 1024px) {
+    .sidebar {
+        -webkit-transform: translateX(-100%) !important;
+        transform: translateX(-100%) !important;
+    }
+
+    .sidebar.open {
+        -webkit-transform: translateX(0) !important;
+        transform: translateX(0) !important;
     }
 }

@@ -12,8 +12,11 @@
 </head>
 <body>
     <div class="admin-container">
+        <!-- Sidebar overlay for mobile -->
+        <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+        
         <!-- Sidebar -->
-        <nav class="sidebar">            <div class="sidebar-header">
+        <nav class="sidebar"><div class="sidebar-header">
                 <div class="logo" onclick="window.location.href='../index.html'" style="cursor: pointer;">
                     <img src="../assets/landing/img/logo.png" alt="CvSU Imus Logo" style="width: 24px; height: 24px; margin-right: 8px;" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline'">
                     <i class="fas fa-university" style="display: none;"></i>
@@ -71,9 +74,8 @@
         <!-- Main Content -->
         <main class="main-content">
             <!-- Header -->
-            <header class="main-header">
-                <div class="header-left">
-                    <button class="menu-toggle" onclick="toggleSidebar()">
+            <header class="main-header">                <div class="header-left">
+                    <button class="menu-toggle" id="menuToggleBtn" aria-label="Toggle sidebar menu" onclick="toggleSidebar(); console.log('Direct button click');">
                         <i class="fas fa-bars"></i>
                     </button>
                     <h1 id="page-title">Dashboard Overview</h1>
@@ -562,8 +564,22 @@
                 </button>
             </div>
         </div>
-    </div>
-
-    <script src="javascript/admin.js"></script>
+    </div>    <script src="javascript/admin.js"></script>
+    <script>
+        // Direct initialization to ensure the hamburger menu works
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM fully loaded');
+            
+            // Direct event attachment
+            const menuBtn = document.getElementById('menuToggleBtn');
+            if (menuBtn) {
+                menuBtn.onclick = function() {
+                    console.log('Menu button clicked via inline script');
+                    toggleSidebar();
+                    return false;
+                };
+            }
+        });
+    </script>
 </body>
 </html>
