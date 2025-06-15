@@ -1002,7 +1002,7 @@
 
 .announcements-container.grid-view {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
 }
 
 .announcement-card {
@@ -1011,7 +1011,7 @@
     box-shadow: var(--shadow);
     overflow: hidden;
     transition: var(--transition);
-    position: relative;
+    position: relative; /* For absolute positioning of bookmark button */
 }
 
 .announcement-card:hover {
@@ -1163,6 +1163,7 @@
     display: flex;
     gap: 20px;
     align-items: center;
+    flex-wrap: wrap; /* Allow controls to wrap on smaller screens */
 }
 
 .date-selector {
@@ -1173,27 +1174,14 @@
     padding: 10px 20px;
     border-radius: var(--border-radius);
     box-shadow: var(--shadow);
-}
-
-.date-nav {
-    background: none;
-    border: none;
-    padding: 8px;
-    border-radius: var(--border-radius);
-    cursor: pointer;
-    transition: var(--transition);
-    color: var(--dark-gray);
-}
-
-.date-nav:hover {
-    background: var(--light-gray);
-    color: var(--cvsu-green);
+    flex-grow: 1; /* Allow date selector to take available space */
+    justify-content: center; /* Center items if it grows */
 }
 
 .current-week {
     font-weight: 600;
     color: var(--text-dark);
-    min-width: 200px;
+    min-width: 180px; /* Adjusted min-width */
     text-align: center;
 }
 
@@ -1201,13 +1189,15 @@
     background: var(--white);
     border-radius: var(--border-radius);
     box-shadow: var(--shadow);
-    overflow: hidden;
+    overflow: hidden; /* Keep this */
+    overflow-x: auto; /* Allow horizontal scrolling for the grid */
 }
 
 .schedule-grid {
     display: grid;
-    grid-template-columns: 100px repeat(6, 1fr);
+    grid-template-columns: 80px repeat(6, minmax(120px, 1fr)); /* Adjusted column widths */
     min-height: 600px;
+    min-width: 750px; /* Ensure the grid has a minimum width to trigger scroll */
 }
 
 .time-column,
@@ -2248,10 +2238,159 @@ body.no-scroll {
 
 /* Adjustments for when side nav is open */
 @media (max-width: 768px) {
-    .student-container.side-nav-open .main-header,
-    .student-container.side-nav-open .main-content,
-    .student-container.side-nav-open .mobile-nav { /* If bottom nav should be pushed */
-        /* Optional: push content if side-nav is not an overlay type */
-        /* margin-left: 280px; */ 
-    }
 }
+
+/* Ensure these styles are present for the grid view of announcements if not already */
+.announcements-container.grid-view {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Default for larger screens */
+    gap: 20px;
+}
+
+.announcements-container.list-view {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Responsive Announcements Section */
+#announcements .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px; /* Add gap between title and controls */
+}
+
+#announcements .section-header h2 {
+    font-size: 1.5rem; /* Adjust title size */
+}
+
+#announcements .section-controls {
+    flex-direction: column;
+    align-items: stretch; /* Make controls take full width */
+    width: 100%;
+    gap: 15px;
+}
+
+#announcements .filter-tabs {
+    flex-wrap: wrap; /* Allow filter tabs to wrap */
+    justify-content: flex-start;
+    gap: 8px; /* Add gap for wrapped tabs */
+}
+
+#announcements .filter-tab {
+    font-size: 0.85rem;
+    padding: 6px 12px;
+}
+
+#announcements .view-toggle {
+    align-self: flex-end; /* Align view toggle to the right if section-controls is column */
+}
+
+/* Responsive Schedule Section */
+#schedule .section-header { 
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+#schedule .section-header h2 {
+    font-size: 1.5rem;
+}
+
+#schedule .section-controls { 
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    gap: 15px;
+}
+    
+#schedule .filter-tabs { /* If schedule has filter tabs */
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 8px;
+}
+#schedule .filter-tab { /* If applicable */
+    font-size: 0.85rem;
+    padding: 6px 12px;
+}
+
+/* Styles for individual schedule items in the full schedule view */
+/* Assuming .schedule-list-container and .schedule-list-item for the full view */
+/* If using .schedule-item from dashboard, these will target those too */
+    
+.schedule-list-item, /* For dedicated schedule page items */
+#schedule .schedule-item /* For items if #schedule directly contains them */ {
+    flex-direction: column; 
+    align-items: flex-start;
+    gap: 10px;
+    padding: 15px;
+}
+
+.schedule-list-item .schedule-time,
+#schedule .schedule-item .schedule-time {
+    min-width: 0; 
+    text-align: left; 
+}
+.schedule-list-item .schedule-time .time,
+#schedule .schedule-item .schedule-time .time {
+    font-size: 1rem;
+}
+ .schedule-list-item .schedule-time .duration,
+ #schedule .schedule-item .schedule-time .duration {
+    font-size: 0.8rem;
+}
+
+.schedule-list-item .schedule-details,
+#schedule .schedule-item .schedule-details {
+    width: 100%; 
+}
+.schedule-list-item .schedule-details h4,
+#schedule .schedule-item .schedule-details h4 {
+    font-size: 1.1rem;
+}
+.schedule-list-item .schedule-details p,
+#schedule .schedule-item .schedule-details p {
+    font-size: 0.9rem;
+}
+
+.schedule-list-item .schedule-status,
+#schedule .schedule-item .schedule-status {
+    min-width: 0; 
+    align-self: flex-start; 
+    margin-top: 8px; 
+}
+.status-badge {
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.status-badge.current {
+    background: #28a745;
+    color: var(--white);
+}
+
+.status-badge.upcoming {
+    background: #ffc107;
+    color: #000;
+}
+
+.status-badge.scheduled {
+    background: var(--medium-gray);
+    color: var(--text-dark);
+}
+
+.mobile-side-nav.active + .overlay {
+    display: block;
+}
+
+/* Commenting out or removing the empty ruleset 
+.student-container.side-nav-open .main-header,
+.student-container.side-nav-open .main-content,
+.student-container.side-nav-open .mobile-nav { 
+    /* Styles to apply when side nav is open, e.g., margin-left or transform */
+    /* Example: margin-left: 250px; */
+/* } 
+*/

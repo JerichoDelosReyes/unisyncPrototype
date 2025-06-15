@@ -10,47 +10,46 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<body>
-    <div class="admin-container">
+<body>    <div class="admin-container">
         <!-- Sidebar overlay for mobile -->
-        <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+        <div class="sidebar-overlay" id="sidebarOverlay"></div>
         
         <!-- Sidebar -->
-        <nav class="sidebar"><div class="sidebar-header>
+        <nav class="sidebar">
+            <div class="sidebar-header">
                 <div class="logo" onclick="window.location.href='../index.html'" style="cursor: pointer;">
                     <img src="../assets/landing/img/logo.png" alt="CvSU Imus Logo" style="width: 24px; height: 24px; margin-right: 8px;" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline'">
                     <i class="fas fa-university" style="display: none;"></i>
                     <span>UNISYNC Admin</span>
                 </div>
             </div>
-            
             <ul class="sidebar-menu">
                 <li class="active">
-                    <a href="#dashboard" onclick="showSection('dashboard')">
+                    <a href="#dashboard" onclick="showSection('dashboard'); return false;">
                         <i class="fas fa-tachometer-alt"></i>
                         <span>Dashboard Overview</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#users" onclick="showSection('users')">
+                    <a href="#users" onclick="showSection('users'); return false;">
                         <i class="fas fa-users"></i>
                         <span>Manage Users</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#announcements" onclick="showSection('announcements')">
+                    <a href="#announcements" onclick="showSection('announcements'); return false;">
                         <i class="fas fa-bullhorn"></i>
                         <span>Announcements</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#schedule" onclick="showSection('schedule')">
+                    <a href="#schedule" onclick="showSection('schedule'); return false;">
                         <i class="fas fa-calendar-alt"></i>
                         <span>Room Schedule</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#settings" onclick="showSection('settings')">
+                    <a href="#settings" onclick="showSection('settings'); return false;">
                         <i class="fas fa-cog"></i>
                         <span>Settings</span>
                     </a>
@@ -63,13 +62,12 @@
                     <span>Logout</span>
                 </a>
             </div>
-        </nav>
-
-        <!-- Main Content -->
+        </nav>        <!-- Main Content -->
         <main class="main-content">
             <!-- Header -->
-            <header class="main-header">                <div class="header-left">
-                    <button class="menu-toggle" id="menuToggleBtn" aria-label="Toggle sidebar menu" onclick="toggleSidebar(); console.log('Direct button click');">
+            <header class="main-header">
+                <div class="header-left">
+                    <button class="menu-toggle" id="menuToggleBtn" aria-label="Toggle sidebar menu">
                         <i class="fas fa-bars"></i>
                     </button>
                     <h1 id="page-title">Dashboard Overview</h1>
@@ -78,7 +76,8 @@
                     <div class="notifications">
                         <i class="fas fa-bell"></i>
                         <span class="notification-count">3</span>
-                    </div>                    <div class="user-profile">
+                    </div>
+                    <div class="user-profile">
                         <img src="../assets/landing/img/aCvSUAlumni.png" alt="Admin" class="avatar">
                         <span>Admin Jericho Delos Reyes</span>
                     </div>

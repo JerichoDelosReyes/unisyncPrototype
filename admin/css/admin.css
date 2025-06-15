@@ -3,6 +3,7 @@
     display: flex;
     min-height: 100vh;
     background: var(--light-gray);
+    position: relative; /* Add position relative to container */
 }
 
 /* Sidebar Styles */
@@ -20,6 +21,38 @@
     z-index: 1001; /* Ensure it's above the overlay */
     transition: transform 0.3s ease-in-out;
     will-change: transform; /* Optimize for animations */
+    transform: translateX(-100%); /* Start off-screen by default on mobile */
+}
+
+/* Class to toggle sidebar visibility */
+.sidebar.open {
+    transform: translateX(0);
+}
+
+/* On desktop, sidebar is visible by default */
+@media (min-width: 1025px) {
+    .sidebar {
+        transform: translateX(0); /* Always visible on desktop */
+    }
+}
+
+/* Sidebar overlay for mobile */
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.sidebar-overlay.active {
+    display: block;
+    opacity: 1;
 }
 
 .sidebar-header {
@@ -98,14 +131,30 @@
 /* Main Content Styles */
 .main-content {
     flex: 1;
-    margin-left: 280px;
+    margin-left: 0; /* Default: no margin on mobile */
     display: flex;
     flex-direction: column;
+    width: 100%;
+    transition: margin-left 0.3s ease-in-out, width 0.3s ease-in-out;
+}
+
+/* Adjust margin for desktop - always keep margin for the sidebar */
+@media (min-width: 1025px) {
+    .main-content {
+        margin-left: 280px; /* Match sidebar width for desktop */
+        width: calc(100% - 280px); /* Adjust width to account for sidebar */
+    }
+    
+    /* When sidebar is manually closed on desktop */
+    .sidebar:not(.open) ~ .main-content {
+        margin-left: 0;
+        width: 100%;
+    }
 }
 
 .main-header {
     background: var(--white);
-    padding: 20px 30px;
+    padding: 10px 15px; /* Reduced padding for a more compact header */
     box-shadow: var(--shadow);
     display: flex;
     justify-content: space-between;
@@ -113,99 +162,173 @@
     position: sticky;
     top: 0;
     z-index: 100;
+    width: 100%;
 }
 
 .header-left {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 10px; /* Reduce gap for mobile */
 }
 
 .menu-toggle {
-    display: none;
+    display: block; /* Always show on mobile */
     background: none;
     border: none;
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     color: var(--dark-gray);
     cursor: pointer;
-    padding: 10px;
+    padding: 6px;
     border-radius: 4px;
     transition: all 0.2s ease;
-    margin-right: 10px;
     outline: none;
     -webkit-tap-highlight-color: transparent; /* Remove tap highlight on mobile */
 }
 
-.menu-toggle:hover, 
-.menu-toggle:focus {
-    background-color: rgba(0, 0, 0, 0.1);
-    transform: scale(1.05);
+.menu-toggle:hover, .menu-toggle:focus {
+    background: var(--light-gray);
+    color: var(--cvsu-green);
 }
 
 .menu-toggle:active {
     transform: scale(0.95);
 }
 
+/* Hide menu toggle on desktop */
+@media (min-width: 1025px) {
+    .menu-toggle {
+        display: none;
+    }
+}
+
 .header-left h1 {
     color: var(--cvsu-green);
-    font-size: 1.8rem;
+    font-size: 1.2rem; /* Smaller font for mobile */
     font-weight: 600;
     margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 180px; /* Limit width on small screens */
+}
+
+@media (min-width: 576px) {
+    .header-left h1 {
+        font-size: 1.3rem;
+        max-width: 250px;
+    }
+}
+
+@media (min-width: 768px) {
+    .header-left h1 {
+        font-size: 1.5rem; /* Slightly reduced from 1.8rem to save space */
+        max-width: none;
+    }
 }
 
 .header-right {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 10px; /* Reduce gap for mobile */
+}
+
+@media (min-width: 768px) {
+    .header-right {
+        gap: 20px; /* Larger gap for desktop */
+    }
 }
 
 .notifications {
     position: relative;
-    padding: 10px;
+    padding: 6px;
     cursor: pointer;
+    transition: all 0.2s ease;
+    border-radius: 50%;
+}
+
+.notifications:hover {
+    background: var(--light-gray);
+}
+
+.notifications:active {
+    transform: scale(0.95);
 }
 
 .notifications i {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     color: var(--dark-gray);
 }
 
 .notification-count {
     position: absolute;
-    top: 0;
-    right: 0;
+    top: -2px;
+    right: -2px;
     background: #dc3545;
     color: var(--white);
     border-radius: 50%;
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     font-weight: 600;
+    border: 2px solid white; /* Adds a white border around the notification badge */
 }
 
 .user-profile {
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 8px 15px;
+    gap: 8px;
+    padding: 6px 10px;
     border-radius: var(--border-radius);
     background: var(--light-gray);
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
 
-.avatar {
-    width: 40px;
-    height: 40px;
+.user-profile:hover {
+    background: #e0e0e0;
+}
+
+.user-profile .avatar {
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
     object-fit: cover;
+    border: 2px solid var(--cvsu-green);
+}
+
+.user-profile span {
+    display: none; /* Hide user name on small mobile */
+    font-size: 0.9rem;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 120px;
+    color: var(--dark-gray);
+}
+
+@media (min-width: 768px) {
+    .user-profile span {
+        display: inline; /* Show user name on larger screens */
+        max-width: 150px;
+    }
+    .user-profile {
+        padding: 8px 15px;
+    }
+    
+    .user-profile .avatar {
+        width: 38px;
+        height: 38px;
+    }
 }
 
 /* Content Sections */
 .content-section {
     display: none;
-    padding: 30px;
+    padding: 20px 15px;
     flex: 1;
 }
 
@@ -218,49 +341,78 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 30px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
 }
 
 .section-header h2 {
     color: var(--cvsu-green);
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: 600;
     margin: 0;
 }
 
-/* Dashboard Widgets */
+@media (min-width: 768px) {
+    .section-header {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+    
+    .section-header h2 {
+        font-size: 2rem;
+    }
+}
+
+/* Dashboard Widgets - Make them more responsive */
 .dashboard-widgets {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 25px;
-    margin-bottom: 40px;
+    grid-template-columns: 1fr; /* Single column on mobile */
+    gap: 15px; /* Reduced gap for mobile */
+    margin-bottom: 25px;
+}
+
+@media (min-width: 640px) {
+    .dashboard-widgets {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns on medium screens */
+    }
+}
+
+@media (min-width: 1025px) {
+    .dashboard-widgets {
+        grid-template-columns: repeat(4, 1fr); /* 4 columns on larger screens */
+        gap: 25px;
+        margin-bottom: 40px;
+    }
 }
 
 .widget-card {
     background: var(--white);
-    padding: 25px;
+    padding: 20px;
     border-radius: var(--border-radius);
     box-shadow: var(--shadow);
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 15px;
     transition: var(--transition);
 }
 
-.widget-card:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-hover);
+/* Responsive widget sizes */
+.widget-icon {
+    width: 50px;
+    height: 50px;
+    flex-shrink: 0;
 }
 
-.widget-icon {
-    width: 60px;
-    height: 60px;
-    background: linear-gradient(135deg, var(--cvsu-green), var(--cvsu-light-green));
-    border-radius: var(--border-radius);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--white);
-    font-size: 1.5rem;
+@media (min-width: 768px) {
+    .widget-icon {
+        width: 60px;
+        height: 60px;
+    }
+    .widget-card {
+        padding: 25px;
+    }
 }
 
 .widget-content h3 {
@@ -296,12 +448,20 @@
     color: var(--dark-gray);
 }
 
-/* Dashboard Charts */
+/* Dashboard Charts - Make them stack on mobile */
 .dashboard-charts {
     display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 30px;
-    margin-bottom: 40px;
+    grid-template-columns: 1fr; /* Stack on mobile */
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+@media (min-width: 1025px) {
+    .dashboard-charts {
+        grid-template-columns: 2fr 1fr; /* Side by side on desktop */
+        gap: 30px;
+        margin-bottom: 40px;
+    }
 }
 
 .chart-card {
@@ -525,10 +685,9 @@
 }
 
 .table-container {
-    background: var(--white);
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow);
-    overflow: hidden;
+    width: 100%;
+    overflow-x: auto; /* Allow horizontal scrolling for tables */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
 }
 
 .users-table {
@@ -614,8 +773,20 @@
 /* Announcements */
 .announcements-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: 25px;
+    grid-template-columns: 1fr; /* Single column on mobile */
+    gap: 20px;
+}
+
+@media (min-width: 768px) {
+    .announcements-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns on medium screens */
+    }
+}
+
+@media (min-width: 1280px) {
+    .announcements-grid {
+        grid-template-columns: repeat(3, 1fr); /* 3 columns on large screens */
+    }
 }
 
 .announcement-card {
@@ -696,8 +867,14 @@
 
 .schedule-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: 25px;
+    grid-template-columns: 1fr; /* Stack on mobile */
+    gap: 20px;
+}
+
+@media (min-width: 1025px) {
+    .schedule-grid {
+        grid-template-columns: repeat(2, 1fr); /* Side by side on desktop */
+    }
 }
 
 .room-schedule-card {
@@ -894,52 +1071,45 @@
 /* AI Assistant FAB */
 .ai-assistant-fab {
     position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 60px;
-    height: 60px;
-    background: linear-gradient(135deg, var(--cvsu-green), var(--cvsu-light-green));
-    color: white;
+    bottom: 20px;
+    right: 20px;
+    width: 56px;
+    height: 56px;
+    background: var(--cvsu-green);
     border-radius: 50%;
+    color: var(--white);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.8rem;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    font-size: 1.5rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    z-index: 1005; /* Ensure it's above most content */
+    transition: all 0.3s ease;
+    z-index: 1050;
 }
 
 .ai-assistant-fab:hover {
     transform: scale(1.1);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
-/* Chatbot Container */
 .chatbot-container {
     position: fixed;
-    bottom: 100px; /* Position above the FAB */
-    right: 30px;
-    width: 350px;
-    max-height: 500px;
+    bottom: 90px;
+    right: 20px;
+    width: calc(100% - 40px);
+    max-width: 350px;
+    height: 450px;
     background: var(--white);
-    border-radius: var(--border-radius-lg);
-    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
-    display: flex;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    display: none;
     flex-direction: column;
-    overflow: hidden;
-    z-index: 1004; /* Below FAB when closed, but above content */
-    opacity: 0;
-    transform: translateY(20px) scale(0.95);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    visibility: hidden;
+    z-index: 1050;
 }
 
 .chatbot-container.open {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-    visibility: visible;
+    display: flex;
 }
 
 .chatbot-header {
@@ -1036,28 +1206,6 @@
 
 .chatbot-input button:hover {
     background: var(--cvsu-green-dark);
-}
-
-/* Sidebar Overlay */
-.sidebar-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 999;
-    display: none;
-}
-
-.sidebar-overlay.active {
-    display: block;
-}
-
-@media (max-width: 1024px) {
-    body.sidebar-open {
-        overflow: hidden;
-    }
 }
 
 /* Responsive Design */
@@ -1203,4 +1351,22 @@
         -webkit-transform: translateX(0) !important;
         transform: translateX(0) !important;
     }
+}
+
+/* Make sure content padding is responsive */
+.content-section {
+    padding: 20px 15px;
+}
+
+@media (min-width: 768px) {
+    .content-section {
+        padding: 30px;
+    }
+}
+
+/* Fix button styles for better touch targets on mobile */
+.btn-primary, 
+.btn-secondary {
+    padding: 10px 15px;
+    min-height: 44px; /* Recommended min touch target size */
 }

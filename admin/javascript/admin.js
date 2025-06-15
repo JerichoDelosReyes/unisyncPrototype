@@ -1,32 +1,31 @@
 // Admin Dashboard JavaScript
 document.addEventListener('DOMContentLoaded', function() {
-    initializeAdminDashboard();
+    // Initialize the sidebar immediately on load
+    initializeSidebar();
+    
+    // Initialize other dashboard components
     initializeCharts();
     initializeChatbot();
     setupSidebarSwipeGestures();
+    
+    // Add overlay click handler
+    const overlay = document.getElementById('sidebarOverlay');
+    if (overlay) {
+        overlay.addEventListener('click', function() {
+            toggleSidebar(false); // Force close on overlay click
+        });
+    }
 });
 
 function initializeAdminDashboard() {
     console.log('Initializing admin dashboard...');
-    
-    // Initialize the sidebar and menu toggle
-    initializeSidebar();
-    
-    // Add event listener to document to log sidebar state when clicked
-    document.addEventListener('click', function() {
-        const sidebar = document.querySelector('.sidebar');
-        if (sidebar) {
-            console.log('Current sidebar state:', 
-                        sidebar.classList.contains('open') ? 'open' : 'closed',
-                        'Classes:', sidebar.className,
-                        'Style transform:', sidebar.style.transform);
-        }
-    });
+    // Any additional initialization can go here
 }
 
 function initializeSidebar() {
     const sidebar = document.querySelector('.sidebar');
     const overlay = document.getElementById('sidebarOverlay');
+    const menuToggle = document.getElementById('menuToggleBtn');
     
     console.log('Initializing sidebar...');
     
@@ -35,91 +34,99 @@ function initializeSidebar() {
         return;
     }
     
-    // Initialize based on screen size and stored state
-    const sidebarOpen = sessionStorage.getItem('sidebarOpen') === 'true';
-    const isDesktop = window.innerWidth > 1024;
-    
-    console.log('Screen width:', window.innerWidth, 'Is desktop:', isDesktop);
-    console.log('Stored sidebar state:', sidebarOpen ? 'open' : 'closed');
-    
-    
-    // Set up menu toggle button - use direct approach
-    const menuToggle = document.getElementById('menuToggleBtn');
+    // Remove any inline onclick attributes to avoid conflicts
     if (menuToggle) {
-        console.log('Setting up menu toggle button...');
-        
-        // Remove existing event listeners
-        menuToggle.replaceWith(menuToggle.cloneNode(true));
-        
-        // Get the fresh element
-        const newMenuToggle = document.getElementById('menuToggleBtn');
-          // Add click event using multiple approaches to ensure it works
-        newMenuToggle.onclick = function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            console.log('Menu toggle button clicked (onclick)');
-            toggleSidebar();
-        };
-        
-        // Also add an event listener as a backup
-        newMenuToggle.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            console.log('Menu toggle button clicked (addEventListener)');
-            toggleSidebar();
-        });
-        
-    } else {
-        console.error('Menu toggle button not found');
+        menuToggle.removeAttribute('onclick');
     }
     
-    // Set up swipe gestures for mobile
-    setupSidebarSwipeGestures();
+    // Initialize based on screen size
+    const isDesktop = window.innerWidth > 1024;
     
-    // Add window resize handler
+    if (isDesktop) {
+        // On desktop, ensure sidebar shows by default (CSS handles this)
+        // Just make sure the class is applied for state tracking
+        sidebar.classList.add('open');
+    } else {
+        // On mobile, ensure sidebar is closed by default
+        sidebar.classList.remove('open');
+        if (overlay) overlay.classList.remove('active');
+    }
+    
+    // Set up menu toggle button with proper event handling
+    if (menuToggle) {
+        // Clean approach to remove old listeners and add new one
+        menuToggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('Menu toggle clicked');
+            toggleSidebar();
+        });
+    }
+    
+    // Set up window resize handler
+    window.removeEventListener('resize', handleWindowResize); // Remove any existing handler
     window.addEventListener('resize', handleWindowResize);
-    
-    // Log current sidebar state
-    console.log('Sidebar initialization complete. Current state:', 
-                sidebar.classList.contains('open') ? 'open' : 'closed',
-                'Classes:', sidebar.className);
 }
 
 function handleWindowResize() {
     const sidebar = document.querySelector('.sidebar');
     const overlay = document.getElementById('sidebarOverlay');
+    const isDesktop = window.innerWidth > 1024;
     
-    if (window.innerWidth > 1024) {
-        // On larger screens, show sidebar by default
-        if (!sidebar.classList.contains('open')) {
-            sidebar.classList.add('open');
-        }
-        // Hide overlay on larger screens
-        if (overlay && overlay.classList.contains('active')) {
+    if (!sidebar) return;
+    
+    if (isDesktop) {
+        // On desktop, ensure sidebar is visible by default
+        sidebar.classList.add('open');
+        
+        // Always hide overlay on desktop
+        if (overlay) {
             overlay.classList.remove('active');
         }
+        
+        // Always allow scrolling on desktop
+        document.body.style.overflow = '';
     } else {
-        // On smaller screens, hide sidebar by default
-        if (sidebar.classList.contains('open') && sessionStorage.getItem('sidebarOpen') !== 'true') {
-            sidebar.classList.remove('open');
+        // On mobile, handle the overlay based on sidebar state
+        if (sidebar.classList.contains('open')) {
+            // If sidebar is open on mobile, show overlay
+            if (overlay) overlay.classList.add('active');
+            // Prevent body scrolling when sidebar is open
+            document.body.style.overflow = 'hidden';
+        } else {
+            // If sidebar is closed on mobile, hide overlay
             if (overlay) overlay.classList.remove('active');
+            // Allow body scrolling when sidebar is closed
+            document.body.style.overflow = '';
         }
     }
 }
 
 // Navigation Functions
 function showSection(sectionId) {
+    // Prevent default behavior if called from an anchor
+    if (event) event.preventDefault();
+    
     // Hide all sections
     const sections = document.querySelectorAll('.content-section');
     sections.forEach(section => section.classList.remove('active'));
     
     // Show selected section
-    document.getElementById(sectionId).classList.add('active');
+    const targetSection = document.getElementById(sectionId);
+    if (targetSection) {
+        targetSection.classList.add('active');
+    } else {
+        console.error(`Section with ID "${sectionId}" not found`);
+        return;
+    }
     
     // Update sidebar active state
     const menuItems = document.querySelectorAll('.sidebar-menu li');
     menuItems.forEach(item => item.classList.remove('active'));
-    event.target.closest('li').classList.add('active');
+    const activeMenuItem = document.querySelector(`.sidebar-menu a[href="#${sectionId}"]`);
+    if (activeMenuItem) {
+        activeMenuItem.closest('li').classList.add('active');
+    }
     
     // Update page title
     const titles = {
@@ -130,12 +137,25 @@ function showSection(sectionId) {
         'reports': 'Reports & Analytics',
         'settings': 'System Settings'
     };
-    document.getElementById('page-title').textContent = titles[sectionId];
+    
+    const pageTitle = document.getElementById('page-title');
+    if (pageTitle && titles[sectionId]) {
+        pageTitle.textContent = titles[sectionId];
+    }
+    
+    // Close sidebar on mobile when a menu item is clicked
+    if (window.innerWidth <= 1024) {
+        // Small delay to allow the click event to complete first
+        setTimeout(() => {
+            toggleSidebar(false); // Force close
+        }, 50);
+    }
+    
+    // Scroll back to top when changing sections
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-function toggleSidebar() {
-    console.log('Toggle sidebar function called');
-    
+function toggleSidebar(forceState) {
     const sidebar = document.querySelector('.sidebar');
     const overlay = document.getElementById('sidebarOverlay');
     const body = document.body;
@@ -145,48 +165,55 @@ function toggleSidebar() {
         return;
     }
     
-    // Force a reflow to ensure CSS transitions work properly
-    void sidebar.offsetWidth;
+    console.log('Toggle sidebar called, forceState:', forceState);
     
-    // Toggle the open class
-    const wasOpen = sidebar.classList.contains('open');
-    const nowOpen = !wasOpen;
+    // Determine if we're opening or closing based on forceState or current state
+    const shouldOpen = forceState !== undefined ? forceState : !sidebar.classList.contains('open');
+    const isDesktop = window.innerWidth > 1024;
     
-    console.log('Sidebar state before:', wasOpen ? 'open' : 'closed');
+    console.log('Should open:', shouldOpen, 'Is desktop:', isDesktop);
     
-    if (nowOpen) {
+    if (shouldOpen) {
+        // Open sidebar
         sidebar.classList.add('open');
-    } else {
-        sidebar.classList.remove('open');
-    }
         
-    // Handle overlay
-    if (overlay) {
-        if (nowOpen) {
-            overlay.classList.add('active');
-        } else {
-            overlay.classList.remove('active');
+        // Only add overlay and prevent scrolling on mobile
+        if (!isDesktop) {
+            if (overlay) {
+                overlay.classList.add('active');
+                // Ensure overlay is properly displayed
+                overlay.style.display = 'block';
+                // Force a reflow to ensure transitions work
+                overlay.offsetHeight;
+                // Then set opacity to 1
+                overlay.style.opacity = '1';
+            }
+            body.style.overflow = 'hidden'; // Prevent scrolling
         }
-        console.log('Overlay state:', overlay.classList.contains('active') ? 'active' : 'inactive');
-    }
-    
-    // Handle body scroll
-    if (nowOpen) {
-        body.classList.add('sidebar-open');
     } else {
-        body.classList.remove('sidebar-open');
+        // Close sidebar
+        sidebar.classList.remove('open');
+        
+        // Hide overlay
+        if (overlay) {
+            overlay.classList.remove('active');
+            // Animate opacity first
+            overlay.style.opacity = '0';
+            // Then hide after transition
+            setTimeout(() => {
+                if (!sidebar.classList.contains('open')) {
+                    overlay.style.display = 'none';
+                }
+            }, 300); // Match the transition time in CSS
+        }
+        
+        body.style.overflow = ''; // Allow scrolling
     }
     
-    // Store sidebar state in session storage for persistence
-    sessionStorage.setItem('sidebarOpen', nowOpen);
-
-    
-    // Remove debug info after 3 seconds
+    // Trigger window resize to ensure proper layout
     setTimeout(() => {
-        if (debugInfo.parentNode) {
-            debugInfo.parentNode.removeChild(debugInfo);
-        }
-    }, 3000);
+        window.dispatchEvent(new Event('resize'));
+    }, 50);
 }
 
 // Chart Initialization
@@ -446,38 +473,51 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// Add support for swipe gestures to open/close sidebar
+// Setup sidebar swipe gestures for mobile
+let touchStartX = 0;
+let touchMoveX = 0;
+
 function setupSidebarSwipeGestures() {
-    let touchStartX = 0;
-    let touchEndX = 0;
-    const minSwipeDistance = 50; // Minimum distance for a swipe
+    const sidebar = document.querySelector('.sidebar');
+    const mainContent = document.querySelector('.main-content');
     
-    // Detect touch start
+    if (!sidebar || !mainContent) {
+        console.error('Sidebar or main content not found');
+        return;
+    }
+    
+    // Detect swipe right to open sidebar
     document.addEventListener('touchstart', function(e) {
         touchStartX = e.changedTouches[0].screenX;
-    }, false);
+    }, { passive: true });
     
-    // Detect touch end and determine if it was a swipe
+    document.addEventListener('touchmove', function(e) {
+        touchMoveX = e.changedTouches[0].screenX;
+    }, { passive: true });
+    
     document.addEventListener('touchend', function(e) {
-        touchEndX = e.changedTouches[0].screenX;
-        handleSwipe();
-    }, false);
-    
-    function handleSwipe() {
-        const sidebar = document.querySelector('.sidebar');
-        const isOpen = sidebar.classList.contains('open');
-        const swipeDistance = touchEndX - touchStartX;
+        const isDesktop = window.innerWidth > 1024;
         
-        // Right swipe to open sidebar
-        if (swipeDistance > minSwipeDistance && !isOpen) {
-            toggleSidebar();
+        // Skip on desktop
+        if (isDesktop) return;
+        
+        const swipeDistance = touchMoveX - touchStartX;
+        const threshold = 100; // Minimum distance for swipe
+        const edgeThreshold = 30; // Edge of screen threshold
+        
+        // Only process swipe if starting from near the left edge
+        if (touchStartX <= edgeThreshold && swipeDistance > threshold) {
+            // Right swipe from left edge - open sidebar
+            toggleSidebar(true);
+        } else if (sidebar.classList.contains('open') && swipeDistance < -threshold) {
+            // Left swipe when sidebar is open - close sidebar
+            toggleSidebar(false);
         }
         
-        // Left swipe to close sidebar
-        else if (swipeDistance < -minSwipeDistance && isOpen) {
-            toggleSidebar();
-        }
-    }
+        // Reset
+        touchStartX = 0;
+        touchMoveX = 0;
+    }, { passive: true });
 }
 
 // Auto-refresh data every 30 seconds
