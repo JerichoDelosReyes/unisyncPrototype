@@ -148,7 +148,7 @@ function updateCurrentTime() {
         } else if (currentHour >= 18) {
             greeting = 'Good evening';
         }
-        welcomeText.textContent = `${greeting}, John! 👋`;
+        welcomeText.textContent = `${greeting}, Jericho! 👋`;
     }
     
     // Update current class indicator

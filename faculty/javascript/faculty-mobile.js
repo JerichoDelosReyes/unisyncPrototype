@@ -6,7 +6,7 @@ let notifications = [
     {
         id: 1,
         title: 'New Assignment Submission',
-        message: 'Juan Dela Cruz submitted Lab Report #3 for CS 123',
+        message: 'Jericho Delos Reyes submitted Lab Report #3 for CS 123',
         time: '5 minutes ago',
         type: 'assignment',
         unread: true,

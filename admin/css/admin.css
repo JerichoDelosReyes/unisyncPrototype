@@ -299,6 +299,130 @@
     margin-bottom: 20px;
 }
 
+/* Usage Statistics Styles */
+.usage-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.stat-row {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+.stat-item {
+    flex: 1;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid var(--cvsu-green);
+}
+
+.stat-label {
+    display: block;
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.stat-value {
+    display: block;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--cvsu-green);
+    margin-bottom: 5px;
+}
+
+.stat-trend {
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.stat-trend.positive {
+    color: #28a745;
+}
+
+.stat-trend.negative {
+    color: #dc3545;
+}
+
+.stat-trend.neutral {
+    color: #6c757d;
+}
+
+.usage-summary {
+    margin-top: 10px;
+    padding-top: 20px;
+    border-top: 1px solid #e9ecef;
+}
+
+.usage-summary h4 {
+    color: var(--cvsu-green);
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+}
+
+.summary-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.summary-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.month-label {
+    font-weight: 600;
+    color: #333;
+    width: 100px;
+    flex-shrink: 0;
+}
+
+.usage-bar {
+    flex: 1;
+    height: 8px;
+    background: #e9ecef;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.usage-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--cvsu-green), #32CD32);
+    transition: width 0.3s ease;
+}
+
+.usage-percent {
+    font-size: 0.9rem;
+    color: #666;
+    width: 80px;
+    flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+    .stat-row {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .summary-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    
+    .month-label,
+    .usage-percent {
+        width: auto;
+    }
+}
+
+/* Recent Activity */
 .recent-activity {
     background: var(--white);
     padding: 25px;

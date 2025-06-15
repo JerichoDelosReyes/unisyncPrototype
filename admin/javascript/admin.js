@@ -37,47 +37,8 @@ function toggleSidebar() {
 
 // Chart Initialization
 function initializeCharts() {
-    // Usage Chart
-    const usageCtx = document.getElementById('usageChart');
-    if (usageCtx) {
-        new Chart(usageCtx, {
-            type: 'line',
-            data: {
-                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                datasets: [{
-                    label: 'Active Users',
-                    data: [1200, 1350, 1400, 1300, 1500, 1600, 1700, 1800, 1750, 1900, 2000, 2100],
-                    borderColor: '#006400',
-                    backgroundColor: 'rgba(0, 100, 0, 0.1)',
-                    tension: 0.4,
-                    fill: true
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: false
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        grid: {
-                            color: '#E9ECEF'
-                        }
-                    },
-                    x: {
-                        grid: {
-                            color: '#E9ECEF'
-                        }
-                    }
-                }
-            }
-        });
-    }
-
+    // Usage Chart has been replaced with static statistics display
+    
     // User Stats Chart
     const userStatsCtx = document.getElementById('userStatsChart');
     if (userStatsCtx) {
