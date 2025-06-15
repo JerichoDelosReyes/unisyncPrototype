@@ -1919,7 +1919,6 @@
     z-index: 1100;
     transition: left 0.3s ease;
     overflow-y: auto;
-    display: none; /* Hidden by default on desktop */
 }
 
 .mobile-side-nav.open {
