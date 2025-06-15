@@ -42,23 +42,6 @@ function initializeSidebar() {
     console.log('Screen width:', window.innerWidth, 'Is desktop:', isDesktop);
     console.log('Stored sidebar state:', sidebarOpen ? 'open' : 'closed');
     
-    // Default to open on desktop, respect saved state otherwise
-    if ((isDesktop && sidebarOpen !== false) || (sidebarOpen === true)) {
-        console.log('Opening sidebar on initialization');
-        sidebar.classList.add('open');
-    } else {
-        console.log('Keeping sidebar closed on initialization');
-        sidebar.classList.remove('open');
-    }
-    
-    // Update overlay state
-    if (overlay) {
-        if (sidebar.classList.contains('open') && !isDesktop) {
-            overlay.classList.add('active');
-        } else {
-            overlay.classList.remove('active');
-        }
-    }
     
     // Set up menu toggle button - use direct approach
     const menuToggle = document.getElementById('menuToggleBtn');
@@ -86,9 +69,6 @@ function initializeSidebar() {
             toggleSidebar();
         });
         
-        // Add a visible indicator to show the button is interactive
-        newMenuToggle.style.position = 'relative';
-        newMenuToggle.insertAdjacentHTML('beforeend', '<span style="position:absolute; top:0; right:0; background:red; color:white; font-size:8px; padding:2px 4px; border-radius:50%;">!</span>');
     } else {
         console.error('Menu toggle button not found');
     }
@@ -179,10 +159,7 @@ function toggleSidebar() {
     } else {
         sidebar.classList.remove('open');
     }
-    
-    console.log('Sidebar state after:', sidebar.classList.contains('open') ? 'open' : 'closed');
-    console.log('Sidebar classes:', sidebar.className);
-    
+        
     // Handle overlay
     if (overlay) {
         if (nowOpen) {
@@ -202,24 +179,7 @@ function toggleSidebar() {
     
     // Store sidebar state in session storage for persistence
     sessionStorage.setItem('sidebarOpen', nowOpen);
-    
-    // Add a debug element to show sidebar state
-    const debugInfo = document.getElementById('sidebarDebugInfo') || document.createElement('div');
-    debugInfo.id = 'sidebarDebugInfo';
-    debugInfo.style.position = 'fixed';
-    debugInfo.style.bottom = '10px';
-    debugInfo.style.left = '10px';
-    debugInfo.style.background = 'rgba(0,0,0,0.7)';
-    debugInfo.style.color = 'white';
-    debugInfo.style.padding = '5px 10px';
-    debugInfo.style.borderRadius = '5px';
-    debugInfo.style.zIndex = '9999';
-    debugInfo.style.fontSize = '12px';
-    debugInfo.textContent = `Sidebar: ${nowOpen ? 'Open' : 'Closed'}`;
-    
-    if (!document.getElementById('sidebarDebugInfo')) {
-        document.body.appendChild(debugInfo);
-    }
+
     
     // Remove debug info after 3 seconds
     setTimeout(() => {
@@ -239,11 +199,21 @@ function initializeCharts() {
         new Chart(userStatsCtx, {
             type: 'doughnut',
             data: {
-                labels: ['Students', 'Faculty', 'Admin'],
+                labels: ['Students', 'Faculty', 'Staff'],
                 datasets: [{
-                    data: [2456, 312, 79],
-                    backgroundColor: ['#006400', '#228B22', '#32CD32'],
-                    borderWidth: 0
+                    label: 'User Distribution',
+                    data: [2456, 312, 79], // Example data
+                    backgroundColor: [
+                        'rgba(0, 128, 0, 0.7)', // Darker Green
+                        'rgba(50, 205, 50, 0.7)', // Lime Green
+                        'rgba(144, 238, 144, 0.7)' // Light Green
+                    ],
+                    borderColor: [
+                        'rgba(0, 128, 0, 1)',
+                        'rgba(50, 205, 50, 1)',
+                        'rgba(144, 238, 144, 1)'
+                    ],
+                    borderWidth: 1
                 }]
             },
             options: {
@@ -251,7 +221,7 @@ function initializeCharts() {
                 maintainAspectRatio: false,
                 plugins: {
                     legend: {
-                        position: 'bottom'
+                        position: 'bottom',
                     }
                 }
             }
@@ -331,74 +301,70 @@ function exportReport(format) {
 
 // Chatbot Functions
 function initializeChatbot() {
-    const chatInput = document.getElementById('chatInput');
-    if (chatInput) {
-        chatInput.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                sendMessage();
-            }
-        });
+    const chatbotContainer = document.getElementById('chatbotContainer');
+    const chatbotInput = document.getElementById('chatbotInput');
+    const sendChatbotMessageBtn = document.getElementById('sendChatbotMessage');
+    const chatbotMessages = document.getElementById('chatbotMessages');
+
+    if (!chatbotContainer || !chatbotInput || !sendChatbotMessageBtn || !chatbotMessages) {
+        console.error('Chatbot elements not found');
+        return;
     }
-}
 
-function toggleChat() {
-    const chatbot = document.getElementById('chatbot');
-    const toggle = document.getElementById('chatToggle');
-    
-    chatbot.classList.toggle('collapsed');
-    
-    if (chatbot.classList.contains('collapsed')) {
-        toggle.className = 'fas fa-chevron-down';
-    } else {
-        toggle.className = 'fas fa-chevron-up';
+    sendChatbotMessageBtn.addEventListener('click', sendMessage);
+    chatbotInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            sendMessage();
+        }
+    });
+
+    function sendMessage() {
+        const messageText = chatbotInput.value.trim();
+        if (messageText === '') return;
+
+        appendMessage(messageText, 'user-message');
+        chatbotInput.value = '';
+
+        // Simulate bot response
+        setTimeout(() => {
+            const botResponse = getBotResponse(messageText);
+            appendMessage(botResponse, 'bot-message');
+        }, 1000);
     }
-}
 
-function sendMessage() {
-    const input = document.getElementById('chatInput');
-    const messagesContainer = document.getElementById('chatMessages');
-    
-    if (input.value.trim() === '') return;
-    
-    // Add user message
-    const userMessage = document.createElement('div');
-    userMessage.className = 'message user-message';
-    userMessage.innerHTML = `<div class="message-content">${input.value}</div>`;
-    messagesContainer.appendChild(userMessage);
-    
-    // Clear input
-    const userInput = input.value;
-    input.value = '';
-    
-    // Simulate AI response
-    setTimeout(() => {
-        const botMessage = document.createElement('div');
-        botMessage.className = 'message bot-message';
-        botMessage.innerHTML = `<div class="message-content">${generateAIResponse(userInput)}</div>`;
-        messagesContainer.appendChild(botMessage);
-        messagesContainer.scrollTop = messagesContainer.scrollHeight;
-    }, 1000);
-    
-    messagesContainer.scrollTop = messagesContainer.scrollHeight;
-}
+    function appendMessage(text, type) {
+        const messageDiv = document.createElement('div');
+        messageDiv.classList.add('message', type);
+        const p = document.createElement('p');
+        p.textContent = text;
+        messageDiv.appendChild(p);
+        chatbotMessages.appendChild(messageDiv);
+        chatbotMessages.scrollTop = chatbotMessages.scrollHeight; // Scroll to bottom
+    }
 
-function generateAIResponse(userInput) {
-    const responses = {
-        'hello': 'Hello! How can I assist you with the admin dashboard today?',
-        'users': 'You currently have 2,847 total users: 2,456 students, 312 faculty members, and 79 admin users.',
-        'room': 'Room 401 is located in the Main Building, 4th floor. It\'s currently scheduled for Database Systems class.',
-        'schedule': 'Today\'s schedule shows high utilization across all buildings. The Engineering Building has the highest usage at 92%.',
-        'reports': 'You can generate reports in PDF or Excel format from the Reports section. Current analytics show positive growth trends.',
-        'default': 'I can help you with user management, room scheduling, announcements, and system reports. What would you like to know?'
-    };
-    
-    const input = userInput.toLowerCase();
-    for (let key in responses) {
-        if (input.includes(key)) {
-            return responses[key];
+    function getBotResponse(userMessage) {
+        userMessage = userMessage.toLowerCase();
+        if (userMessage.includes('hello') || userMessage.includes('hi')) {
+            return "Hello there! How can I help you manage the UNISYNC system today?";
+        } else if (userMessage.includes('users')) {
+            return "You can manage users in the 'Manage Users' section. Would you like me to navigate you there?";
+        } else if (userMessage.includes('announcements')) {
+            return "To create or view announcements, please go to the 'Announcements' section.";
+        } else if (userMessage.includes('schedule')) {
+            return "Room schedules can be viewed and managed under 'Room Schedule'.";
+        } else if (userMessage.includes('thank you') || userMessage.includes('thanks')) {
+            return "You're welcome! Is there anything else I can assist with?";
+        } else {
+            return "I'm still learning. Can you please rephrase or ask something else? You can ask about users, announcements, or schedules.";
         }
     }
-    return responses['default'];
+}
+
+function toggleChatbot() {
+    const chatbotContainer = document.getElementById('chatbotContainer');
+    if (chatbotContainer) {
+        chatbotContainer.classList.toggle('open');
+    }
 }
 
 // Filters and Search Functions

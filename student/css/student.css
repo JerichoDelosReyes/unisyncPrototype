@@ -2,6 +2,8 @@
 .student-container {
     min-height: 100vh;
     background: var(--light-gray);
+    display: flex; /* Use flex to manage layout */
+    flex-direction: column; /* Stack header, nav, content */
 }
 
 /* Header Styles */
@@ -14,7 +16,8 @@
     justify-content: space-between;
     position: sticky;
     top: 0;
-    z-index: 100;
+    z-index: 1000; /* Ensure header is on top */
+    width: 100%; /* Ensure header takes full width */
 }
 
 .header-left {
@@ -33,6 +36,7 @@
     padding: 8px;
     border-radius: var(--border-radius);
     transition: var(--transition);
+    line-height: 1; /* Ensure consistent height */
 }
 
 .mobile-menu-btn:hover {
@@ -172,26 +176,37 @@
 
 /* Navigation Styles */
 .mobile-nav {
-    display: none;
+    /* display: none; */ /* Controlled by media query */
     background: var(--white);
     border-top: 1px solid var(--medium-gray);
-    padding: 10px 0;
-    position: sticky;
-    top: 70px;
-    z-index: 99;
+    padding: 5px 0; 
+    position: fixed; 
+    bottom: 0; 
+    left: 0;
+    right: 0;
+    z-index: 1000; /* Ensure mobile nav is on top of content */
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.1); 
+    display: flex; 
+    justify-content: space-around; 
 }
 
 .mobile-nav .nav-item {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 5px;
-    padding: 10px;
+    gap: 4px; /* Reduced gap */
+    padding: 8px 5px; /* Adjusted padding */
     color: var(--dark-gray);
     text-decoration: none;
     border-radius: var(--border-radius);
     transition: var(--transition);
-    font-size: 0.9rem;
+    font-size: 0.8rem; /* Smaller font size */
+    flex-grow: 1; /* Allow items to grow and fill space */
+    text-align: center; /* Center text */
+}
+
+.mobile-nav .nav-item i {
+    font-size: 1.2rem; /* Slightly smaller icons */
 }
 
 .mobile-nav .nav-item.active,
@@ -201,41 +216,223 @@
 }
 
 .desktop-nav {
+    display: none; /* Hidden by default, shown in media query */
     background: var(--white);
     border-bottom: 1px solid var(--medium-gray);
     padding: 0 25px;
     position: sticky;
-    top: 70px;
-    z-index: 99;
+    top: 70px; /* Adjust if header height is different */
+    z-index: 999; /* Below header but above content */
+    width: 100%; /* Ensure nav takes full width */
 }
 
-.nav-container {
-    display: flex;
-    gap: 40px;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.nav-tab {
+.desktop-nav .nav-container {
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 20px 0;
+    overflow-x: auto; /* Allow horizontal scroll if too many items */
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+.desktop-nav .nav-container::-webkit-scrollbar { /* Hide scrollbar for Chrome, Safari, Opera */
+    display: none;
+}
+
+.desktop-nav .nav-tab {
+    padding: 15px 20px;
     color: var(--dark-gray);
     text-decoration: none;
     border-bottom: 3px solid transparent;
     transition: var(--transition);
-    font-weight: 500;
+    white-space: nowrap; /* Prevent tabs from wrapping */
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.95rem;
 }
 
-.nav-tab:hover,
-.nav-tab.active {
+.desktop-nav .nav-tab:hover,
+.desktop-nav .nav-tab.active {
     color: var(--cvsu-green);
     border-bottom-color: var(--cvsu-green);
 }
+.desktop-nav .nav-tab.active {
+    font-weight: 600;
+}
 
-.nav-tab i {
-    font-size: 1.1rem;
+
+/* Make mobile-nav visible only on smaller screens */
+@media (max-width: 768px) {
+    .main-header {
+        padding: 10px 15px; /* Slightly reduce padding on mobile */
+    }
+    .main-header .header-center { 
+        display: none;
+    }
+    .main-header .header-left .logo span { 
+        display: none;
+    }
+    .main-header .header-left .logo img {
+        width: 28px; 
+        height: 28px;
+    }
+    /* .desktop-nav is already display: none by default, ensure it stays none */
+    .desktop-nav {
+        display: none !important; /* Hide desktop nav on mobile */
+    }
+    .mobile-nav {
+        display: flex; /* Show mobile nav */
+    }
+    .main-content {
+        padding: 15px; /* Reduce padding on mobile */
+        padding-bottom: 70px; /* Add padding to prevent overlap with fixed mobile nav */
+    }
+    .mobile-menu-btn { 
+        display: block;
+        font-size: 1.25rem; 
+        z-index: 1101; /* Ensure hamburger is above overlay */
+    }
+    .user-profile .user-info { 
+        display: none;
+    }
+    .user-profile .avatar {
+        width: 32px; 
+        height: 32px;
+    }
+    .notifications i {
+        font-size: 1.25rem; 
+    }
+    .notification-count {
+        width: 18px;
+        height: 18px;
+        font-size: 0.7rem;
+    }
+
+    /* Responsive Welcome Section */
+    .welcome-section {
+        flex-direction: column;
+        align-items: flex-start; 
+        padding: 20px; 
+    }
+    .welcome-text h1 {
+        font-size: 1.8rem; 
+    }
+    .welcome-text p {
+        font-size: 1rem; 
+    }
+    .quick-stats {
+        flex-direction: column; 
+        align-items: flex-start;
+        gap: 15px; 
+        margin-top: 20px; 
+        width: 100%; 
+    }
+    .stat-item {
+        text-align: left; 
+        display: flex; 
+        align-items: center;
+        gap: 10px;
+    }
+    .stat-number {
+        font-size: 1.5rem; 
+        margin-bottom: 0;
+    }
+
+    /* Responsive Dashboard Grid */
+    .dashboard-grid {
+        grid-template-columns: 1fr; 
+        grid-template-areas: 
+            "schedule"
+            "announcements"
+            "actions" 
+            "progress"; 
+        gap: 20px; 
+    }
+
+    /* Responsive Cards */
+    .dashboard-card .card-header {
+        padding: 15px; 
+    }
+    .dashboard-card .card-header h3 {
+        font-size: 1.1rem; 
+    }
+    .schedule-preview, .announcements-preview { /* Add other preview sections if needed */
+        padding: 15px; 
+    }
+    .schedule-item {
+        flex-direction: column; 
+        align-items: flex-start;
+        gap: 10px;
+    }
+    .schedule-time {
+        min-width: 0; 
+        text-align: left;
+    }
+    .schedule-status {
+        min-width: 0; 
+        align-self: flex-start; 
+        margin-top: 5px;
+    }
+    .announcement-content h4 {
+        font-size: 1rem;
+    }
+    .announcement-content p {
+        font-size: 0.9rem;
+        /* Consider using text-overflow or line-clamp for long announcement previews */
+        display: -webkit-box;
+        -webkit-line-clamp: 2; /* Show 2 lines */
+        line-clamp: 2; /* Standard property */
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+
+/* Further adjustments for very small screens if necessary */
+@media (max-width: 480px) {
+    .main-header .header-left .logo {
+        gap: 8px; 
+    }
+    .header-right {
+        gap: 10px; 
+    }
+    .mobile-nav .nav-item {
+        padding: 6px 3px; 
+        font-size: 0.7rem; 
+    }
+    .mobile-nav .nav-item i {
+        font-size: 1rem; 
+    }
+    .welcome-text h1 {
+        font-size: 1.5rem;
+    }
+    .welcome-text p {
+        font-size: 0.9rem;
+    }
+}
+
+/* Styles for larger screens (desktop) */
+@media (min-width: 769px) {
+    .desktop-nav {
+        display: block; /* Show desktop nav */
+    }
+    .mobile-nav {
+        display: none !important; /* Hide mobile nav */
+    }
+    .mobile-menu-btn {
+        display: none !important; /* Hide mobile menu button on desktop */
+    }
+    .main-content {
+        padding-bottom: 0; /* No bottom padding needed if mobile nav is hidden */
+    }
+    .main-header .header-center {
+        display: flex; /* Show search bar */
+    }
+    .main-header .header-left .logo span {
+        display: inline; /* Show UNISYNC text */
+    }
+    .user-profile .user-info {
+        display: flex; /* Show user name and ID */
+    }
 }
 
 /* Main Content */
@@ -243,6 +440,8 @@
     padding: 30px 25px;
     max-width: 1200px;
     margin: 0 auto;
+    width: 100%; /* Ensure content takes full width available */
+    flex-grow: 1; /* Allow content to take available vertical space */
 }
 
 .content-section {
@@ -550,14 +749,13 @@
 }
 
 .announcement-content p {
-    color: var(--dark-gray);
-    font-size: 0.9rem;
-    line-height: 1.4;
-    margin: 0 0 10px 0;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
+    margin: 0;
     overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Limit to 2 lines */
+    line-clamp: 2; /* Standard property */
+    -webkit-box-orient: vertical;
 }
 
 .announcement-meta {
@@ -639,7 +837,7 @@
     font-size: 0.9rem;
 }
 
-/* Progress Card */
+/* Academic Progress Card */
 .progress-card {
     grid-area: progress;
 }
@@ -1936,4 +2134,124 @@
     padding: 2px 6px;
     border-radius: 10px;
     margin-top: 5px;
+}
+
+/* Ensure the line-clamp fix from previous step is preserved or re-added if necessary */
+.announcement-content p {
+    /* ... existing styles ... */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* line-clamp will be set in media queries */
+}
+
+/* Add this if not already present from previous fix for line-clamp on mobile */
+@media (max-width: 768px) {
+    .announcement-content p {
+        -webkit-line-clamp: 2; /* Show 2 lines on mobile */
+        line-clamp: 2;
+    }
+}
+/* Add this for desktop if a different line-clamp is desired, or remove if not needed */
+@media (min-width: 769px) {
+    .announcement-content p {
+         -webkit-line-clamp: 3; /* Example: Show 3 lines on desktop */
+         line-clamp: 3;
+    }
+}
+
+/* New Mobile Side Navigation Styles */
+.mobile-side-nav {
+    position: fixed;
+    top: 0;
+    left: -280px; /* Start off-screen */
+    width: 280px;
+    height: 100%;
+    background-color: var(--white);
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    z-index: 1100;
+    transition: left 0.3s ease-in-out;
+    padding-top: 60px; /* Space for close button or header */
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.mobile-side-nav.open {
+    left: 0;
+}
+
+.mobile-side-nav .close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 2rem;
+    color: var(--dark-gray);
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.mobile-side-nav .side-nav-item {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    color: var(--text-dark);
+    text-decoration: none;
+    font-size: 1rem;
+    gap: 15px;
+    border-bottom: 1px solid var(--light-gray);
+}
+
+.mobile-side-nav .side-nav-item:hover,
+.mobile-side-nav .side-nav-item.active {
+    background-color: var(--light-gray);
+    color: var(--cvsu-green);
+}
+
+.mobile-side-nav .side-nav-item i {
+    width: 20px; /* For icon alignment */
+    text-align: center;
+}
+
+.mobile-side-nav .side-nav-item.logout {
+    margin-top: auto; /* Pushes logout to the bottom */
+    border-top: 1px solid var(--medium-gray);
+    color: var(--danger-red);
+}
+.mobile-side-nav .side-nav-item.logout:hover {
+    background-color: var(--danger-red-light);
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 1099; /* Below side nav, above content */
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.overlay.active {
+    display: block;
+    opacity: 1;
+}
+
+body.no-scroll {
+    overflow: hidden;
+}
+
+/* Adjustments for when side nav is open */
+@media (max-width: 768px) {
+    .student-container.side-nav-open .main-header,
+    .student-container.side-nav-open .main-content,
+    .student-container.side-nav-open .mobile-nav { /* If bottom nav should be pushed */
+        /* Optional: push content if side-nav is not an overlay type */
+        /* margin-left: 280px; */ 
+    }
 }

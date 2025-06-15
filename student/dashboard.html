@@ -14,7 +14,7 @@
         <!-- Header -->
         <header class="main-header">
             <div class="header-left">
-                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                <button class="mobile-menu-btn" onclick="toggleMobileSideMenu()">
                     <i class="fas fa-bars"></i>
                 </button>                <div class="logo" onclick="window.location.href='../index.html'" style="cursor: pointer;">
                     <img src="../assets/landing/img/logo.png" alt="CvSU Imus Logo" style="width: 24px; height: 24px; margin-right: 8px;" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline'">
@@ -46,7 +46,41 @@
             </div>
         </header>
 
-        <!-- Mobile Navigation -->
+        <!-- New Mobile Side Navigation Menu -->
+        <nav class="mobile-side-nav" id="mobileSideNav">
+            <button class="close-btn" onclick="toggleMobileSideMenu()">&times;</button>
+            <a href="#dashboard" class="side-nav-item active" onclick="showSection('dashboard'); toggleMobileSideMenu();">
+                <i class="fas fa-home"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="#announcements" class="side-nav-item" onclick="showSection('announcements'); toggleMobileSideMenu();">
+                <i class="fas fa-bullhorn"></i>
+                <span>Announcements</span>
+            </a>
+            <a href="#schedule" class="side-nav-item" onclick="showSection('schedule'); toggleMobileSideMenu();">
+                <i class="fas fa-calendar-alt"></i>
+                <span>My Schedule</span>
+            </a>
+            <a href="#rooms" class="side-nav-item" onclick="showSection('rooms'); toggleMobileSideMenu();">
+                <i class="fas fa-door-open"></i>
+                <span>Room Finder</span>
+            </a>
+            <a href="#profile" class="side-nav-item" onclick="showUserProfile(); toggleMobileSideMenu();">
+                <i class="fas fa-user"></i>
+                <span>My Profile</span>
+            </a>
+            <a href="#settings" class="side-nav-item" onclick="showSettings(); toggleMobileSideMenu();">
+                <i class="fas fa-cog"></i>
+                <span>Settings</span>
+            </a>
+            <a href="../index.html" class="side-nav-item logout">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Logout</span>
+            </a>
+        </nav>
+        <div class="overlay" id="overlay" onclick="toggleMobileSideMenu()"></div>
+
+        <!-- Mobile Navigation (Bottom Bar) -->
         <nav class="mobile-nav" id="mobileNav">
             <a href="#dashboard" class="nav-item active" onclick="showSection('dashboard')">
                 <i class="fas fa-home"></i>

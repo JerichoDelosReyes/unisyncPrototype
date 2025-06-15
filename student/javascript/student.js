@@ -81,7 +81,7 @@ function showSection(sectionId) {
     document.getElementById(sectionId).classList.add('active');
     
     // Update navigation active state
-    const navItems = document.querySelectorAll('.nav-item, .nav-tab');
+    const navItems = document.querySelectorAll('.nav-item, .nav-tab, .side-nav-item');
     navItems.forEach(item => item.classList.remove('active'));
     
     // Find and activate the clicked nav item
@@ -94,8 +94,13 @@ function showSection(sectionId) {
     // Load section-specific data
     loadSectionData(sectionId);
     
-    // Close mobile menu if open
-    closeMobileMenu();
+    // Close mobile side menu if open and on mobile view
+    if (window.innerWidth <= 768) {
+        const sideNav = document.getElementById('mobileSideNav');
+        if (sideNav.classList.contains('open')) {
+            toggleMobileSideMenu(); 
+        }
+    }
 }
 
 function loadSectionData(sectionId) {
@@ -117,13 +122,34 @@ function loadSectionData(sectionId) {
 
 function toggleMobileMenu() {
     const mobileNav = document.getElementById('mobileNav');
-    mobileNav.style.display = mobileNav.style.display === 'flex' ? 'none' : 'flex';
+    // This function might be deprecated or repurposed if bottom bar is always visible
+    // For now, let's assume it might still be used or was for the bottom bar originally.
+    // If the hamburger is solely for the side menu, this function might not be needed for the bottom bar.
+    // mobileNav.style.display = mobileNav.style.display === 'flex' ? 'none' : 'flex';
+    console.log("toggleMobileMenu called - likely for bottom bar, check usage");
 }
 
 function closeMobileMenu() {
     const mobileNav = document.getElementById('mobileNav');
-    if (window.innerWidth <= 768) {
-        mobileNav.style.display = 'none';
+    if (window.innerWidth <= 768 && mobileNav.style.display === 'flex') {
+        // mobileNav.style.display = 'none';
+        // This function might also need review based on new side menu
+    }
+}
+
+// New functions for the mobile side navigation
+function toggleMobileSideMenu() {
+    const sideNav = document.getElementById('mobileSideNav');
+    const overlay = document.getElementById('overlay');
+    const body = document.body;
+    if (sideNav.classList.contains('open')) {
+        sideNav.classList.remove('open');
+        overlay.classList.remove('active');
+        body.classList.remove('no-scroll');
+    } else {
+        sideNav.classList.add('open');
+        overlay.classList.add('active');
+        body.classList.add('no-scroll');
     }
 }
 
@@ -905,3 +931,17 @@ window.studentDashboard = {
     getDirections,
     viewRoomSchedule
 };
+
+function showUserProfile() {
+    // Placeholder: Implement or link to user profile section/modal
+    console.log("User profile clicked");
+    alert("User Profile page/modal to be implemented.");
+    // Example: showSection('profileSectionId'); 
+}
+
+function showSettings() {
+    // Placeholder: Implement or link to settings section/modal
+    console.log("Settings clicked");
+    alert("Settings page/modal to be implemented.");
+    // Example: showSection('settingsSectionId');
+}

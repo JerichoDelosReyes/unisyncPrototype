@@ -891,118 +891,151 @@
     color: var(--white);
 }
 
-/* Chatbot Styles */
+/* AI Assistant FAB */
+.ai-assistant-fab {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--cvsu-green), var(--cvsu-light-green));
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    z-index: 1005; /* Ensure it's above most content */
+}
+
+.ai-assistant-fab:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Chatbot Container */
 .chatbot-container {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    bottom: 100px; /* Position above the FAB */
+    right: 30px;
     width: 350px;
+    max-height: 500px;
     background: var(--white);
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow-hover);
-    z-index: 1001;
+    border-radius: var(--border-radius-lg);
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
     overflow: hidden;
-    transition: var(--transition);
+    z-index: 1004; /* Below FAB when closed, but above content */
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    visibility: hidden;
+}
+
+.chatbot-container.open {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    visibility: visible;
 }
 
 .chatbot-header {
-    background: var(--cvsu-green);
-    color: var(--white);
+    background: linear-gradient(135deg, var(--cvsu-green), var(--cvsu-light-green));
+    color: white;
     padding: 15px 20px;
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 10px;
-    cursor: pointer;
-    user-select: none;
 }
 
-.chatbot-header span {
-    flex: 1;
+.chatbot-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
     font-weight: 600;
 }
 
-.chatbot-body {
-    height: 400px;
-    display: flex;
-    flex-direction: column;
-    transition: var(--transition);
+.close-chatbot-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 5px;
+    line-height: 1;
 }
 
-.chatbot-container.collapsed .chatbot-body {
-    height: 0;
-    overflow: hidden;
-}
-
-.chat-messages {
+.chatbot-messages {
     flex: 1;
     padding: 20px;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 12px;
 }
 
 .message {
+    padding: 10px 15px;
+    border-radius: 18px;
     max-width: 80%;
+    line-height: 1.4;
+    font-size: 0.95rem;
 }
 
 .bot-message {
+    background: var(--light-gray);
+    color: var(--text-dark);
     align-self: flex-start;
+    border-bottom-left-radius: 4px;
 }
 
 .user-message {
-    align-self: flex-end;
-}
-
-.message-content {
-    padding: 10px 15px;
-    border-radius: var(--border-radius);
-    font-size: 0.9rem;
-    line-height: 1.4;
-}
-
-.bot-message .message-content {
-    background: var(--light-gray);
-    color: var(--text-dark);
-}
-
-.user-message .message-content {
     background: var(--cvsu-green);
-    color: var(--white);
+    color: white;
+    align-self: flex-end;
+    border-bottom-right-radius: 4px;
 }
 
-.chat-input {
+.chatbot-input {
     display: flex;
-    padding: 15px 20px;
+    padding: 15px;
     border-top: 1px solid var(--medium-gray);
-    gap: 10px;
 }
 
-.chat-input input {
+.chatbot-input input {
     flex: 1;
-    padding: 10px 15px;
+    padding: 12px 15px;
     border: 1px solid var(--medium-gray);
-    border-radius: var(--border-radius);
-    font-size: 0.9rem;
+    border-radius: 20px;
+    font-size: 0.95rem;
+    margin-right: 10px;
+    transition: border-color 0.3s ease;
 }
 
-.chat-input input:focus {
+.chatbot-input input:focus {
     outline: none;
     border-color: var(--cvsu-green);
 }
 
-.chat-input button {
+.chatbot-input button {
     background: var(--cvsu-green);
-    color: var(--white);
+    color: white;
     border: none;
-    padding: 10px 15px;
-    border-radius: var(--border-radius);
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    font-size: 1.2rem;
     cursor: pointer;
-    transition: var(--transition);
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.chat-input button:hover {
-    background: var(--cvsu-light-green);
+.chatbot-input button:hover {
+    background: var(--cvsu-green-dark);
 }
 
 /* Sidebar Overlay */

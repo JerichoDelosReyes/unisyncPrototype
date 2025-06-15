@@ -16,7 +16,7 @@
         <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
         
         <!-- Sidebar -->
-        <nav class="sidebar"><div class="sidebar-header">
+        <nav class="sidebar"><div class="sidebar-header>
                 <div class="logo" onclick="window.location.href='../index.html'" style="cursor: pointer;">
                     <img src="../assets/landing/img/logo.png" alt="CvSU Imus Logo" style="width: 24px; height: 24px; margin-right: 8px;" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline'">
                     <i class="fas fa-university" style="display: none;"></i>
@@ -489,31 +489,32 @@
                 </div>
             </section>
         </main>
-    </div>
 
-    <!-- AI Chatbot -->
-    <div class="chatbot-container" id="chatbot">
-        <div class="chatbot-header" onclick="toggleChat()">
+        <!-- AI Assistant FAB -->
+        <div class="ai-assistant-fab" id="aiAssistantFab" onclick="toggleChatbot()">
             <i class="fas fa-robot"></i>
-            <span>AI Assistant</span>
-            <i class="fas fa-chevron-up" id="chatToggle"></i>
         </div>
-        <div class="chatbot-body">
-            <div class="chat-messages" id="chatMessages">
+
+        <!-- Chatbot Container -->
+        <div class="chatbot-container" id="chatbotContainer">
+            <div class="chatbot-header">
+                <h3>AI Assistant</h3>
+                <button class="close-chatbot-btn" onclick="toggleChatbot()"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="chatbot-messages" id="chatbotMessages">
+                <!-- Messages will be appended here -->
                 <div class="message bot-message">
-                    <div class="message-content">
-                        Hello! I'm your AI assistant. How can I help you today?
-                    </div>
+                    <p>Hello! How can I assist you today, Admin?</p>
                 </div>
             </div>
-            <div class="chat-input">
-                <input type="text" placeholder="Type your message..." id="chatInput">
-                <button onclick="sendMessage()">
-                    <i class="fas fa-paper-plane"></i>
-                </button>
+            <div class="chatbot-input">
+                <input type="text" id="chatbotInput" placeholder="Type your message...">
+                <button id="sendChatbotMessage"><i class="fas fa-paper-plane"></i></button>
             </div>
         </div>
-    </div>    <script src="javascript/admin.js"></script>
+
+    </div>
+    <script src="javascript/admin.js"></script>
     <script>
         // Direct initialization to ensure the hamburger menu works
         document.addEventListener('DOMContentLoaded', function() {
