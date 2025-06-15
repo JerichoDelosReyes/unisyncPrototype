@@ -41,7 +41,7 @@
 .logo-text h1 {
     font-size: 2rem;
     font-weight: 800;
-    background: var(--gradient-primary);
+    background: var(--cvsu-green);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -97,7 +97,7 @@
     width: 80px;
     height: 80px;
     margin: 0 auto 24px;
-    background: var(--gradient-primary);
+    background: var(--cvsu-green);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -285,7 +285,7 @@
     gap: 12px;
     width: 100%;
     padding: 16px;
-    background: var(--gradient-primary);
+    background: var(--cvsu-green);
     color: white;
     border: none;
     border-radius: 12px;
@@ -297,7 +297,7 @@
 }
 
 .login-btn:hover {
-    background: var(--gradient-primary-hover);
+    background: var(--cvsu-green);
     box-shadow: 0 6px 20px rgba(0, 100, 0, 0.3);
     transform: translateY(-2px);
 }
