@@ -575,150 +575,99 @@ function initializeChatbot() {
 }
 
 function toggleChatbot() {
-    const chatbot = document.getElementById('chatbot');
-    chatbot.classList.toggle('open');
+    const chatbotPanel = document.getElementById('chatbotPanel');
+    chatbotPanel.classList.toggle('active');
     
-    if (chatbot.classList.contains('open')) {
-        const chatInput = document.getElementById('chatInput');
-        const messagesContainer = document.getElementById('chatMessages');
-        
-        if (messagesContainer) {
-            // Scroll to the bottom of messages
-            setTimeout(() => {
-                messagesContainer.scrollTop = messagesContainer.scrollHeight;
-            }, 100);
-        }
-        
-        if (chatInput) {
-            // Focus the input field with a delay to allow animation to complete
-            setTimeout(() => chatInput.focus(), 300);
-        }
+    // Focus on input when opening
+    if (chatbotPanel.classList.contains('active')) {
+        setTimeout(() => {
+            document.getElementById('chatbotInput').focus();
+        }, 100);
     }
 }
 
-function sendMessage() {
-    const input = document.getElementById('chatInput');
-    const messagesContainer = document.getElementById('chatMessages');
+function handleChatbotEnter(event) {
+    if (event.key === 'Enter') {
+        sendChatbotMessage();
+    }
+}
+
+function sendChatbotMessage() {
+    const input = document.getElementById('chatbotInput');
+    const message = input.value.trim();
     
-    if (!input.value.trim()) return;
+    if (message === '') return;
     
     // Add user message
-    const userMessage = createChatMessage(input.value, 'user');
-    messagesContainer.appendChild(userMessage);
+    addChatbotMessage(message, 'user');
     
-    // Store message
-    const userInput = input.value;
-    chatMessages.push({ type: 'user', content: userInput, timestamp: new Date() });
-    
-    // Clear input and refocus
+    // Clear input
     input.value = '';
-    input.focus();
     
-    // Scroll to bottom immediately after user message
-    smoothScrollToBottom(messagesContainer);
-    
-    // Hide suggestions after first message
-    const suggestions = document.querySelector('.quick-suggestions');
-    if (suggestions && chatMessages.filter(m => m.type === 'user').length === 1) {
-        suggestions.style.display = 'none';
-    }
-    
-    // Show typing indicator
-    const typingIndicator = document.createElement('div');
-    typingIndicator.className = 'message bot-message typing-indicator';
-    typingIndicator.innerHTML = '<div class="message-avatar"><i class="fas fa-robot"></i></div><div class="message-content">Typing...</div>';
-    messagesContainer.appendChild(typingIndicator);
-    
-    // Scroll to show typing indicator
-    smoothScrollToBottom(messagesContainer);
-    
-    // Simulate AI response
+    // Simulate bot response
     setTimeout(() => {
-        // Remove typing indicator
-        messagesContainer.removeChild(typingIndicator);
-        
-        // Add bot response
-        const response = generateAIResponse(userInput);
-        const botMessage = createChatMessage(response, 'bot');
-        messagesContainer.appendChild(botMessage);
-        
-        chatMessages.push({ type: 'bot', content: response, timestamp: new Date() });
-        
-        // Ensure we scroll to bottom after bot responds
-        smoothScrollToBottom(messagesContainer);
+        const botResponse = generateBotResponse(message);
+        addChatbotMessage(botResponse, 'bot');
     }, 1000);
 }
 
-// Helper function to scroll chat smoothly to bottom
-function smoothScrollToBottom(element) {
-    if (!element) return;
-    
-    setTimeout(() => {
-        element.scrollTop = element.scrollHeight;
-    }, 50);
-}
-
-function sendSuggestion(text) {
-    const input = document.getElementById('chatInput');
-    input.value = text;
-    sendMessage();
-}
-
-function createChatMessage(content, type) {
+function addChatbotMessage(message, sender) {
+    const messagesContainer = document.getElementById('chatbotMessages');
     const messageDiv = document.createElement('div');
-    messageDiv.className = `message ${type}-message`;
+    messageDiv.className = sender === 'user' ? 'user-message' : 'bot-message';
     
-    const avatar = document.createElement('div');
-    avatar.className = 'message-avatar';
-    avatar.innerHTML = type === 'bot' ? '<i class="fas fa-robot"></i>' : '<i class="fas fa-user"></i>';
+    if (sender === 'user') {
+        messageDiv.innerHTML = `
+            <div class="user-avatar">
+                <i class="fas fa-user"></i>
+            </div>
+            <div class="message-content">
+                <p>${message}</p>
+            </div>
+        `;
+    } else {
+        messageDiv.innerHTML = `
+            <i class="fas fa-robot"></i>
+            <div class="message-content">
+                <p>${message}</p>
+            </div>
+        `;
+    }
     
-    const messageContent = document.createElement('div');
-    messageContent.className = 'message-content';
-    messageContent.textContent = content;
-    
-    messageDiv.appendChild(avatar);
-    messageDiv.appendChild(messageContent);
-    
-    return messageDiv;
+    messagesContainer.appendChild(messageDiv);
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
 }
 
-function generateAIResponse(userInput) {
-    const responses = {
-        'hello': 'Hello John! How can I help you today? I can assist with finding rooms, checking schedules, or answering questions about campus.',
-        'room 401': 'Room 401 is located in the Main Building on the 4th floor. It\'s currently available and equipped with a projector, WiFi, and air conditioning. Would you like directions?',
-        'where is': 'I can help you find any room on campus! Just tell me the room number or building name.',
-        'next class': 'Your next class is Data Structures at 10:00 AM in Room 403, Main Building. It\'s with Prof. Ana Reyes.',
-        'schedule': 'You have 3 classes today: Database Systems (8:00-9:30 AM), Data Structures (10:00-11:30 AM), and Programming Lab (2:00-4:00 PM).',
-        'available room': 'Currently available rooms include Room 401 (Main Building) and Room IT301 (IT Building). Both have projectors and WiFi.',
-        'library': 'The library is located in the Library Building and is currently open until 10:00 PM during exam week.',
-        'exam': 'Final examinations start on December 18, 2024. You can check your specific exam schedule in the announcements section.',
-        'help': 'I can help you with: finding rooms and directions, checking your class schedule, viewing announcements, finding available study spaces, and general campus information. What would you like to know?',
-        'default': 'I\'m here to help! I can assist with room locations, schedules, announcements, and campus information. What would you like to know?'
-    };
+function generateBotResponse(userMessage) {
+    const message = userMessage.toLowerCase();
     
-    const input = userInput.toLowerCase();
-    for (let key in responses) {
-        if (input.includes(key)) {
-            return responses[key];
-        }
+    // Room-related queries
+    if (message.includes('room') || message.includes('schedule') || message.includes('available')) {
+        return "I can help you find room availability! The main building has rooms 101-105 available today. Room 401 where your Database Systems class is held is currently available. Would you like me to check specific room schedules?";
     }
-    return responses['default'];
-}
-
-function loadChatHistory() {
-    // Load chat history from localStorage if available
-    const savedMessages = localStorage.getItem('unisync_chat_history');
-    if (savedMessages) {
-        chatMessages = JSON.parse(savedMessages);
-        // Render saved messages
-        const messagesContainer = document.getElementById('chatMessages');
-        chatMessages.forEach(msg => {
-            if (msg.type !== 'bot' || msg.content !== 'Hi John! I\'m your AI assistant...') {
-                const messageElement = createChatMessage(msg.content, msg.type);
-                messagesContainer.appendChild(messageElement);
-            }
-        });
+    
+    // Announcement queries
+    if (message.includes('announcement') || message.includes('news') || message.includes('update')) {
+        return "Here are the latest announcements: Final Exam Schedule has been released, Library hours are extended during exam week, and there's a Database Systems project due soon. Would you like details about any specific announcement?";
     }
+    
+    // Schedule queries
+    if (message.includes('class') || message.includes('today') || message.includes('tomorrow')) {
+        return "According to your schedule, you have Database Systems at 8:00 AM in Room 401, Data Structures at 10:00 AM in Room 403, and Programming Lab at 2:00 PM in Room IT301. Would you like more details about any of these classes?";
+    }
+    
+    // Event queries
+    if (message.includes('event') || message.includes('activity') || message.includes('organization')) {
+        return "I can help you find campus events! There are several student organizations active on campus. Would you like information about specific organizations like CSC, BITS, or upcoming events?";
+    }
+    
+    // General help
+    if (message.includes('help') || message.includes('what') || message.includes('how')) {
+        return "I'm here to help! I can assist you with:\n• Room schedules and availability\n• Latest announcements and updates\n• Your class schedule\n• Campus events and organizations\n• University policies and information\n\nJust ask me anything!";
+    }
+    
+    // Default response
+    return "I understand you're asking about '" + userMessage + "'. I can help you with room schedules, announcements, class information, and campus events. Could you please be more specific about what you'd like to know?";
 }
 
 // Notification Functions

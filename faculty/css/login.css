@@ -38,14 +38,20 @@
     transform: scale(1.05);
 }
 
+.logo-text {
+    display: flex;
+    align-items: center;
+}
+
 .logo-text h1 {
     font-size: 2rem;
     font-weight: 800;
-    background: var(--gradient-primary);
+    background: linear-gradient(135deg, #006400, #228B22);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     margin: 0;
+    color: #006400; /* fallback color */
 }
 
 .logo-text p {
